@@ -1,0 +1,53 @@
+===========================================
+|                                         |
+|      Project 1A                         |
+|      SIMP Image Manipulation            |
+|                                         |
+|      Alex Lende                         |
+|      ajlende                            |
+|                                         |
+===========================================
+
+
+The SIMP Data Structure
+===========================================
+TODO: A description of your data structure for storing an image.
+
+
+Extra Details
+===========================================
+TODO: A description of any extra details assumed due to ambiguous requirements in the project specification.
+
+
+Files
+===========================================
+TODO: A file listing of the source code files, specifically mentioning the purpose of each code file.
+
+README - This README.
+
+Makefile - 
+TODO: Makefile
+
+bw.c - 
+TODOL bw.c
+
+colorshift.c - 
+TODO: colorshift.c
+
+crop.c - 
+TODO: crop.c
+
+overlay.c - 
+TODO: overlay.c
+
+simp.h - 
+TODO : simp.h
+
+Extra Features
+===========================================
+TODO: A description of any extra features you added to the programs (or any extra programs you created).
+
+
+
+
+
