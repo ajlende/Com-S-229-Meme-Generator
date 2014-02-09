@@ -9,18 +9,22 @@ typedef struct pixel_s {
 } pixel;
 
 typedef struct simp_s {
-	int32_t width;
-	int32_t height;
-	pixel[] data;
+	uint32_t   width;
+	uint32_t   height;
+	pixel** data;
 } simp;
 
-// Reads a file and returns a simp data structure to work with
-simp readSimp(void) {
+/*
+ * Reads the simp file into a simp data structure
+ */
+simp readSimp(FILE *read_file) {
 	simp image;
 	return image;
 }
 
-// Writes the simp file after manipulation
-void writeSimp(void) {
+/*
+ * Writes the simp file after manipulation
+ */
+void writeSimp(FILE *write_file, simp *data) {
 	return;
 }

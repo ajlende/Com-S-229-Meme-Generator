@@ -46,8 +46,6 @@ Session.vim
 *.hex
 
 # Special Executables
-simp2bmp
-bmp2simp
 bw
 colorshift
 crop
