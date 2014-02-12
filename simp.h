@@ -1,3 +1,6 @@
+#ifndef _SIMP_H_
+#define _SIMP_H_
+
 #include<stdint.h>
 #include<stdio.h>
 
@@ -28,3 +31,5 @@ simp readSimp(FILE *read_file) {
 void writeSimp(FILE *write_file, simp *data) {
 	return;
 }
+
+#endif
