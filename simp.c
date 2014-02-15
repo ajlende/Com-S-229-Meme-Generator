@@ -12,8 +12,8 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	
 	size_read = 0;
 	
-	size_read += fread(simp_data->width,  sizeof(int), 1, read_file) * sizeof(int);
-	size_read += fread(simp_data->height, sizeof(int), 1, read_file) * sizeof(int);
+	size_read += fread(&(simp_data->width),  sizeof(int), 1, read_file) * sizeof(int);
+	size_read += fread(&(simp_data->height), sizeof(int), 1, read_file) * sizeof(int);
 	
 	printf("read width: %d\nread height: %d\n", simp_data->width, simp_data->height);
 	
