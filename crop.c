@@ -11,7 +11,7 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	FILE* outfile
+	FILE* outfile;
 	
 	outfile = fopen( argv[2], "wb" );
 	
