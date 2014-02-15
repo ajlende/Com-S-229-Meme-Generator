@@ -4,6 +4,7 @@
 int main(int argc, char** argv) {
 	
 	FILE* infile;
+	FILE* outfile;
 	
 	infile = fopen( argv[1], "rb" );
 
@@ -11,8 +12,6 @@ int main(int argc, char** argv) {
 		printf("File %s failed to open!\n", argv[1]);
 		return 1;
 	}
-
-	FILE* outfile;
 	
 	outfile = fopen( argv[2], "wb" );
 	

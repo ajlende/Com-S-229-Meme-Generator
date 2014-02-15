@@ -1,9 +1,6 @@
 #ifndef _SIMP_H_
 #define _SIMP_H_
 
-#include<stdint.h>
-#include<stdio.h>
-
 typedef struct pixel_s {
 	uint8_t r;
 	uint8_t g;

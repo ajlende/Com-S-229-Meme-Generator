@@ -8,9 +8,9 @@
  */
 size_t readSimp(simp *simp_data, FILE *read_file) {
 	
-	size_t size_read = 0;
+	size_t size_read;
 	
-	simp_data = (simp*) malloc(sizeof(simp));
+	size_read = 0;
 	
 	size_read += fread(simp_data->width,  sizeof(int), 1, read_file) * sizeof(int);
 	size_read += fread(simp_data->height, sizeof(int), 1, read_file) * sizeof(int);
