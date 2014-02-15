@@ -17,6 +17,12 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
+	simp* simp_file = (simp*) malloc(sizeof(simp));
+
+	readSimp(simp_file, infile);
+
+	free(simp_file);
+
 	fclose(infile);
 	fclose(outfile);
 
