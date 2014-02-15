@@ -12,24 +12,24 @@ typedef struct pixel_s {
 } pixel;
 
 typedef struct simp_s {
-	uint32_t   width;
-	uint32_t   height;
-	pixel** data;
+	uint32_t width;
+	uint32_t height;
+	pixel**  data;
 } simp;
 
 /*
- * Reads the simp file into a simp data structure
+ * Reads the simp file into a simp data structure, and returns the number of bytes read from the file.
  */
-simp readSimp(FILE *read_file) {
-	simp image;
-	return image;
-}
+size_t readSimp(simp *simp_data, FILE *read_file);
 
 /*
- * Writes the simp file after manipulation
+ * Writes data from a simp data structure to a simp file and returns the number of bytes written to the file.
  */
-void writeSimp(FILE *write_file, simp *data) {
-	return;
-}
+size_t writeSimp(simp *simp_data, FILE *write_file);
+
+/*
+ * Frees the memory allocated for a simp data structure.
+ */
+void freeSimp(simp *simp_data);
 
 #endif
