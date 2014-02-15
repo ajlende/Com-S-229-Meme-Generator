@@ -1,16 +1,18 @@
 #ifndef _SIMP_H_
 #define _SIMP_H_
 
+#include <stdio.h>
+
 typedef struct pixel_s {
-	uint8_t r;
-	uint8_t g;
-	uint8_t b;
-	uint8_t a;
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+	unsigned char a;
 } pixel;
 
 typedef struct simp_s {
-	uint32_t width;
-	uint32_t height;
+	unsigned int width;
+	unsigned int height;
 	pixel**  data;
 } simp;
 
