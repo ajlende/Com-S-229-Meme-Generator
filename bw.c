@@ -6,6 +6,7 @@ int main(int argc, char** argv) {
 	
 	FILE* infile;
 	FILE* outfile;
+	simp* simp_file;
 	
 	infile = fopen( argv[1], "rb" );
 
@@ -21,8 +22,8 @@ int main(int argc, char** argv) {
 		fclose(infile);
 		return 1;
 	}
-
-	simp* simp_file = (simp*) malloc(sizeof(simp));
+	
+	simp_file = (simp*) malloc(sizeof(simp));
 
 	readSimp(simp_file, infile);
 

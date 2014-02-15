@@ -8,7 +8,7 @@ clean :
 overlay.o : overlay.c simp.h
 	gcc -ansi -pedantic -c overlay.c
 
-crop.o : crop.o simp.h 
+crop.o : crop.c simp.h 
 	gcc -ansi -pedantic -c crop.c
 
 colorshift.o : colorshift.c simp.h
@@ -17,17 +17,17 @@ colorshift.o : colorshift.c simp.h
 bw.o : bw.c simp.h
 	gcc -ansi -pedantic -c bw.c
 
-overlay : overlay.o
-	gcc -ansi -pedantic -o overlay overlay.o
+overlay : overlay.o simp.o
+	gcc -ansi -pedantic -o overlay overlay.o simp.o
 
-crop : crop.o
-	gcc -ansi -pedantic -o crop crop.o
+crop : crop.o simp.o
+	gcc -ansi -pedantic -o crop crop.o simp.o
 
-colorshift : colorshift.o
-	gcc -ansi -pedantic -o colorshift colorshift.o
+colorshift : colorshift.o simp.o
+	gcc -ansi -pedantic -o colorshift colorshift.o simp.o
 
-bw : bw.o
-	gcc -ansi -pedantic -o bw bw.o
+bw : bw.o simp.o
+	gcc -ansi -pedantic -o bw bw.o simp.o
 	
 tarball : 
 	tar czf ajlende.tar.gz *.c *.h Makefile
