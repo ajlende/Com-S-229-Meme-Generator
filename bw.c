@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
 
 	size_read = readSimp(simp_file, infile);
 
-	printf("read width: %d\nread height: %d\n", simp_data->width, simp_data->height);
+	printf("read width: %d\nread height: %d\n", simp_file->width, simp_file->height);
 
 	size_written = writeSimp(simp_file, outfile);
 
