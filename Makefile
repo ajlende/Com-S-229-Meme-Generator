@@ -5,7 +5,7 @@ all : overlay crop colorshift bw
 clean : 
 	rm *.o bw colorshift crop overlay
 
-simp.o : simp.c simp.h
+# simp.o : simp.c simp.h
 	
 
 overlay.o : overlay.c simp.h
