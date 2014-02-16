@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
 		simp_file->data[i] += x;
 	}
 
-	printf("Moved simp_file->data[i]...\n")
+	printf("Moved simp_file->data[i]...\n");
 
 	writeSimp(simp_file, outfile);
 
