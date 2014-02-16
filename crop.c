@@ -24,26 +24,40 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
+	printf("Opened files...\n");
+
 	x = atoi(argv[3]);
 	y = atoi(argv[4]);
 	w = atoi(argv[5]);
 	h = atoi(argv[6]);
 
+	printf("Assigned x, y, w, h...\n");
+
 	simp_file = (simp*) malloc(sizeof(simp));
 
 	readSimp(simp_file, infile);
 
+	printf("Read SIMP file...\n");
+
 	/* Adjust the width and height */
 	simp_file->width = w;
 	simp_file->height = h;
+
+	printf("Set simp_file width and height...\n");
+
+	printf("Info: simp_file->data: %X...\n", simp_file->data);
 	
 	/* move the pointer to the new top of the image */
 	simp_file->data += y;
+
+	printf("Moved simp_file to: %X...\n", simp_file->data);
 
 	/* move each pointer that we are dealing with to the new left edge of the image */
 	for (i = 0; i < simp_file->height; i++) {
 		simp_file->data[i] += x;
 	}
+
+	printf("Moved simp_file->data[i]...\n")
 
 	writeSimp(simp_file, outfile);
 
