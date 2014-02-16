@@ -7,10 +7,9 @@ int main(int argc, char** argv) {
 	FILE* infile;
 	FILE* outfile;
 	simp* simp_file;
+	int i, j;
+	unsigned char avg;
 
-	size_t size_read;
-	size_t size_written;
-	
 	infile = fopen( argv[1], "rb" );
 
 	if ( infile == 0 ) {
@@ -30,12 +29,17 @@ int main(int argc, char** argv) {
 
 	size_read = readSimp(simp_file, infile);
 
-	printf("read width: %d\nread height: %d\n", simp_file->width, simp_file->height);
+	/* Edit the photo here */
+	for (i = 0; i < simp_file->height; i++) {
+		for (j = 0; j < simp_file->width; j++) {
+			avg = ((simp_file->data[i][j].r) + (simp_file->data[i][j].g) + (simp_file->data[i][j].b)) / 3;
+			simp_file->data[i][j].r = avg;
+			simp_file->data[i][j].g = avg;
+			simp_file->data[i][j].b = avg;
+		}	
+	}
 
 	size_written = writeSimp(simp_file, outfile);
-
-	printf("filein size: %zu", size_read);
-	printf("fileout size: %zu", size_written);
 
 	freeSimp(simp_file);
 
