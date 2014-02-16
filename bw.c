@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 	
 	simp_file = (simp*) malloc(sizeof(simp));
 
-	size_read = readSimp(simp_file, infile);
+	readSimp(simp_file, infile);
 
 	/* Edit the photo here */
 	for (i = 0; i < simp_file->height; i++) {
@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 		}	
 	}
 
-	size_written = writeSimp(simp_file, outfile);
+	writeSimp(simp_file, outfile);
 
 	freeSimp(simp_file);
 
