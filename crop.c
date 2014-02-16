@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 	x = atoi(argv[3]);
 	y = atoi(argv[4]);
 	w = atoi(argv[5]);
-	z = atoi(argv[6]);
+	h = atoi(argv[6]);
 
 	simp_file = (simp*) malloc(sizeof(simp));
 
