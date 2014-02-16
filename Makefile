@@ -18,16 +18,16 @@ bw.o : bw.c simp.h
 	gcc -ansi -pedantic -c bw.c
 
 overlay : overlay.o simp.o
-	gcc -ansi -pedantic -o overlay overlay.o simp.o
+	gcc -pedantic -o overlay overlay.o simp.o
 
 crop : crop.o simp.o
-	gcc -ansi -pedantic -o crop crop.o simp.o
+	gcc -pedantic -o crop crop.o simp.o
 
 colorshift : colorshift.o simp.o
-	gcc -ansi -pedantic -o colorshift colorshift.o simp.o
+	gcc -pedantic -o colorshift colorshift.o simp.o
 
 bw : bw.o simp.o
-	gcc -ansi -pedantic -o bw bw.o simp.o
+	gcc -pedantic -o bw bw.o simp.o
 	
 tarball : 
 	tar czf ajlende.tar.gz *.c *.h Makefile

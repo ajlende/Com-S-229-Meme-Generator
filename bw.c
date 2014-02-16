@@ -27,6 +27,10 @@ int main(int argc, char** argv) {
 
 	readSimp(simp_file, infile);
 
+	writeSimp(simp_file, outfile);
+
+	freeSimp(simp_file);
+
 	free(simp_file);
 
 	fclose(infile);
