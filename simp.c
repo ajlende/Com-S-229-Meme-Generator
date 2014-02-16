@@ -1,10 +1,35 @@
 #include "simp.h"
 
-/* TODO: Remove this include. */
-#include <stdio.h>
+/*
+ * Creates space for the data of a simp structure with the given width and height.
+ */
+void initSimp(simp *simp_data, unsigned int width, unsigned int height) {
+
+	int i;
+
+	simp_data->data = (pixel**) malloc(height * sizeof(pixel*));
+
+	for (i = 0; i < simp_data->height; i++) {
+		simp_data->data[i] = (pixel*) malloc(width * sizeof(pixel));
+	}
+}
 
 /*
- * Reads the simp file into a simp data structure, and returns the number of bytes read from the file.
+ * Frees the data malloc'd for the simp data.
+ */
+void freeSimp(simp *simp_data) {
+
+	int i;
+
+	for (i = 0; i < simp_data->height; i++) {
+		free(simp_data->data[i]);
+	}
+	
+	free(simp_data->data);
+}
+
+/*
+ * Allocates space for the data part of a simp data structure. Reads the simp file into the structure. Returns the number of bytes read from the file.
  */
 size_t readSimp(simp *simp_data, FILE *read_file) {
 	
@@ -15,15 +40,9 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	
 	size_read += fread(&(simp_data->width),  sizeof(int), 1, read_file) * sizeof(int);
 	size_read += fread(&(simp_data->height), sizeof(int), 1, read_file) * sizeof(int);
-	
-	
-	simp_data->data = (pixel**) malloc(simp_data->height * sizeof(pixel*));
 
-	for (i = 0; i < simp_data->height; i++) {
-		simp_data->data[i] = (pixel*) malloc(simp_data->width * sizeof(pixel));
-	}
+	initSimp(simp_data, simp_data->width, simp_data->height);
 
-	/* TODO: actually read the data */
 	for (i = 0; i < simp_data->height; i++) {
 		size_read += fread(simp_data->data[i], sizeof(pixel), simp_data->width, read_file) * sizeof(pixel);
 	}
@@ -32,9 +51,10 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 }
 
 /*
- * Writes data from a simp data structure to a simp file and returns the number of bytes written to the file.
+ * Writes data from a simp data structure to a simp file. Frees the space allocated for the data. Returns the number of bytes written to the file.
  */
 size_t writeSimp(simp *simp_data, FILE *write_file) {
+
 	size_t size_written;
 	int i;
 
@@ -47,20 +67,7 @@ size_t writeSimp(simp *simp_data, FILE *write_file) {
 		size_written += fwrite(simp_data->data[i], sizeof(pixel), simp_data->width, write_file) * sizeof(pixel);
 	}
 
+	freeSimp(simp_data);
+
 	return size_written;
-}
-
-/*
- * Frees the data malloc'd for the simp data structure in 
- */
-void freeSimp(simp *simp_data) {
-
-	int i;
-
-	for (i = 0; i < simp_data->height; i++) {
-		free(simp_data->data[i]);
-	}
-	
-	free(simp_data->data);
-
 }

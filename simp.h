@@ -17,6 +17,16 @@ typedef struct simp_s {
 } simp;
 
 /*
+ * Creates space for a new simp structure with the given width and height
+ */
+void initSimp(simp *simp_data, unsigned int width, unsigned int height);
+
+/*
+ * Frees the memory allocated for a simp data structure.
+ */
+void freeSimp(simp *simp_data);
+
+/*
  * Reads the simp file into a simp data structure, and returns the number of bytes read from the file.
  */
 size_t readSimp(simp *simp_data, FILE *read_file);
@@ -25,10 +35,5 @@ size_t readSimp(simp *simp_data, FILE *read_file);
  * Writes data from a simp data structure to a simp file and returns the number of bytes written to the file.
  */
 size_t writeSimp(simp *simp_data, FILE *write_file);
-
-/*
- * Frees the memory allocated for a simp data structure.
- */
-void freeSimp(simp *simp_data);
 
 #endif

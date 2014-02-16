@@ -8,7 +8,6 @@ int main(int argc, char** argv) {
 	FILE* outfile;
 	simp* simp_file;
 	int i, j;
-	unsigned char avg;
 
 	infile = fopen( argv[1], "rb" );
 
@@ -32,7 +31,10 @@ int main(int argc, char** argv) {
 	/* Edit the photo here */
 	for (i = 0; i < simp_file->height; i++) {
 		for (j = 0; j < simp_file->width; j++) {
+			
+			unsigned char avg;
 			avg = ((simp_file->data[i][j].r) + (simp_file->data[i][j].g) + (simp_file->data[i][j].b)) / 3;
+			
 			simp_file->data[i][j].r = avg;
 			simp_file->data[i][j].g = avg;
 			simp_file->data[i][j].b = avg;
@@ -40,8 +42,6 @@ int main(int argc, char** argv) {
 	}
 
 	writeSimp(simp_file, outfile);
-
-	freeSimp(simp_file);
 
 	free(simp_file);
 

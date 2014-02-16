@@ -31,8 +31,6 @@ int main(int argc, char** argv) {
 
 	writeSimp(simp_file, outfile);
 
-	freeSimp(simp_file);
-
 	free(simp_file);
 
 	fclose(infile);
