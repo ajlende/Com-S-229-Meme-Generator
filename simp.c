@@ -45,7 +45,6 @@ size_t writeSimp(simp *simp_data, FILE *write_file) {
 
 	for (i = 0; i < simp_data->height; i++) {
 		size_written += fwrite(simp_data->data[i], sizeof(pixel), simp_data->width, write_file) * sizeof(pixel);
-		if (!(i % 100)) printf("%d", i);
 	}
 
 	return size_written;
