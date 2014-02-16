@@ -5,6 +5,9 @@ all : overlay crop colorshift bw
 clean : 
 	rm *.o bw colorshift crop overlay
 
+simp.o : simp.c simp.h
+	
+
 overlay.o : overlay.c simp.h
 	gcc -ansi -pedantic -c overlay.c
 
@@ -18,19 +21,22 @@ bw.o : bw.c simp.h
 	gcc -ansi -pedantic -c bw.c
 
 overlay : overlay.o simp.o
-	gcc -pedantic -o overlay overlay.o simp.o
+	gcc -pedantic -g -o overlay overlay.o simp.o
 
 crop : crop.o simp.o
-	gcc -pedantic -o crop crop.o simp.o
+	gcc -pedantic -g -o crop crop.o simp.o
 
 colorshift : colorshift.o simp.o
-	gcc -pedantic -o colorshift colorshift.o simp.o
+	gcc -pedantic -g -o colorshift colorshift.o simp.o
 
 bw : bw.o simp.o
-	gcc -pedantic -o bw bw.o simp.o
+	gcc -pedantic -g -o bw bw.o simp.o
 	
 tarball : 
 	tar czf ajlende.tar.gz *.c *.h Makefile
+
+debug : 
+	# TODO: finish debug make
 
 testall : testcrop testcolorshift testbw testoverlay
 
