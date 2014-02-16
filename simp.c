@@ -56,6 +56,8 @@ size_t writeSimp(simp *simp_data, FILE *write_file) {
  */
 void freeSimp(simp *simp_data) {
 
+	int i;
+
 	for (i = 0; i < simp_data->height; i++) {
 		free(simp_data->data[i]);
 	}
