@@ -7,6 +7,9 @@ int main(int argc, char** argv) {
 	FILE* infile;
 	FILE* outfile;
 	simp* simp_file;
+
+	size_t size_read;
+	size_t size_written;
 	
 	infile = fopen( argv[1], "rb" );
 
@@ -25,9 +28,12 @@ int main(int argc, char** argv) {
 	
 	simp_file = (simp*) malloc(sizeof(simp));
 
-	readSimp(simp_file, infile);
+	size_read = readSimp(simp_file, infile);
 
-	writeSimp(simp_file, outfile);
+	size_written = writeSimp(simp_file, outfile);
+
+	printf("filein size: %zu", size_read);
+	printf("fileout size: %zu", size_written);
 
 	freeSimp(simp_file);
 
