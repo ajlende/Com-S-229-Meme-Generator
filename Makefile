@@ -41,8 +41,8 @@ debug :
 testall : testcrop testcolorshift testbw testoverlay
 
 testcrop : crop utils/compare utils/bmp2simp utils/simp2bmp
-	./crop /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/insanity.simp /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity_o.simp 150 112 220 290
-	./utils/compare /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity.simp /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity_o.simp
+	./crop test/SIMP/insanity.simp test/SIMP/c_insanity_o.simp 150 112 220 290
+	./utils/compare test/SIMP/c_insanity.simp test/SIMP/c_insanity_o.simp
 
 testcolorshift : colorshift utils/compare utils/bmp2simp utils/simp2bmp
 	./colorshift test/SIMP/keanu.simp test/SIMP/keanurgb_o.simp RGB
