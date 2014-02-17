@@ -78,9 +78,9 @@ int main(int argc, char** argv) {
 		printf("Width or height is too large or x, y coordinates are out of range!\n");
 		freeSimp(simp_in);
 		free(simp_in);
+		simp_in = 0;
 		fclose(infile);
 		fclose(outfile);
-		simp_in = 0;
 		return 1;
 	}
 
