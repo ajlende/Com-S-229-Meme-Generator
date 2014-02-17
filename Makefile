@@ -40,11 +40,11 @@ debug :
 
 testall : testcrop testcolorshift testbw testoverlay
 
-testcrop : crop compare utils/bmp2simp utils/simp2bmp
+testcrop : crop utils/compare utils/bmp2simp utils/simp2bmp
 	./crop /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/insanity.simp /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity_o.simp 150 112 220 290
 	./utils/compare /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity.simp /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity_o.simp
 
-testcolorshift : colorshift compare utils/bmp2simp utils/simp2bmp
+testcolorshift : colorshift utils/compare utils/bmp2simp utils/simp2bmp
 	./colorshift test/SIMP/keanu.simp test/SIMP/keanurgb_o.simp RGB
 	./colorshift test/SIMP/keanu.simp test/SIMP/keanurbg_o.simp RBG
 	./colorshift test/SIMP/keanu.simp test/SIMP/keanurg_o.simp RG
@@ -56,11 +56,11 @@ testcolorshift : colorshift compare utils/bmp2simp utils/simp2bmp
 	./utils/compare test/SIMP/keanurb.simp test/SIMP/keanurb_o.simp
 	./utils/compare test/SIMP/keanugb.simp test/SIMP/keanugb_o.simp
 
-testbw : bw compare utils/bmp2simp utils/simp2bmp
+testbw : bw utils/compare utils/bmp2simp utils/simp2bmp
 	./bw test/SIMP/attached.simp test/SIMP/bw_attached_o.simp
 	./utils/compare test/SIMP/bw_attached.simp test/SIMP/bw_attached_o.simp
 
-testoverlay : overlay compare utils/bmp2simp utils/simp2bmp
+testoverlay : overlay utils/compare utils/bmp2simp utils/simp2bmp
 	./overlay test/SIMP/insanity.simp test/SIMP/doge.simp test/SIMP/insanedoge_o.simp 150 120
 	./utils/compare test/SIMP/insanedoge.simp test/SIMP/insanedoge_o.simp
 
