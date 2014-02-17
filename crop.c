@@ -6,8 +6,10 @@ int main(int argc, char** argv) {
 
 	FILE* infile;
 	FILE* outfile;
-	simp* simp_file;
-	int x, y, w, h, i;
+	simp* simp_in;
+	simp* simp_out;
+	unsigned int x, y, w, h;
+	int i, j;
 
 	infile = fopen( argv[1], "rb" );
 
@@ -24,44 +26,32 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	printf("Opened files...\n");
-
 	x = atoi(argv[3]);
 	y = atoi(argv[4]);
 	w = atoi(argv[5]);
 	h = atoi(argv[6]);
 
-	printf("Assigned x, y, w, h...\n");
-
-	simp_file = (simp*) malloc(sizeof(simp));
-
-	readSimp(simp_file, infile);
-
-	printf("Read SIMP file...\n");
-
-	/* Adjust the width and height */
-	simp_file->width = w;
-	simp_file->height = h;
-
-	printf("Set simp_file width and height...\n");
-
-	printf("Info: simp_file->data: %X...\n", simp_file->data);
+	simp_in = (simp*) malloc(sizeof(simp));
 	
-	/* move the pointer to the new top of the image */
-	simp_file->data += y;
+	readSimp(simp_in, infile);
+	
+	simp_out = (simp*) malloc(sizeof(simp));
 
-	printf("Moved simp_file to: %X...\n", simp_file->data);
+	initSimp(simp_out, w, h);
 
-	/* move each pointer that we are dealing with to the new left edge of the image */
-	for (i = 0; i < simp_file->height; i++) {
-		simp_file->data[i] += x;
+	for (i = 0; i < h; i++) {
+		for (j = 0; j < w; j++) {
+			simp_out->data[i][j] = simp_in->data[i+y][j+x];
+		}
 	}
 
-	printf("Moved simp_file->data[i]...\n");
+	writeSimp(simp_out, outfile);
 
-	writeSimp(simp_file, outfile);
+	freeSimp(simp_in);
 
-	free(simp_file);
+	free(simp_out);
+
+	free(simp_in);
 
 	fclose(infile);
 	fclose(outfile);
