@@ -41,30 +41,54 @@ debug :
 testall : testcrop testcolorshift testbw testoverlay
 
 testcrop : crop compare utils/bmp2simp utils/simp2bmp
-	./utils/bmp2simp /test/BMP/insanity-cs229.bmp /test/SIMP/insanity-cs229.simp
-	./crop /test/SIMP/insanity-cs229.simp /test/SIMP/o-insanity-cs229.simp
-	./utils/simp2bmp /test/SIMP/o-insanity-cs229.simp /test/BMP/o-insanity-cs229.bmp
+	./crop /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/insanity.simp /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity_o.simp 150 112 220 290
+	./utils/compare /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity.simp /Users/ajlende/Box\ Sync/cs229/Pojects/Project1/test/SIMP/c_insanity_o.simp
 
 testcolorshift : colorshift compare utils/bmp2simp utils/simp2bmp
-	./utils/bmp2simp keanu-cs229.bmp /test/SIMP/keanu-cs229.simp
-	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurgb-cs229.simp RGB
-	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurbg-cs229.simp RBG
-	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurg-cs229.simp RG
-	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurb-cs229.simp RB
-	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanugb-cs229.simp GB
-	./utils/simp2bmp /test/SIMP/keanurgb-cs229.simp /test/BMP/keanurgb-cs229.bmp
-	./utils/simp2bmp /test/SIMP/keanurbg-cs229.simp /test/BMP/keanurbg-cs229.bmp
-	./utils/simp2bmp /test/SIMP/keanurg-cs229.simp /test/BMP/keanurg-cs229.bmp
-	./utils/simp2bmp /test/SIMP/keanurb-cs229.simp /test/BMP/keanurb-cs229.bmp
-	./utils/simp2bmp /test/SIMP/keanugb-cs229.simp /test/BMP/keanugb-cs229.bmp
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurgb_o.simp RGB
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurbg_o.simp RBG
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurg_o.simp RG
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurb_o.simp RB
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanugb_o.simp GB
+	./utils/compare test/SIMP/keanurgb.simp test/SIMP/keanurgb_o.simp
+	./utils/compare test/SIMP/keanurbg.simp test/SIMP/keanurbg_o.simp
+	./utils/compare test/SIMP/keanurg.simp test/SIMP/keanurg_o.simp
+	./utils/compare test/SIMP/keanurb.simp test/SIMP/keanurb_o.simp
+	./utils/compare test/SIMP/keanugb.simp test/SIMP/keanugb_o.simp
 
 testbw : bw compare utils/bmp2simp utils/simp2bmp
-	./utils/bmp2simp /test/BMP/attached-cs229.bmp /test/SIMP/attached-cs229.simp
-	./bw /test/SIMP/attached-cs229.simp /test/SIMP/o-attached-cs229.simp
-	./utils/simp2bmp /test/SIMP/o-attached-cs229.simp /test/BMP/o-attached-cs229.bmp
+	./bw test/SIMP/attached.simp test/SIMP/bw_attached_o.simp
+	./utils/compare test/SIMP/bw_attached.simp test/SIMP/bw_attached_o.simp
 
 testoverlay : overlay compare utils/bmp2simp utils/simp2bmp
-	./utils/bmp2simp /test/BMP/doge-cs229.bmp /test/SIMP/doge-cs229.simp
-	./overlay /test/SIMP/insanity-cs229.simp doge-cs229.simp /test/SIMP/o-insanedoge-cs229.simp 150 120
-	./utils/simp2bmp /test/SIMP/o-insanedoge-cs229.simp /test/BMP/o-insanedoge-cs229.bmp
+	./overlay test/SIMP/insanity.simp test/SIMP/doge.simp test/SIMP/insanedoge_o.simp 150 120
+	./utils/compare test/SIMP/insanedoge.simp test/SIMP/insanedoge_o.simp
 
+#testcrop : crop compare utils/bmp2simp utils/simp2bmp
+#	./utils/bmp2simp /test/BMP/insanity-cs229.bmp /test/SIMP/insanity-cs229.simp
+#	./crop /test/SIMP/insanity-cs229.simp /test/SIMP/o-insanity-cs229.simp
+#	./utils/simp2bmp /test/SIMP/o-insanity-cs229.simp /test/BMP/o-insanity-cs229.bmp
+#
+#testcolorshift : colorshift compare utils/bmp2simp utils/simp2bmp
+#	./utils/bmp2simp keanu-cs229.bmp /test/SIMP/keanu-cs229.simp
+#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurgb-cs229.simp RGB
+#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurbg-cs229.simp RBG
+#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurg-cs229.simp RG
+#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurb-cs229.simp RB
+#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanugb-cs229.simp GB
+#	./utils/simp2bmp /test/SIMP/keanurgb-cs229.simp /test/BMP/keanurgb-cs229.bmp
+#	./utils/simp2bmp /test/SIMP/keanurbg-cs229.simp /test/BMP/keanurbg-cs229.bmp
+#	./utils/simp2bmp /test/SIMP/keanurg-cs229.simp /test/BMP/keanurg-cs229.bmp
+#	./utils/simp2bmp /test/SIMP/keanurb-cs229.simp /test/BMP/keanurb-cs229.bmp
+#	./utils/simp2bmp /test/SIMP/keanugb-cs229.simp /test/BMP/keanugb-cs229.bmp
+#
+#testbw : bw compare utils/bmp2simp utils/simp2bmp
+#	./utils/bmp2simp /test/BMP/attached-cs229.bmp /test/SIMP/attached-cs229.simp
+#	./bw /test/SIMP/attached-cs229.simp /test/SIMP/o-attached-cs229.simp
+#	./utils/simp2bmp /test/SIMP/o-attached-cs229.simp /test/BMP/o-attached-cs229.bmp
+#
+#testoverlay : overlay compare utils/bmp2simp utils/simp2bmp
+#	./utils/bmp2simp /test/BMP/doge-cs229.bmp /test/SIMP/doge-cs229.simp
+#	./overlay /test/SIMP/insanity-cs229.simp doge-cs229.simp /test/SIMP/o-insanedoge-cs229.simp 150 120
+#	./utils/simp2bmp /test/SIMP/o-insanedoge-cs229.simp /test/BMP/o-insanedoge-cs229.bmp
+#

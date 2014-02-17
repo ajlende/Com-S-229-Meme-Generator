@@ -50,3 +50,7 @@ bw
 colorshift
 crop
 overlay
+
+# All the test files and utilities
+utils/
+test/
