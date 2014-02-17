@@ -1,12 +1,16 @@
 # Makefile for the SIMP Program.
+# 
+#   Contents:
+#    1. Default make command
+#    2. clean command
+#    3. tarball command
+#    4. debug commands
+#    5. test commands
+#    6. run commands
+# 
 
+# 1. Default make command to compile all of the programs normally
 all : overlay crop colorshift bw
-
-clean : 
-	rm *.o bw colorshift crop overlay
-
-# simp.o : simp.c simp.h
-	
 
 overlay.o : overlay.c simp.h
 	gcc -ansi -pedantic -c overlay.c
@@ -21,23 +25,53 @@ bw.o : bw.c simp.h
 	gcc -ansi -pedantic -c bw.c
 
 overlay : overlay.o simp.o
-	gcc -pedantic -g -o overlay overlay.o simp.o
+	gcc -pedantic -o overlay overlay.o simp.o
 
 crop : crop.o simp.o
-	gcc -pedantic -g -o crop crop.o simp.o
+	gcc -pedantic -o crop crop.o simp.o
 
 colorshift : colorshift.o simp.o
-	gcc -pedantic -g -o colorshift colorshift.o simp.o
+	gcc -pedantic -o colorshift colorshift.o simp.o
 
 bw : bw.o simp.o
-	gcc -pedantic -g -o bw bw.o simp.o
-	
+	gcc -pedantic -o bw bw.o simp.o
+
+
+
+# 2. This will clean out any non-source files from the directory
+clean : 
+	rm *.o bw colorshift crop overlay
+
+
+
+# 3. This will make a tarball from the files for submission
 tarball : 
 	tar czf ajlende.tar.gz *.c *.h Makefile
 
-debug : 
-	# TODO: finish debug make
 
+
+# 4. This runs all the compiling with the gcc -g flag for gdb debugging
+debugall : debugcrop debugcolorshift debugbw debugoverlay
+
+debugcrop : crop crop.o simp.o crop.c simp.h
+	gcc -ansi -pedantic -c crop.c
+	gcc -pedantic -g -o crop crop.o simp.o
+
+debugcolorshift : colorshift colorshift.o simp.o colorshift.c simp.h
+	gcc -ansi -pedantic -c colorshift.c
+	gcc -pedantic -g -o colorshift colorshift.o simp.o
+
+debugbw : bw bw.o simp.o bw.c simp.h
+	gcc -ansi -pedantic -c bw.c
+	gcc -pedantic -g -o bw bw.o simp.o
+
+debugoverlay : overlay overlay.o simp.o overlay.c simp.h
+	gcc -ansi -pedantic -c overlay.c
+	gcc -pedantic -g -o overlay.o simp.o
+
+
+
+# 5. These are for comparing the simp output image to the one downloaded from the cs229 website
 testall : testcrop testcolorshift testbw testoverlay
 
 testcrop : crop utils/compare utils/bmp2simp utils/simp2bmp
@@ -64,31 +98,32 @@ testoverlay : overlay utils/compare utils/bmp2simp utils/simp2bmp
 	./overlay test/SIMP/insanity.simp test/SIMP/doge.simp test/SIMP/insanedoge_o.simp 150 120
 	./utils/compare test/SIMP/insanedoge.simp test/SIMP/insanedoge_o.simp
 
-#testcrop : crop compare utils/bmp2simp utils/simp2bmp
-#	./utils/bmp2simp /test/BMP/insanity-cs229.bmp /test/SIMP/insanity-cs229.simp
-#	./crop /test/SIMP/insanity-cs229.simp /test/SIMP/o-insanity-cs229.simp
-#	./utils/simp2bmp /test/SIMP/o-insanity-cs229.simp /test/BMP/o-insanity-cs229.bmp
-#
-#testcolorshift : colorshift compare utils/bmp2simp utils/simp2bmp
-#	./utils/bmp2simp keanu-cs229.bmp /test/SIMP/keanu-cs229.simp
-#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurgb-cs229.simp RGB
-#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurbg-cs229.simp RBG
-#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurg-cs229.simp RG
-#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanurb-cs229.simp RB
-#	./colorshift /test/SIMP/keanu-cs229.simp /test/SIMP/keanugb-cs229.simp GB
-#	./utils/simp2bmp /test/SIMP/keanurgb-cs229.simp /test/BMP/keanurgb-cs229.bmp
-#	./utils/simp2bmp /test/SIMP/keanurbg-cs229.simp /test/BMP/keanurbg-cs229.bmp
-#	./utils/simp2bmp /test/SIMP/keanurg-cs229.simp /test/BMP/keanurg-cs229.bmp
-#	./utils/simp2bmp /test/SIMP/keanurb-cs229.simp /test/BMP/keanurb-cs229.bmp
-#	./utils/simp2bmp /test/SIMP/keanugb-cs229.simp /test/BMP/keanugb-cs229.bmp
-#
-#testbw : bw compare utils/bmp2simp utils/simp2bmp
-#	./utils/bmp2simp /test/BMP/attached-cs229.bmp /test/SIMP/attached-cs229.simp
-#	./bw /test/SIMP/attached-cs229.simp /test/SIMP/o-attached-cs229.simp
-#	./utils/simp2bmp /test/SIMP/o-attached-cs229.simp /test/BMP/o-attached-cs229.bmp
-#
-#testoverlay : overlay compare utils/bmp2simp utils/simp2bmp
-#	./utils/bmp2simp /test/BMP/doge-cs229.bmp /test/SIMP/doge-cs229.simp
-#	./overlay /test/SIMP/insanity-cs229.simp doge-cs229.simp /test/SIMP/o-insanedoge-cs229.simp 150 120
-#	./utils/simp2bmp /test/SIMP/o-insanedoge-cs229.simp /test/BMP/o-insanedoge-cs229.bmp
-#
+
+
+# 6. These use the simp files from the cs229 website run the command, and then export a bmp image for viewing
+runall : runcrop runcolorshift runbw runoverlay
+
+runcrop : crop utils/bmp2simp utils/simp2bmp
+	./crop test/SIMP/insanity.simp test/SIMP/c_insanity_o.simp
+	./utils/simp2bmp test/SIMP/c_insanity_o.simp test/BMP/c_insanity_o.bmp
+
+runcolorshift : colorshift utils/bmp2simp utils/simp2bmp
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurgb_o.simp RGB
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurbg_o.simp RBG
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurg_o.simp RG
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanurb_o.simp RB
+	./colorshift test/SIMP/keanu.simp test/SIMP/keanugb_o.simp GB
+	./utils/simp2bmp test/SIMP/keanurgb_o.simp test/BMP/keanurgb_o.bmp
+	./utils/simp2bmp test/SIMP/keanurbg_o.simp test/BMP/keanurbg_o.bmp
+	./utils/simp2bmp test/SIMP/keanurg_o.simp test/BMP/keanurg_o.bmp
+	./utils/simp2bmp test/SIMP/keanurb_o.simp test/BMP/keanurb_o.bmp
+	./utils/simp2bmp test/SIMP/keanugb_o.simp test/BMP/keanugb_o.bmp
+
+runbw : bw utils/bmp2simp utils/simp2bmp
+	./bw test/SIMP/attached.simp test/SIMP/bw_attached_o.simp
+	./utils/simp2bmp test/SIMP/c_attached_o.simp test/BMP/bw_attached_o.bmp
+
+runoverlay : overlay utils/bmp2simp utils/simp2bmp
+	./overlay test/SIMP/insanity.simp test/SIMP/doge.simp test/SIMP/insanedoge_o.simp 150 120
+	./utils/simp2bmp test/SIMP/insanedoge_o.simp test/BMP/insanedoge_o.bmp
+
