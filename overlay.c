@@ -61,9 +61,9 @@ int main(int argc, char** argv) {
 			b2 = simp_top->data[i][j].b;
 			a2 = simp_top->data[i][j].a;
 
-			simp_bottom->data[i+y][j+x].r = ((a2/255)*r2)+(((a1*(255-a2))/(255*255))*r1);
-			simp_bottom->data[i+y][j+x].g = ((a2/255)*g2)+(((a1*(255-a2))/(255*255))*g1);
-			simp_bottom->data[i+y][j+x].b = ((a2/255)*b2)+(((a1*(255-a2))/(255*255))*b1);
+			simp_bottom->data[i+y][j+x].r = ((a2*r2)/255)+(((a1*(255-a2))/(255*255))*r1);
+			simp_bottom->data[i+y][j+x].g = ((a2*g2)/255)+(((a1*(255-a2))/(255*255))*g1);
+			simp_bottom->data[i+y][j+x].b = ((a2*b2)/255)+(((a1*(255-a2))/(255*255))*b1);
 			simp_bottom->data[i+y][j+x].a = 255*((a2/255)+((a1*(255-a2))/(255*255)));
 		}
 	}
