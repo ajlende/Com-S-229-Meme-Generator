@@ -61,15 +61,17 @@ int main(int argc, char** argv) {
 			b2 = simp_top->data[i][j].b;
 			a2 = simp_top->data[i][j].a;
 
-			if (a2 == 255) {
+			if (a2 == 0xFF) {
 				simp_bottom->data[i+y][j+x].r = r2;
             	simp_bottom->data[i+y][j+x].g = g2;
             	simp_bottom->data[i+y][j+x].b = b2;
+				simp_bottom->data[i+y][j+x].a = a2;
 			} else {
 				simp_bottom->data[i+y][j+x].r = ((a2*r2)/255)+((r1*a1*(255-a2))/(255*255));
 				simp_bottom->data[i+y][j+x].g = ((a2*g2)/255)+((g1*a1*(255-a2))/(255*255));
 				simp_bottom->data[i+y][j+x].b = ((a2*b2)/255)+((b1*a1*(255-a2))/(255*255));
-				simp_bottom->data[i+y][j+x].a = 255*((a2/255)+((a1*(255-a2))/(255*255)));
+				/* simp_bottom->data[i+y][j+x].a = ((a2/255)+((a1*(255-a2))/(255*255)))*255; */
+				simp_bottom->data[i+y][j+x].a = (((255*(a1+a2))-(a1*a2))/255);
 			}
 		}
 	}
