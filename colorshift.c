@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "simp.h"
 
 int main(int argc, char** argv) {
@@ -7,6 +8,7 @@ int main(int argc, char** argv) {
 	FILE* infile;
 	FILE* outfile;
 	simp* simp_file;
+	char pattern[3];
 
 	infile = fopen( argv[1], "rb" );
 
@@ -28,6 +30,7 @@ int main(int argc, char** argv) {
 	readSimp(simp_file, infile);
 
 	/* Edit the photo here */
+	
 
 	writeSimp(simp_file, outfile);
 
