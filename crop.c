@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
 	for (i = 3; i < argc; i++) {
 		if (argv[i][0] == '-') {
 			printf("Invalid argument %s must be positive!\n", argv[i]);
-			return 1
+			return 1;
 		}
 	}
 
