@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
 				simp_file->data[i][j].g = tmp;
 			}
 		}
-	} else if (!strcmp(argv[3], "RGB") || !strcmp(argv[3], "GBR") || !strcmp(argv[3], "BRG")) {
+	} else if (!strcmp(argv[3], "RBG") || !strcmp(argv[3], "BGR") || !strcmp(argv[3], "GRB")) {
 		for (i = 0; i < simp_file->height; i++) {
 			for (j = 0; j < simp_file->width; j++) {
 				unsigned char tmp = simp_file->data[i][j].r;
