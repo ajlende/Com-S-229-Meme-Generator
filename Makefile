@@ -67,7 +67,7 @@ debugbw : bw bw.o simp.o bw.c simp.h
 
 debugoverlay : overlay overlay.o simp.o overlay.c simp.h
 	gcc -ansi -pedantic -c overlay.c
-	gcc -pedantic -g -o overlay.o simp.o
+	gcc -pedantic -g -o overlay overlay.o simp.o
 
 
 
