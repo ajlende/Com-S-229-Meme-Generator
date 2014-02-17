@@ -121,7 +121,7 @@ runcolorshift : colorshift utils/bmp2simp utils/simp2bmp
 
 runbw : bw utils/bmp2simp utils/simp2bmp
 	./bw test/SIMP/attached.simp test/SIMP/bw_attached_o.simp
-	./utils/simp2bmp test/SIMP/c_attached_o.simp test/BMP/bw_attached_o.bmp
+	./utils/simp2bmp test/SIMP/bw_attached_o.simp test/BMP/bw_attached_o.bmp
 
 runoverlay : overlay utils/bmp2simp utils/simp2bmp
 	./overlay test/SIMP/insanity.simp test/SIMP/doge.simp test/SIMP/insanedoge_o.simp 150 120
