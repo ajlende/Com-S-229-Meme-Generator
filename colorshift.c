@@ -8,7 +8,7 @@ int main(int argc, char** argv) {
 	FILE* infile;
 	FILE* outfile;
 	simp* simp_file;
-	char pattern[3];
+	int i, j;
 
 	infile = fopen( argv[1], "rb" );
 
@@ -30,7 +30,56 @@ int main(int argc, char** argv) {
 	readSimp(simp_file, infile);
 
 	/* Edit the photo here */
-	
+	if (!strcmp(argv[3], "RGB") || !strcmp(argv[3], "GBR") || !strcmp(argv[3], "BRG")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "RGB") || !strcmp(argv[3], "GBR") || !strcmp(argv[3], "BRG")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "RG") || !strcmp(argv[3], "GR")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "RB") || !strcmp(argv[3], "BR")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "GB") || !strcmp(argv[3], "BG")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = tmp;
+			}
+		}
+	} else {
+		printf("Invalid argument %s", argv[3]);
+		freeSimp(simp_file);
+		free(simp_file);
+		fclose(infile);
+		fclose(outfile);
+		return 1;
+	}
 
 	writeSimp(simp_file, outfile);
 
