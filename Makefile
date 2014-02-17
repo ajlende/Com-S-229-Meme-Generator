@@ -104,7 +104,7 @@ testoverlay : overlay utils/compare utils/bmp2simp utils/simp2bmp
 runall : runcrop runcolorshift runbw runoverlay
 
 runcrop : crop utils/bmp2simp utils/simp2bmp
-	./crop test/SIMP/insanity.simp test/SIMP/c_insanity_o.simp
+	./crop test/SIMP/insanity.simp test/SIMP/c_insanity_o.simp 150 112 220 290
 	./utils/simp2bmp test/SIMP/c_insanity_o.simp test/BMP/c_insanity_o.bmp
 
 runcolorshift : colorshift utils/bmp2simp utils/simp2bmp
