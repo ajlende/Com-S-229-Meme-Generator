@@ -53,4 +53,7 @@ overlay
 
 # All the test files and utilities
 utils/
-test/
+test/SIMP/*_o.simp
+test/SIMP/*-o.simp
+test/SIMP/*-cs229.simp
+test/BMP
