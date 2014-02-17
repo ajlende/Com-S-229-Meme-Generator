@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
 	if ( outfile == 0 ) {
 		printf("File %s failed to open!\n", argv[3]);
 		fclose(infile_bottom);
-		fclose(infile_top)
+		fclose(infile_top);
 		return 1;
 	}
 
@@ -74,7 +74,8 @@ int main(int argc, char** argv) {
 
 	free(simp_bottom);
 
-	fclose(infile);
+	fclose(infile_bottom);
+	fclose(infile_top);
 	fclose(outfile);
 	
 	return 0;
