@@ -73,6 +73,7 @@ int main(int argc, char** argv) {
 	freeSimp(simp_top);
 
 	free(simp_bottom);
+	free(simp_top);
 
 	fclose(infile_bottom);
 	fclose(infile_top);
