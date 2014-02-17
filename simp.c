@@ -19,6 +19,7 @@ void initSimp(simp *simp_data, unsigned int width, unsigned int height) {
 	}
 }
 
+
 /*
  * Frees the data malloc'd for the simp data.
  */
@@ -28,10 +29,13 @@ void freeSimp(simp *simp_data) {
 
 	for (i = 0; i < simp_data->height; i++) {
 		free(simp_data->data[i]);
+		simp_data->data[i] = 0;
 	}
 	
 	free(simp_data->data);
+	simp_data->data = 0;
 }
+
 
 /*
  * Allocates space for the data part of a simp data structure. Reads the simp file into the structure. Returns the number of bytes read from the file.
@@ -55,6 +59,7 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 
 	return size_read;
 }
+
 
 /*
  * Writes data from a simp data structure to a simp file. Frees the space allocated for the data. Returns the number of bytes written to the file.
