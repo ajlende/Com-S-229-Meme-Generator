@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
 			}
 		}
 	} else {
-		printf("Invalid argument %s", argv[3]);
+		printf("Invalid argument %s\n", argv[3]);
 		
 		freeSimp(simp_file);
 		
