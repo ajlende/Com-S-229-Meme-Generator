@@ -13,35 +13,115 @@ The SIMP Data Structure
 ===========================================
 TODO: A description of your data structure for storing an image.
 
+The simp data structure consists of a 32-bit unsigned int for the width followed by another 32-bit unsigned int for the height. Following the width and height is a pixel** to hold all of the pixels of the image. Each pixel is stored in a structure with four unsigned 8-bit chars to represent the values of the red, green, blue, and alpha channels of the pixel. The structure type definitions can be found in simp.h
+
 
 Extra Details
 ===========================================
 TODO: A description of any extra details assumed due to ambiguous requirements in the project specification.
 
+All files inputted into all programs are assumed to follow the SIMP image format as described in section 6.1 of the Project 1 Specification.
+All file names entered for input are expected to 
+All numerical values entered as command line arguments are expected to be positive integers.
+
 
 Files
 ===========================================
-TODO: A file listing of the source code files, specifically mentioning the purpose of each code file.
 
-README - This README.
+README:
+-------
+This README.
 
-Makefile - 
-TODO: Makefile
 
-bw.c - 
-TODOL bw.c
+Makefile:
+---------
+The Makefile contained in the project contains six sections as described below. 
+Test files for running commands in sections five and six are contained within two
+folders, utils and test which are not included within this tarball. 
 
-colorshift.c - 
-TODO: colorshift.c
+1. all command     - This is the default make command to compile all of the
+                     programs normally.
+2. clean command   - This will clean out any non-source files from the
+                     directory.
+3. tarball command - This will make a tarball from the source files for
+                     submission.
+4. debug commands  - This runs all the compiling with the gcc -g flag for gdb
+                     debugging.
+5. test commands   - These are for comparing the simp output image to the one
+                     downloaded from the cs229 website.
+6. run commands    - These use the simp files from the cs229 website run the
+                     command, and then export a bmp image for viewing.
 
-crop.c - 
-TODO: crop.c
 
-overlay.c - 
-TODO: overlay.c
+bw.c:
+-----
+The bw.c file contains the main method for the bw program.
 
-simp.h - 
-TODO : simp.h
+The bw program converts an image to black and white.
+
+Usage: bw pic.simp out.simp
+
+Each pixel is converted to black and white by averaging the Red, Green,
+and Blue values and then setting each color channel to that averaged value.
+
+
+colorshift.c:
+-------------
+The colorshift.c file contains the main method for the colorshift program.
+
+The colorshift program performs an artistic color shift in the given image.
+
+Usage: colorshift pic.simp out.simp pattern
+
+The pattern should be one of the following strings:
+RGB GBR BRG RBG BGR GRB RG GR RB BR GB BG
+
+The pattern RGB says send Red to Green, Green to Blue, and Blue to Red.
+The two-letter patterns swap two colors, such as RG to swap Red and Green,
+while keeping Blue the same. 
+
+
+crop.c:
+-------
+The crop.c file contains the main method for the crop program.
+
+The crop program performs a crop operation on an image, selecting a smaller
+portion to create a smaller image.
+
+Usage: crop picture.simp out.simp x y w h
+
+Overlay creates a new image given by drawing the second picture on top of 
+the first picture using a translation such that the top-left corner of pic2
+is at the position (x, y) inside pic1.
+
+
+overlay.c:
+----------
+The overlay.c file contains the main method for the overlay program.
+
+The overlay program takes two images and places one on top of the other.
+
+Usage: overlay pic1.simp pic2.simp out.simp x y
+
+Overlay creates a new image given by drawing the second picture on top of 
+the first picture using a translation such that the top-left corner of pic2
+is at the position (x, y) inside pic1.
+
+
+simp.c:
+-------
+The simp.c file contains all of the function bodies for the function
+prototypes in simp.h.
+
+The functions below relate to reading and writing of the simp file type.
+
+
+simp.h:
+-------
+The simp.h header file contains the type definitions for the simp and
+pixel data structure as well as the function prototypes that are defined
+in simp.c
+
 
 Extra Features
 ===========================================
