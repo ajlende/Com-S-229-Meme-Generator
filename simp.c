@@ -1,3 +1,14 @@
+/*
+ * simp.c
+ * By Alex Lende
+ * 
+ * The simp.c file contains all of the function bodies
+ * for the function prototypes in simp.h.
+ *
+ * The functions below relate to reading and writing of
+ * the simp file type.
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "simp.h"

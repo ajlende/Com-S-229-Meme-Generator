@@ -1,3 +1,17 @@
+/*
+ * crop.c
+ * By Alex Lende
+ *
+ * The crop program performs a crop operation on an image, selecting a smaller portion to create a smaller image.
+ * 
+ * Usage: crop picture.simp out.simp x y w h
+ * 
+ * Overlay creates a new image given by drawing the second picture on top of 
+ * the first picture using a translation such that the top-left corner of pic2
+ * is at the position (x, y) inside pic1.
+ */
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "simp.h"
@@ -21,22 +35,22 @@ int main(int argc, char** argv) {
 
 	/* Read the values of x, y, w, and h. If any is not an integer, then exit and return 1. */
 	if (sscanf(argv[3], "%u", &x) != 1) {
-		printf("Invalid argument %s must be an integer!\n", argv[3]);
+		printf("Invalid argument '%s' must be an integer!\n", argv[3]);
 		return 1;
 	}
 
 	if (sscanf(argv[4], "%u", &y) != 1) {
-		printf("Invalid argument %s must be an integer!\n", argv[4]);
+		printf("Invalid argument '%s' must be an integer!\n", argv[4]);
 		return 1;
 	}
 
 	if (sscanf(argv[5], "%u", &w) != 1) {
-		printf("Invalid argument %s must be an integer!\n", argv[5]);
+		printf("Invalid argument '%s' must be an integer!\n", argv[5]);
 		return 1;
 	}
 
 	if (sscanf(argv[6], "%u", &h) != 1) {
-		printf("Invalid argument %s must be an integer!\n", argv[6]);
+		printf("Invalid argument '%s' must be an integer!\n", argv[6]);
 		return 1;
 	}
 
@@ -44,7 +58,7 @@ int main(int argc, char** argv) {
 	/* Make sure that all integers read were not negative. */
 	for (i = 3; i < argc; i++) {
 		if (argv[i][0] == '-') {
-			printf("Invalid argument %s must be positive!\n", argv[i]);
+			printf("Invalid argument '%s' must be positive!\n", argv[i]);
 			return 1;
 		}
 	}
@@ -53,15 +67,15 @@ int main(int argc, char** argv) {
 	/* Open the files. If one fails to open, then exit and return 1. */
 	infile = fopen( argv[1], "rb" );
 
-	if ( infile == 0 ) {
-		printf("File %s failed to open!\n", argv[1]);
+	if (infile == 0) {
+		printf("File '%s' failed to open!\n", argv[1]);
 		return 1;
 	}
 	
 	outfile = fopen( argv[2], "wb" );
 	
-	if ( outfile == 0 ) {
-		printf("File %s failed to open!\n", argv[2]);
+	if (outfile == 0) {
+		printf("File '%s' failed to open!\n", argv[2]);
 		fclose(infile);
 		return 1;
 	}
@@ -75,12 +89,17 @@ int main(int argc, char** argv) {
 	/* Make sure that the width and height to crop to are within the size of the image. */
 	/* Also, make sure that the x and y coordinates are within the bounds of the image. */
 	if ((x+w) > simp_in->width || (y+h) > simp_in->height) {
+		
 		printf("Width or height is too large or x, y coordinates are out of range!\n");
+		
 		freeSimp(simp_in);
+		
 		free(simp_in);
 		simp_in = 0;
+		
 		fclose(infile);
 		fclose(outfile);
+		
 		return 1;
 	}
 

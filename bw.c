@@ -1,3 +1,15 @@
+/*
+ * bw.c
+ * By Alex Lende
+ *
+ * The bw program converts an image to black and white.
+ *
+ * Usage: bw pic.simp out.simp
+ * 
+ * Each pixel is converted to black and white by averaging the Red, Green,
+ * and Blue values and then setting each color channel to that averaged value.
+ */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "simp.h"
@@ -9,24 +21,34 @@ int main(int argc, char** argv) {
 	simp* simp_file;
 	int i, j;
 
+	/* Check to make sure there are the proper number of argumnets. */
+	if (argc != 3) {
+		printf("Invalid number of arguments!\n");
+		return 1;
+	}
+
+
+	/* Open the files. If one fails to open, then exit and return 1. */
 	infile = fopen( argv[1], "rb" );
 
-	if ( infile == 0 ) {
-		printf("File %s failed to open!\n", argv[1]);
+	if (infile == 0) {
+		printf("File '%s' failed to open!\n", argv[1]);
 		return 1;
 	}
 	
 	outfile = fopen( argv[2], "wb" );
 	
-	if ( outfile == 0 ) {
-		printf("File %s failed to open!\n", argv[2]);
+	if (outfile == 0) {
+		printf("File '%s' failed to open!\n", argv[2]);
 		fclose(infile);
 		return 1;
 	}
-	
-	simp_file = (simp*) malloc(sizeof(simp));
 
+
+	/* Read the data from the infile into a simp data structure. */
+	simp_file = (simp*) malloc(sizeof(simp));
 	readSimp(simp_file, infile);
+
 
 	/* Edit the photo here */
 	for (i = 0; i < simp_file->height; i++) {
@@ -41,10 +63,14 @@ int main(int argc, char** argv) {
 		}	
 	}
 
+
+	/* Write the image to the file and free simp data. */
 	writeSimp(simp_file, outfile);
-
 	free(simp_file);
+	simp_file = 0;
 
+	
+	/* Close the files. */
 	fclose(infile);
 	fclose(outfile);
 

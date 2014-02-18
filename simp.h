@@ -1,3 +1,12 @@
+/* 
+ * simp.h
+ * By Alex Lende
+ * 
+ * The simp.h header file contains the type definitions for the
+ * simp and pixel data structure as well as the function prototypes
+ * that are defined in simp.c
+ */
+
 #ifndef _SIMP_H_
 #define _SIMP_H_
 
