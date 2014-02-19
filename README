@@ -13,16 +13,32 @@ The SIMP Data Structure
 ===========================================
 TODO: A description of your data structure for storing an image.
 
-The simp data structure consists of a 32-bit unsigned int for the width followed by another 32-bit unsigned int for the height. Following the width and height is a pixel** to hold all of the pixels of the image. Each pixel is stored in a structure with four unsigned 8-bit chars to represent the values of the red, green, blue, and alpha channels of the pixel. The structure type definitions can be found in simp.h
+The simp data structure consists of a 32-bit unsigned int for the width followed by
+another 32-bit unsigned int for the height. Following the width and height is a
+pixel** to hold all of the pixels of the image. Each pixel is stored in a structure
+with four unsigned 8-bit chars to represent the values of the red, green, blue, and
+alpha channels of the pixel. The structure type definitions can be found in simp.h.
 
 
 Extra Details
 ===========================================
-TODO: A description of any extra details assumed due to ambiguous requirements in the project specification.
+TODO: A description of any extra details assumed due to ambiguous requirements in
+      the project specification.
 
-All files inputted into all programs are assumed to follow the SIMP image format as described in section 6.1 of the Project 1 Specification.
-All file names entered for input are expected to 
-All numerical values entered as command line arguments are expected to be positive integers.
+All files inputted into all programs are assumed to follow the SIMP image format as
+described in section 6.1 of the Project 1 Specification.
+
+All file names entered as command line arguments for input are expected to exist.
+Non-existent output files will be created, and existing ones will be overwritten.
+
+All numerical values entered as command line arguments are expected to be positive
+integers.
+
+In the crop program, the values w + x and h + y are expected to be within the width
+and height of the inout image.
+
+In the overlay program, the width of the image to overlay plus x and the hight of the
+image to overlay plys y are expected to be within the 
 
 
 Files
