@@ -21,6 +21,13 @@ int main(int argc, char** argv) {
 	simp* simp_file;
 	int i, j;
 
+
+
+	/* TODO: Remove these two variables */
+	size_t size_read, size_written;
+
+
+
 	/* Check to make sure there are the proper number of argumnets. */
 	if (argc != 3) {
 		printf("Invalid number of arguments!\n");
@@ -47,7 +54,10 @@ int main(int argc, char** argv) {
 
 	/* Read the data from the infile into a simp data structure. */
 	simp_file = (simp*) malloc(sizeof(simp));
-	readSimp(simp_file, infile);
+	size_read = readSimp(simp_file, infile);
+
+
+	printf("size_read: %u", size_read);
 
 
 	/* Edit the photo here */
@@ -65,9 +75,12 @@ int main(int argc, char** argv) {
 
 
 	/* Write the image to the file and free simp data. */
-	writeSimp(simp_file, outfile);
+	size_written = writeSimp(simp_file, outfile);
 	free(simp_file);
 	simp_file = 0;
+
+
+	printf("size_written: %u", size_written);
 
 	
 	/* Close the files. */
