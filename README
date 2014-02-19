@@ -35,10 +35,12 @@ All numerical values entered as command line arguments are expected to be positi
 integers.
 
 In the crop program, the values w + x and h + y are expected to be within the width
-and height of the inout image.
+and height of the input image.
 
 In the overlay program, the width of the image to overlay plus x and the hight of the
-image to overlay plys y are expected to be within the 
+image to overlay plus y are expected to be within the boundries of the base image.
+
+If any of the above are entered not as expected, then the program will exit.
 
 
 Files

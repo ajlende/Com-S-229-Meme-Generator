@@ -25,6 +25,7 @@ int main(int argc, char** argv) {
 	FILE* outfile;
 	simp* simp_file;
 	int i, j;
+	size_t size_read, size_written;
 
 	/* Check to make sure there are the proper number of argumnets. */
 	if (argc != 4) {
@@ -33,7 +34,7 @@ int main(int argc, char** argv) {
 	}
 
 
-	/* Open the files. If one fails to open, then exit and return 1. */
+	/* Open the file to read. If it fails to open, then exit and return 1. */
 	infile = fopen( argv[1], "rb" );
 
 	if ( infile == 0 ) {
@@ -41,14 +42,6 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 	
-	outfile = fopen( argv[2], "wb" );
-	
-	if ( outfile == 0 ) {
-		printf("File %s failed to open!\n", argv[2]);
-		fclose(infile);
-		return 1;
-	}
-
 
 	/* Convert argv[3] (or at least the first three letters) to uppercase. */
 	for (i = 0; argv[3][i] && i < 3; i++) {
@@ -58,7 +51,15 @@ int main(int argc, char** argv) {
 
 	/* Read the data from the infile into a simp data structure. */
 	simp_file = (simp*) malloc(sizeof(simp));
-	readSimp(simp_file, infile);
+	size_read = readSimp(simp_file, infile);
+
+
+	/* readSimp() returns zero if there was an error. */
+	if (!size_read) {
+		printf("The file was unable to be read! The filetype may be incorrect or the file may be corrupted.\n");
+		fclose(infile);
+		return 1;
+	}
 
 
 	/* Edit the photo here */
@@ -113,14 +114,30 @@ int main(int argc, char** argv) {
 		simp_file = 0;
 		
 		fclose(infile);
-		fclose(outfile);
 		
+		return 1;
+	}
+
+	
+	/* Open the file to write to. If it fails to open, then exit and return 1. */
+	outfile = fopen( argv[2], "wb" );
+	
+	if ( outfile == 0 ) {
+		printf("File %s failed to open!\n", argv[2]);
+
+		freeSimp(simp_file);
+		
+		free(simp_file);
+		simp_file = 0;
+		
+		fclose(infile);
+
 		return 1;
 	}
 
 
 	/* Write the image to the file and free simp data. */
-	writeSimp(simp_file, outfile);
+	size_written = writeSimp(simp_file, outfile);
 	free(simp_file);
 	simp_file = 0;
 

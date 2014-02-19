@@ -36,7 +36,9 @@ void initSimp(simp *simp_data, unsigned int width, unsigned int height);
 void freeSimp(simp *simp_data);
 
 /*
- * Reads the simp file into a simp data structure, and returns the number of bytes read from the file.
+ * Reads the simp file into a simp data structure, and returns the number 
+ * of bytes read from the file or zero if the file could not be read
+ * correctly.
  */
 size_t readSimp(simp *simp_data, FILE *read_file);
 

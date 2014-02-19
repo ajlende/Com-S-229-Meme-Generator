@@ -24,6 +24,7 @@ int main(int argc, char** argv) {
 	simp* simp_out;
 	unsigned int x, y, w, h;
 	int i, j;
+	size_t size_read, size_written;
 
 
 	/* Check to make sure there are the proper number of argumnets. */
@@ -64,7 +65,7 @@ int main(int argc, char** argv) {
 	}
 
 
-	/* Open the files. If one fails to open, then exit and return 1. */
+	/* Open the file to read. If one fails to open, then exit and return 1. */
 	infile = fopen( argv[1], "rb" );
 
 	if (infile == 0) {
@@ -72,18 +73,18 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 	
-	outfile = fopen( argv[2], "wb" );
-	
-	if (outfile == 0) {
-		printf("File '%s' failed to open!\n", argv[2]);
-		fclose(infile);
-		return 1;
-	}
-
 
 	/* Read the data from the infile into a simp data structure. */
 	simp_in = (simp*) malloc(sizeof(simp));	
-	readSimp(simp_in, infile);
+	size_read = readSimp(simp_in, infile);
+
+
+	/* readSimp() returns zero if there was an error. */
+	if (!size_read) {
+		printf("The file was unable to be read! The filetype may be incorrect or the file may be corrupted.\n");
+		fclose(infile);
+		return 1;
+	}
 
 	
 	/* Make sure that the width and height to crop to are within the size of the image. */
@@ -98,7 +99,6 @@ int main(int argc, char** argv) {
 		simp_in = 0;
 		
 		fclose(infile);
-		fclose(outfile);
 		
 		return 1;
 	}
@@ -117,9 +117,30 @@ int main(int argc, char** argv) {
 	}
 
 	
+	/* Open the file to read. If it fails to open, then exit and return 1. */
+	outfile = fopen( argv[2], "wb" );
+	
+	if (outfile == 0) {
+		printf("File '%s' failed to open!\n", argv[2]);
+
+		freeSimp(simp_in);
+		freeSimp(simp_out);
+		
+		free(simp_in);
+		simp_in = 0;
+
+		free(simp_out);
+		simp_out = 0;
+		
+		fclose(infile);
+
+		return 1;
+	}
+
+	
 	/* Write the image to the file and free the data part of each simp struct. */
 	/* NOTE: writeSimp(simp_out, outfile) automatically frees simp_out->data, but simp_in->data still needs to be freed using freeSimp(simp_in). */
-	writeSimp(simp_out, outfile);
+	size_written = writeSimp(simp_out, outfile);
 	freeSimp(simp_in);
 
 

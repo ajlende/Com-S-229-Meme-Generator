@@ -20,11 +20,7 @@ int main(int argc, char** argv) {
 	FILE* outfile;
 	simp* simp_file;
 	int i, j;
-
-
-
-	/* TODO: Remove these two variables */
-	size_t size_read, size_written, file_size;
+	size_t size_read, size_written;
 
 
 
@@ -35,19 +31,11 @@ int main(int argc, char** argv) {
 	}
 
 
-	/* Open the files. If one fails to open, then exit and return 1. */
+	/* Open the input file. If it fails to open, then exit and return 1. */
 	infile = fopen( argv[1], "rb" );
 
 	if (infile == 0) {
 		printf("File '%s' failed to open!\n", argv[1]);
-		return 1;
-	}
-	
-	outfile = fopen( argv[2], "wb" );
-	
-	if (outfile == 0) {
-		printf("File '%s' failed to open!\n", argv[2]);
-		fclose(infile);
 		return 1;
 	}
 
@@ -57,14 +45,12 @@ int main(int argc, char** argv) {
 	size_read = readSimp(simp_file, infile);
 
 
-	/* TODO: Remove this. it is simply getting the size of the file. */
-	fseek(infile, 0, SEEK_END);
-	file_size = ftell(infile);
-	fseek(infile, 0, SEEK_SET);
-
-
-	printf("file_size: %u\n", file_size);
-	printf("size_read: %u\n", size_read);
+	/* readSimp() returns zero if there was an error. */
+	if (!size_read) {
+		printf("The file was unable to be read! The filetype may be incorrect or the file may be corrupted.\n");
+		fclose(infile);
+		return 1;
+	}
 
 
 	/* Edit the photo here */
@@ -81,13 +67,27 @@ int main(int argc, char** argv) {
 	}
 
 
+	/* Open the file to write tt. If it fails to open, then exit and return 1. */
+	outfile = fopen( argv[2], "wb" );
+	
+	if (outfile == 0) {
+
+		printf("File '%s' failed to open!\n", argv[2]);
+
+		fclose(infile);
+
+		freeSimp(simp_file);
+		free(simp_file);
+		simp_file = 0;
+
+		return 1;
+	}
+
+
 	/* Write the image to the file and free simp data. */
 	size_written = writeSimp(simp_file, outfile);
 	free(simp_file);
 	simp_file = 0;
-
-
-	printf("size_written: %u\n", size_written);
 
 	
 	/* Close the files. */
