@@ -72,6 +72,12 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	size_read += fread(&width,  sizeof(int), 1, read_file) * sizeof(int);
 	size_read += fread(&height, sizeof(int), 1, read_file) * sizeof(int);
 
+	printf("WIDTH (s): %d\n", width);
+	printf("WIDTH (u): %d\n", width);
+	printf("HEIGHT (s): %d\n", width);
+	printf("HEIGHT (u): %d\n", width);
+
+
 	/* The expected size of the file is the size of the two 32-bit ints that were already read and the sum of all the pixels. */
 	/* If the expected size is not the same as the actual size, then the file is incorrect. */
 	if (file_size != ((width * height * sizeof(pixel)) + (2 * sizeof(int)))) return 0;
