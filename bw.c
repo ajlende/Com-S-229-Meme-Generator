@@ -22,8 +22,6 @@ int main(int argc, char** argv) {
 	int i, j;
 	size_t size_read, size_written;
 
-
-
 	/* Check to make sure there are the proper number of argumnets. */
 	if (argc != 3) {
 		printf("Invalid number of arguments!\n");
@@ -47,8 +45,15 @@ int main(int argc, char** argv) {
 
 	/* readSimp() returns zero if there was an error. */
 	if (!size_read) {
+
 		printf("The file was unable to be read! The filetype may be incorrect or the file may be corrupted.\n");
+
 		fclose(infile);
+
+		freeSimp(simp_file);
+		free(simp_file);
+		simp_file = 0;
+
 		return 1;
 	}
 
@@ -67,7 +72,7 @@ int main(int argc, char** argv) {
 	}
 
 
-	/* Open the file to write tt. If it fails to open, then exit and return 1. */
+	/* Open the file to write to. If it fails to open, then exit and return 1. */
 	outfile = fopen( argv[2], "wb" );
 	
 	if (outfile == 0) {

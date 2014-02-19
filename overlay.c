@@ -72,7 +72,19 @@ int main(int argc, char** argv) {
 	/* readSimp() returns zero if there was an error. */
 	if (!size_read_bottom || !size_read_top) {
 		printf("The file was unable to be read! The filetype may be incorrect or the file may be corrupted.\n");
-		fclose(infile);
+		
+		freeSimp(simp_bottom);
+		freeSimp(simp_top);
+
+		free(simp_bottom);
+		simp_bottom = 0;
+
+		free(simp_top);
+		simp_top = 0;
+
+		fclose(infile_bottom);
+		fclose(infile_top);
+
 		return 1;
 	}
 
