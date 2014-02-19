@@ -58,7 +58,8 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	
 	size_t size_read, file_size;
 	int i;
-	unsigned int width, height, calculated_size;
+	unsigned int width, height;
+	unsigned long long int calculated_size;
 
 	/* Read the number of bytes in the file */
 	fseek(read_file, 0, SEEK_END);
@@ -80,7 +81,7 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	printf("HEIGHT (u): %u\n", height);
 
 	printf ("File Size: %u\n", file_size);
-	printf ("Calculated Size: %u\n", calculated_size);
+	printf ("Calculated Size: %llu\n", calculated_size);
 
 
 	/* The expected size of the file is the size of the two 32-bit ints that were already read and the sum of all the pixels. */
