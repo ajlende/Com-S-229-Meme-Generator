@@ -24,7 +24,7 @@ int main(int argc, char** argv) {
 
 
 	/* TODO: Remove these two variables */
-	size_t size_read, size_written;
+	size_t size_read, size_written, file_size;
 
 
 
@@ -57,7 +57,14 @@ int main(int argc, char** argv) {
 	size_read = readSimp(simp_file, infile);
 
 
-	printf("size_read: %u", size_read);
+	/* TODO: Remove this. it is simply getting the size of the file. */
+	fseek(infile, 0, SEEK_END);
+	file_size = ftell(infile);
+	fseek(infile, 0, SEEK_SET);
+
+
+	printf("file_size: %u\n", file_size);
+	printf("size_read: %u\n", size_read);
 
 
 	/* Edit the photo here */
@@ -80,7 +87,7 @@ int main(int argc, char** argv) {
 	simp_file = 0;
 
 
-	printf("size_written: %u", size_written);
+	printf("size_written: %u\n", size_written);
 
 	
 	/* Close the files. */
