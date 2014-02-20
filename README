@@ -11,7 +11,6 @@
 
 The SIMP Data Structure
 ===========================================
-TODO: A description of your data structure for storing an image.
 
 The simp data structure consists of a 32-bit unsigned int for the width followed by
 another 32-bit unsigned int for the height. Following the width and height is a
@@ -22,8 +21,6 @@ alpha channels of the pixel. The structure type definitions can be found in simp
 
 Extra Details
 ===========================================
-TODO: A description of any extra details assumed due to ambiguous requirements in
-      the project specification.
 
 All files inputted into all programs are assumed to follow the SIMP image format as
 described in section 6.1 of the Project 1 Specification.
@@ -65,10 +62,6 @@ folders, utils and test which are not included within this tarball.
                      submission.
 4. debug commands  - This runs all the compiling with the gcc -g flag for gdb
                      debugging.
-5. test commands   - These are for comparing the simp output image to the one
-                     downloaded from the cs229 website.
-6. run commands    - These use the simp files from the cs229 website run the
-                     command, and then export a bmp image for viewing.
 
 
 bw.c:
@@ -139,13 +132,5 @@ simp.h:
 The simp.h header file contains the type definitions for the simp and
 pixel data structure as well as the function prototypes that are defined
 in simp.c
-
-
-Extra Features
-===========================================
-TODO: A description of any extra features you added to the programs (or any extra programs you created).
-
-
-
 
 
