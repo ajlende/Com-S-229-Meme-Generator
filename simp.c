@@ -59,7 +59,7 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	size_t size_read, file_size;
 	int i;
 	unsigned int width, height;
-	unsigned long long int calculated_size;
+	unsigned long long calculated_size;
 
 	/* Read the number of bytes in the file */
 	fseek(read_file, 0, SEEK_END);
@@ -73,7 +73,7 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	size_read += fread(&width,  sizeof(int), 1, read_file) * sizeof(int);
 	size_read += fread(&height, sizeof(int), 1, read_file) * sizeof(int);
 
-	calculated_size = (width * height * sizeof(pixel)) + (2U * sizeof(int));
+	calculated_size = ((unsigned long long)width * height * sizeof(pixel)) + (2U * sizeof(int));
 
 	printf("WIDTH (s): %d\n", width);
 	printf("WIDTH (u): %u\n", width);
