@@ -50,9 +50,7 @@ This README.
 
 Makefile:
 ---------
-The Makefile contained in the project contains six sections as described below. 
-Test files for running commands in sections five and six are contained within two
-folders, utils and test which are not included within this tarball. 
+The Makefile contained in the project contains four sections as described below. 
 
 1. all command     - This is the default make command to compile all of the
                      programs normally.

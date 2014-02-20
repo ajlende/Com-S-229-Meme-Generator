@@ -49,7 +49,7 @@ tarball :
 
 
 # 4. This runs all the compiling with the gcc -g flag for gdb debugging
-debugall : debugcrop debugcolorshift debugbw debugoverlay
+debug : debugcrop debugcolorshift debugbw debugoverlay
 
 debugcrop : crop crop.o simp.o crop.c simp.h
 	gcc -ansi -pedantic -c crop.c
