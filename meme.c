@@ -20,8 +20,8 @@ int main (int argc, char** argv) {
 	char* value;
 	size_t line_size = 0;
 
-	meme meme_data;
-	font font_data;
+	meme* meme_data;
+	font* font_data;
 
 
 	/* Check to make sure there are the proper number of argumnets. */
