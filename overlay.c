@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
 	FILE* outfile;
 	simp* simp_bottom;
 	simp* simp_top;
-	unsigned int x, y;
+	int x, y;
 	int i, j;
 	size_t size_read_bottom, size_read_top, size_written;
 
@@ -33,8 +33,8 @@ int main(int argc, char** argv) {
 	}
 
 
-	/* Read the values of x and y. If either is not a positive integer, then exit and return 1. */
-/*	if (argv[4][0] == '-' || sscanf(argv[4], "%u", &x) != 1) {
+/*
+	if (argv[4][0] == '-' || sscanf(argv[4], "%u", &x) != 1) {
 		printf("Invalid argument '%s' must be a positive integer!\n", argv[4]);
 		return 1;
 	}
@@ -44,6 +44,19 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 */
+
+
+	/* Read the values of x and y. If either is not an integer, then exit and return 1. */
+	if (sscanf(argv[4], "%d", &x) != 1) {
+		printf("Invalid argument '%s' must be a positive integer!\n", argv[4]);
+		return 1;
+	}
+
+	if (sscanf(argv[5], "%d", &y) != 1) {
+		printf("Invalid argument '%s' must be a positive integer!\n", argv[5]);
+		return 1;
+	}
+
 
 	/* Open the files for reading. If one fails to open, then exit and return 1. */
 	infile_bottom = fopen( argv[1], "rb" );
