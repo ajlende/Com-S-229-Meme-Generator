@@ -42,12 +42,12 @@ int main (int argc, char** argv) {
 
 	/* Read through the act file */
 	while (getline(&line, &line_size, action_file) != -1) {
-		printf("String: %s\nline_size: %zu\nread: %ld\n", line, line_size, read);
+		printf("String: %sline_size: %zu\n", line, line_size);
 	}
 
 	/* Read thoough the mem file */
 	while (getline(&line, &line_size, meme_file) != -1) {
-		printf("String: %s\nline_size: %zu\nread: %ld\n", line, line_size, read);
+		printf("String: %sline_size: %zu\n", line, line_size);
 	}
 
 	/* Read through the fsf file */
