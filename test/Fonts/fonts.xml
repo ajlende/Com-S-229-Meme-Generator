@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fsfs>
+	<font fsf-name="impact.fsf">
+		<name>IMPACT</name>
+		<image>impact.simp</image>
+		<characer value="A">
+			<x-coord>1</x-coord>
+			<y-coord>1</y-coord>
+			<width>24</width>
+			<height>40</height>
+		</character>
+		<characer value="B">
+			<x-coord>30</x-coord>
+			<y-coord>1</y-coord>
+			<width>22</width>
+			<height>40</height>
+		</character>
+		<characer value="C">
+			<x-coord>59</x-coord>
+			<y-coord>1</y-coord>
+			<width>22</width>
+			<height>40</height>
+		</character>
+		<characer value="D">
+			<x-coord>86</x-coord>
+			<y-coord>1</y-coord>
+			<width>23</width>
+			<height>40</height>
+		</character>
+		<characer value="E">
+			<x-coord>114</x-coord>
+			<y-coord>1</y-coord>
+			<width>16</width>
+			<height>40</height>
+		</character>
+		<characer value="F">
+			<x-coord>137</x-coord>
+			<y-coord>1</y-coord>
+			<width>16</width>
+			<height>40</height>
+		</character>
+		<characer value="G">
+			<x-coord>160</x-coord>
+			<y-coord>1</y-coord>
+			<width>20</width>
+			<height>40</height>
+		</character>
+		<!-- Etc. -->
+		<characer value="">
+			<x-coord></x-coord>
+			<y-coord>1</y-coord>
+			<width></width>
+			<height>40</height>
+		</character>
+
+	</font>
+	<font>
+		<name>COMICSANS</name>
+		<file>comicsans.simp</file>
+	</font>
+
+</fsfs>

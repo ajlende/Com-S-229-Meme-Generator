@@ -35,34 +35,35 @@ int main(int argc, char** argv) {
 
 
 	/* Read the values of x, y, w, and h. If any is not an integer, then exit and return 1. */
-	if (sscanf(argv[3], "%u", &x) != 1) {
+	if (sscanf(argv[3], "%d", &x) != 1) {
 		printf("Invalid argument '%s' must be an integer!\n", argv[3]);
 		return 1;
 	}
 
-	if (sscanf(argv[4], "%u", &y) != 1) {
+	if (sscanf(argv[4], "%d", &y) != 1) {
 		printf("Invalid argument '%s' must be an integer!\n", argv[4]);
 		return 1;
 	}
 
-	if (sscanf(argv[5], "%u", &w) != 1) {
+	if (sscanf(argv[5], "%d", &w) != 1) {
 		printf("Invalid argument '%s' must be an integer!\n", argv[5]);
 		return 1;
 	}
 
-	if (sscanf(argv[6], "%u", &h) != 1) {
+	if (sscanf(argv[6], "%d", &h) != 1) {
 		printf("Invalid argument '%s' must be an integer!\n", argv[6]);
 		return 1;
 	}
 
 
 	/* Make sure that all integers read were not negative. */
-	for (i = 3; i < argc; i++) {
+/*	for (i = 3; i < argc; i++) {
 		if (argv[i][0] == '-') {
 			printf("Invalid argument '%s' must be positive!\n", argv[i]);
 			return 1;
 		}
 	}
+*/
 
 
 	/* Open the file to read. If one fails to open, then exit and return 1. */
@@ -97,7 +98,7 @@ int main(int argc, char** argv) {
 	
 	/* Make sure that the width and height to crop to are within the size of the image. */
 	/* Also, make sure that the x and y coordinates are within the bounds of the image. */
-	if ((x+w) > simp_in->width || (y+h) > simp_in->height) {
+/*	if ((x+w) > simp_in->width || (y+h) > simp_in->height) {
 		
 		printf("Width or height is too large or x, y coordinates are out of range!\n");
 		
@@ -110,6 +111,7 @@ int main(int argc, char** argv) {
 		
 		return 1;
 	}
+*/
 
 	
 	/* Prepare space for the cropped image. */
@@ -118,11 +120,14 @@ int main(int argc, char** argv) {
 
 
 	/* Copy the cropped area of the image into the new structure. */
-	for (i = 0; i < h; i++) {
+/*	for (i = 0; i < h; i++) {
 		for (j = 0; j < w; j++) {
 			simp_out->data[i][j] = simp_in->data[i+y][j+x];
 		}
 	}
+*/
+
+	crop(simp_in, simp_out, x, y, w, h);
 
 	
 	/* Open the file to read. If it fails to open, then exit and return 1. */

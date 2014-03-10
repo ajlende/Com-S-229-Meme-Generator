@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mems>
+	<memefile mem-name="memes.mem">
+		<fonts>
+			<image>insanity.simp</image>
+		</fonts>
+		<meme memeid="INSANITY">
+			<file>insanity.simp</file>
+			<textid name="TOP">
+				<x-coord>250</x-coord>
+				<y-coord>50</y-coord>
+			</textid>
+			<textid name="BOTTOM">
+				<x-coord>250</x-coord>
+				<y-coord>490</y-coord>
+			</textid>
+		</meme>
+		<meme memeid="KEANU">
+			<file>keanu.simp</file>
+			<textid name="TOP">
+				<x-coord>154</x-coord>
+				<y-coord>45</y-coord>
+			</textid>
+			<textid name="BOTTOM">
+				<x-coord>154</x-coord>
+				<y-coord>405<y-coord>
+			</textid>
+		</meme>
+		<meme memeid="CONFESSION">
+			<file>confession.simp</file>
+			<textid name="TOP">
+				<x-coord>460</x-coord>
+				<y-coord>45</y-coord>
+			</textid>
+			<textid name="BOTTOM">
+				<x-coord>460</x-coord>
+				<y-coord>955<y-coord>
+			</textid>
+		</meme>
+	</memefile>
+</mems>

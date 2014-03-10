@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<acts>
+	<action act-name="insaneproject.act">
+		<outfile>insanity_project.simp</outfile>
+		<meme>INSANITY</meme>
+		<font>IMPACT</font>
+		<textid name="TOP">WRITE C PROJECT</textid>
+		<textid name="BOTTOM">NEVER TEST IT</textid>
+	</action>
+	<action act-name="confessproject.act">
+		<outfile>confess_project.simp</outfile>
+		<meme>CONFESSION</meme>
+		<font>IMPACT</font>
+		<textid name="TOP">I MADE THIS IMAGE BIGGER THAN IT NEEDED TO BE</textid>
+		<textid name="BOTTOM">JUST TO ALLOW LONGER STRINGS IN A SINGLE LINE</textid>
+	</action>
+</acts>

@@ -20,15 +20,15 @@ typedef struct pixel_s {
 } pixel;
 
 typedef struct simp_s {
-	unsigned int width;
-	unsigned int height;
+	int width;
+	int height;
 	pixel**  data;
 } simp;
 
 /*
  * Creates space for a new simp structure with the given width and height
  */
-void initSimp(simp *simp_data, unsigned int width, unsigned int height);
+void initSimp(simp *simp_data, int width, int height);
 
 /*
  * Frees the memory allocated for a simp data structure.
@@ -46,5 +46,25 @@ size_t readSimp(simp *simp_data, FILE *read_file);
  * Writes data from a simp data structure to a simp file and returns the number of bytes written to the file.
  */
 size_t writeSimp(simp *simp_data, FILE *write_file);
+
+/*
+ * Makes all pixels in simp_data grayscale by averaging the R, G, and B values.
+ */
+void bw(simp* simp_data);
+
+/*
+ * Swaps the R, G, and B values of all pixels in simp_data using the given pattern.
+ */
+void colorshift(simp* simp_data, char* pattern);
+
+/*
+ * Copies the pixels from simp_in to simp_out that are within the given x, y, w, and h bounds
+ */
+int crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h);
+
+/* 
+ * Overlays the pixels from simp_top onto the pixels of simp_bottom, calculating the transparencies
+ */
+int overlay(simp* simp_top, simp* simp_bottom, int x, int y);
 
 #endif

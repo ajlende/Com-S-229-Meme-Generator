@@ -16,9 +16,16 @@
 /*
  * Creates space for the data of a simp structure with the given width and height.
  */
-void initSimp(simp *simp_data, unsigned int width, unsigned int height) {
+void initSimp(simp *simp_data, int width, int height) {
 
 	int i;
+
+	if (width < 0 || height < 0) {
+		simp_data->width = 0;
+		simp_data->height = 0;
+		simp_data->data = 0;
+		return;
+	}
 
 	simp_data->width = width;
 	simp_data->height = height;
@@ -58,8 +65,8 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	
 	size_t size_read, file_size;
 	int i;
-	unsigned int width, height;
-	unsigned long long calculated_size;
+	int width, height;
+	long int calculated_size;
 
 	/* Read the number of bytes in the file */
 	fseek(read_file, 0, SEEK_END);
@@ -73,7 +80,9 @@ size_t readSimp(simp *simp_data, FILE *read_file) {
 	size_read += fread(&width,  sizeof(int), 1, read_file) * sizeof(int);
 	size_read += fread(&height, sizeof(int), 1, read_file) * sizeof(int);
 
-	calculated_size = ((unsigned long long)width * height * sizeof(pixel)) + (2U * sizeof(int));
+	if (width < 0 || height < 0) return 0;
+
+	calculated_size = ( (long int) width * height * sizeof(pixel) ) + (2 * sizeof(int));
 
 	/* The expected size of the file is the size of the two 32-bit ints that were already read and the sum of all the pixels. */
 	/* If the expected size is not the same as the actual size, then the file is incorrect. */
@@ -112,3 +121,148 @@ size_t writeSimp(simp *simp_data, FILE *write_file) {
 
 	return size_written;
 }
+
+
+/* Thsese are the functions for modifying the simp file. */
+/* 
+ * Makes all pixels in simp_data grayscale by averaging the R, G, and B values.
+ * Returns zero on error and a positive integer on success.
+ */
+void bw(simp* simp_file) {
+/* TODO	if (simp_file) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				
+				unsigned char avg;
+				avg = ((simp_file->data[i][j].r) + (simp_file->data[i][j].g) + (simp_file->data[i][j].b)) / 3;
+				
+				simp_file->data[i][j].r = avg;
+				simp_file->data[i][j].g = avg;
+				simp_file->data[i][j].b = avg;
+			}	
+		}
+	}*/
+}
+
+/* Swaps the R, G, and B values of all pixels in simp_data using the given pattern. */
+void colorshift(simp* simp_data, char* pattern) {
+/* TODO	if (!strcmp(argv[3], "RGB") || !strcmp(argv[3], "GBR") || !strcmp(argv[3], "BRG")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "RBG") || !strcmp(argv[3], "BGR") || !strcmp(argv[3], "GRB")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "RG") || !strcmp(argv[3], "GR")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "RB") || !strcmp(argv[3], "BR")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].r;
+				simp_file->data[i][j].r = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = tmp;
+			}
+		}
+	} else if (!strcmp(argv[3], "GB") || !strcmp(argv[3], "BG")) {
+		for (i = 0; i < simp_file->height; i++) {
+			for (j = 0; j < simp_file->width; j++) {
+				unsigned char tmp = simp_file->data[i][j].g;
+				simp_file->data[i][j].g = simp_file->data[i][j].b;
+				simp_file->data[i][j].b = tmp;
+			}
+		}
+	}*/
+}
+
+/* 
+ * Copies the pixels from simp_in to simp_out that are within the given x, y, w, and h bounds.
+ * Returns zero if error and one if otherwise.
+ */
+int crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h) {
+	int i, j;
+
+	pixel empty_pixel;
+	empty_pixel.r = 0;
+	empty_pixel.g = 0;
+	empty_pixel.b = 0;
+	empty_pixel.a = 0;
+	
+	if (w < 0 || h < 0) return 0;
+
+	/* Copy the cropped area of the image into the new structure. */
+	for (i = 0; i < h; i++) {
+		for (j = 0; j < w; j++) {
+			if ((i+y) < 0 || (j+x) < 0 || (i+y) >= simp_in->height || (j+x) >= simp_in->width) {
+				/* If the pixel doesn't exist in the image, make a empty one in it's place. */
+				simp_out->data[i][j] = empty_pixel;
+			} else {
+				simp_out->data[i][j] = simp_in->data[i+y][j+x];
+			}
+		}
+	}
+
+	return 1;
+}
+
+/* 
+ * Overlays the pixels from simp_top onto the pixels of simp_bottom, calculating the transparencies
+ * Returns zero if error and one if otherwise.
+ */
+int overlay(simp* simp_top, simp* simp_bottom, int x, int y) {
+	int i, j;
+
+	/* Make sure that the width and height to overlay to are within the size of the bottom image. */
+	/* Also, make sure that the x and y coordinates are within the bounds of the bottom image. */
+	if ((x + simp_top->width) > simp_bottom->width || (y + simp_top->height) > simp_bottom->height) {
+		return 0;
+	}
+
+	for (i = 0; i < simp_top->height; i++) {
+		for (j = 0; j < simp_top->width; j++) {
+
+			unsigned char r1, g1, b1, a1, r2, g2, b2, a2;
+			
+			r1 = simp_bottom->data[i+y][j+x].r;
+			g1 = simp_bottom->data[i+y][j+x].g;
+			b1 = simp_bottom->data[i+y][j+x].b;
+			a1 = simp_bottom->data[i+y][j+x].a;
+
+			r2 = simp_top->data[i][j].r;
+			g2 = simp_top->data[i][j].g;
+			b2 = simp_top->data[i][j].b;
+			a2 = simp_top->data[i][j].a;
+
+			if (a2 == 0xFF) {
+				simp_bottom->data[i+y][j+x].r = r2;
+            	simp_bottom->data[i+y][j+x].g = g2;
+            	simp_bottom->data[i+y][j+x].b = b2;
+				simp_bottom->data[i+y][j+x].a = a2;
+			} else {
+				simp_bottom->data[i+y][j+x].r = ((a2*r2)/0xFF)+((r1*a1*(0xFF-a2))/(0xFF*0xFF));
+				simp_bottom->data[i+y][j+x].g = ((a2*g2)/0xFF)+((g1*a1*(0xFF-a2))/(0xFF*0xFF));
+				simp_bottom->data[i+y][j+x].b = ((a2*b2)/0xFF)+((b1*a1*(0xFF-a2))/(0xFF*0xFF));
+				simp_bottom->data[i+y][j+x].a = (((0xFF*(a1+a2))-(a1*a2))/0xFF);
+			}
+		}
+	}
+	
+	return 1;
+}
+
