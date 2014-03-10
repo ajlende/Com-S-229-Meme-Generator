@@ -50,10 +50,15 @@ bw
 colorshift
 crop
 overlay
+meme
 
 # All the test files and utilities
 utils/
-test/SIMP/*_o.simp
-test/SIMP/*-o.simp
-test/SIMP/*-cs229.simp
-test/BMP
+test/Part1/SIMP/*_o.simp
+test/Part1/SIMP/*-o.simp
+test/Part1/SIMP/*-cs229.simp
+test/Part1/BMP/*_o.bmp
+test/Part1/BMP/*-o.bmp
+test/Part1/BMP/*-cs229.bmp
+
+
