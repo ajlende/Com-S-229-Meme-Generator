@@ -226,16 +226,21 @@ int crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h) {
  * Returns zero if error and one if otherwise.
  */
 int overlay(simp* simp_top, simp* simp_bottom, int x, int y) {
-	int i, j;
+	int i, j, i_start, j_start;
 
 	/* Make sure that the width and height to overlay to are within the size of the bottom image. */
 	/* Also, make sure that the x and y coordinates are within the bounds of the bottom image. */
-	if ((x + simp_top->width) > simp_bottom->width || (y + simp_top->height) > simp_bottom->height) {
+/*	if ((x + simp_top->width) > simp_bottom->width || (y + simp_top->height) > simp_bottom->height) {
 		return 0;
 	}
+*/
 
-	for (i = 0; i < simp_top->height; i++) {
-		for (j = 0; j < simp_top->width; j++) {
+	i_start = (x < 0) ? -x : 0;
+	j_start = (y < 0) ? -y : 0;
+
+
+	for (i = i_start; i < simp_top->height && (i+y) < simp_bottom->height; i++) {
+		for (j = j_start; j < simp_top->width && (j+x) < simp_bottom->width; j++) {
 
 			unsigned char r1, g1, b1, a1, r2, g2, b2, a2;
 			
