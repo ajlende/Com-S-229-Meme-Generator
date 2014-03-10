@@ -14,7 +14,7 @@ int main (int argc, char** argv) {
 	FILE* meme_file;
 	FILE* action_file;
 	char* line;
-	size_t line_size;
+	size_t line_size = 0;
 
 
 	/* Check to make sure there are the proper number of argumnets. */
