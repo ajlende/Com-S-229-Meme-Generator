@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
 
 
 	/* Edit the photo here */
-	for (i = 0; i < simp_top->height; i++) {
+/*	for (i = 0; i < simp_top->height; i++) {
 		for (j = 0; j < simp_top->width; j++) {
 
 			unsigned char r1, g1, b1, a1, r2, g2, b2, a2;
@@ -155,12 +155,12 @@ int main(int argc, char** argv) {
 			}
 		}
 	}
-
+*/
 
 
 	/* overlay the new image */
-/*	overlay(simp_top, simp_bottom, x, y);
-*/
+	overlay(simp_top, simp_bottom, x, y);
+
 
 
 	/* Open the file to write to. If it fails to open, then exit and return 1. */
