@@ -15,7 +15,6 @@ int main (int argc, char** argv) {
 	FILE* action_file;
 	char* line;
 	size_t line_size;
-	ssize_t read;
 
 
 	/* Check to make sure there are the proper number of argumnets. */
@@ -42,13 +41,13 @@ int main (int argc, char** argv) {
 
 
 	/* Read through the act file */
-	while ((read = getline(&line, &line_size, action_file) != -1)) {
+	while (getline(&line, &line_size, action_file) != -1) {
 		printf("String: %s\nline_size: %zu\nread: %ld\n", line, line_size, read);
 	}
 
 	/* Read thoough the mem file */
-	while (0) {
-		
+	while (getline(&line, &line_size, meme_file) != -1) {
+		printf("String: %s\nline_size: %zu\nread: %ld\n", line, line_size, read);
 	}
 
 	/* Read through the fsf file */
