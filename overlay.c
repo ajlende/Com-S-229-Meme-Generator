@@ -33,19 +33,6 @@ int main(int argc, char** argv) {
 	}
 
 
-/*
-	if (argv[4][0] == '-' || sscanf(argv[4], "%u", &x) != 1) {
-		printf("Invalid argument '%s' must be a positive integer!\n", argv[4]);
-		return 1;
-	}
-
-	if (argv[5][0] == '-' || sscanf(argv[5], "%u", &y) != 1) {
-		printf("Invalid argument '%s' must be a positive integer!\n", argv[5]);
-		return 1;
-	}
-*/
-
-
 	/* Read the values of x and y. If either is not an integer, then exit and return 1. */
 	if (sscanf(argv[4], "%d", &x) != 1) {
 		printf("Invalid argument '%s' must be a positive integer!\n", argv[4]);
@@ -102,65 +89,8 @@ int main(int argc, char** argv) {
 	}
 
 
-	/* Make sure that the width and height to overlay to are within the size of the bottom image. */
-	/* Also, make sure that the x and y coordinates are within the bounds of the bottom image. */
-/*	if ((x + simp_top->width) > simp_bottom->width || (y + simp_top->height) > simp_bottom->height) {
-		
-		printf("X or y coordinates are out of range!\n");
-		
-		freeSimp(simp_bottom);
-		freeSimp(simp_top);
-
-		free(simp_bottom);
-		simp_bottom = 0;
-
-		free(simp_top);
-		simp_top = 0;
-
-		fclose(infile_bottom);
-		fclose(infile_top);
-		
-		return 1;
-	}
-*/
-
-
-
-	/* Edit the photo here */
-/*	for (i = 0; i < simp_top->height; i++) {
-		for (j = 0; j < simp_top->width; j++) {
-
-			unsigned char r1, g1, b1, a1, r2, g2, b2, a2;
-			
-			r1 = simp_bottom->data[i+y][j+x].r;
-			g1 = simp_bottom->data[i+y][j+x].g;
-			b1 = simp_bottom->data[i+y][j+x].b;
-			a1 = simp_bottom->data[i+y][j+x].a;
-
-			r2 = simp_top->data[i][j].r;
-			g2 = simp_top->data[i][j].g;
-			b2 = simp_top->data[i][j].b;
-			a2 = simp_top->data[i][j].a;
-
-			if (a2 == 0xFF) {
-				simp_bottom->data[i+y][j+x].r = r2;
-            	simp_bottom->data[i+y][j+x].g = g2;
-            	simp_bottom->data[i+y][j+x].b = b2;
-				simp_bottom->data[i+y][j+x].a = a2;
-			} else {
-				simp_bottom->data[i+y][j+x].r = ((a2*r2)/0xFF)+((r1*a1*(0xFF-a2))/(0xFF*0xFF));
-				simp_bottom->data[i+y][j+x].g = ((a2*g2)/0xFF)+((g1*a1*(0xFF-a2))/(0xFF*0xFF));
-				simp_bottom->data[i+y][j+x].b = ((a2*b2)/0xFF)+((b1*a1*(0xFF-a2))/(0xFF*0xFF));
-				simp_bottom->data[i+y][j+x].a = (((0xFF*(a1+a2))-(a1*a2))/0xFF);
-			}
-		}
-	}
-*/
-
-
 	/* overlay the new image */
 	overlay(simp_top, simp_bottom, x, y);
-
 
 
 	/* Open the file to write to. If it fails to open, then exit and return 1. */

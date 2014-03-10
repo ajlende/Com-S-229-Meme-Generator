@@ -195,7 +195,7 @@ void colorshift(simp* simp_data, char* pattern) {
  * Copies the pixels from simp_in to simp_out that are within the given x, y, w, and h bounds.
  * Returns zero if error and one if otherwise.
  */
-int crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h) {
+void crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h) {
 	int i, j;
 
 	pixel empty_pixel;
@@ -217,27 +217,17 @@ int crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h) {
 			}
 		}
 	}
-
-	return 1;
 }
 
 /* 
  * Overlays the pixels from simp_top onto the pixels of simp_bottom, calculating the transparencies
  * Returns zero if error and one if otherwise.
  */
-int overlay(simp* simp_top, simp* simp_bottom, int x, int y) {
+void overlay(simp* simp_top, simp* simp_bottom, int x, int y) {
 	int i, j, i_start, j_start;
 
-	/* Make sure that the width and height to overlay to are within the size of the bottom image. */
-	/* Also, make sure that the x and y coordinates are within the bounds of the bottom image. */
-/*	if ((x + simp_top->width) > simp_bottom->width || (y + simp_top->height) > simp_bottom->height) {
-		return 0;
-	}
-*/
-
-	i_start = (y < 0) ? (-1 * y) : 0;
-	j_start = (x < 0) ? (-1 * x) : 0;
-
+	i_start = (y < 0) ? -y : 0;
+	j_start = (x < 0) ? -x : 0;
 
 	for (i = i_start; (i < simp_top->height) && ((i+y) < simp_bottom->height); i++) {
 		for (j = j_start; (j < simp_top->width) && ((j+x) < simp_bottom->width); j++) {
@@ -267,7 +257,5 @@ int overlay(simp* simp_top, simp* simp_bottom, int x, int y) {
 			}
 		}
 	}
-	
-	return 1;
 }
 

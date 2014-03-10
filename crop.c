@@ -56,16 +56,6 @@ int main(int argc, char** argv) {
 	}
 
 
-	/* Make sure that all integers read were not negative. */
-/*	for (i = 3; i < argc; i++) {
-		if (argv[i][0] == '-') {
-			printf("Invalid argument '%s' must be positive!\n", argv[i]);
-			return 1;
-		}
-	}
-*/
-
-
 	/* Open the file to read. If one fails to open, then exit and return 1. */
 	infile = fopen( argv[1], "rb" );
 
@@ -95,44 +85,20 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
-	
-	/* Make sure that the width and height to crop to are within the size of the image. */
-	/* Also, make sure that the x and y coordinates are within the bounds of the image. */
-/*	if ((x+w) > simp_in->width || (y+h) > simp_in->height) {
-		
-		printf("Width or height is too large or x, y coordinates are out of range!\n");
-		
-		freeSimp(simp_in);
-		
-		free(simp_in);
-		simp_in = 0;
-		
-		fclose(infile);
-		
-		return 1;
-	}
-*/
 
-	
 	/* Prepare space for the cropped image. */
 	simp_out = (simp*) malloc(sizeof(simp));
 	initSimp(simp_out, w, h);
 
 
-	/* Copy the cropped area of the image into the new structure. */
-/*	for (i = 0; i < h; i++) {
-		for (j = 0; j < w; j++) {
-			simp_out->data[i][j] = simp_in->data[i+y][j+x];
-		}
-	}
-*/
-
+	/* Crop the image here! */
 	crop(simp_in, simp_out, x, y, w, h);
 
-	
+
 	/* Open the file to read. If it fails to open, then exit and return 1. */
 	outfile = fopen( argv[2], "wb" );
-	
+
+
 	if (outfile == 0) {
 		printf("File '%s' failed to open!\n", argv[2]);
 
