@@ -9,7 +9,7 @@
 
 CC=gcc -ansi -pedantic
 CFLAGS= 
-DEPS=simp.h
+DEPS=simp.h memelib.h
 
 
 # 1. Default make command to compile all of the programs normally
