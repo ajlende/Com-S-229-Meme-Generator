@@ -60,11 +60,11 @@ void colorshift(simp* simp_data, char* pattern);
 /*
  * Copies the pixels from simp_in to simp_out that are within the given x, y, w, and h bounds
  */
-int crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h);
+void crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h);
 
 /* 
  * Overlays the pixels from simp_top onto the pixels of simp_bottom, calculating the transparencies
  */
-int overlay(simp* simp_top, simp* simp_bottom, int x, int y);
+void overlay(simp* simp_top, simp* simp_bottom, int x, int y);
 
 #endif

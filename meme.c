@@ -4,9 +4,63 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "meme.h"
+#include "font.h"
 #include "simp.h"
 
 int main (int argc, char** argv) {
-	printf("TODO");
+
+	FILE* meme_file;
+	FILE* action_file;
+	char* line;
+	size_t line_size;
+	ssize_t read;
+
+
+	/* Check to make sure there are the proper number of argumnets. */
+	if (argc != 3 ) {
+		printf("Invalid number of arguments!\n");
+		return 1;
+	}
+
+	
+	/* Open the files for reading. If one fails to open, then exit and return 1. */
+	meme_file = fopen( argv[1], "r" );
+
+	if ( meme_file == 0 ) {
+		printf("File %s failed to open!\n", argv[1]);
+		return 1;
+	}
+	
+	action_file = fopen( argv[2], "r" );
+
+	if ( action_file == 0 ) {
+		printf("File %s failed to open!\n", argv[2]);
+		return 1;
+	}
+
+
+	/* Read through the act file */
+	while ((read = getline(&line, &line_size, action_file) != -1)) {
+		printf("String: %s\nline_size: %zu\nread: %ld\n", line, line_size, read);
+	}
+
+	/* Read thoough the mem file */
+	while (0) {
+		
+	}
+
+	/* Read through the fsf file */
+
+	
+
+
+	/* cleanup */
+	free(line);
+	line = 0;
+
+	fclose(meme_file);
+	fclose(action_file);
+
 	return 0;
 }

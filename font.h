@@ -8,6 +8,8 @@
 #ifndef _FONT_H_
 #define _FONT_H_
 
+#include "simp.h"
+
 typedef struct font_s {
 	char* name;
 	char* file;

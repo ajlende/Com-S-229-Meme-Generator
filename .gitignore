@@ -61,4 +61,7 @@ test/Part1/BMP/*_o.bmp
 test/Part1/BMP/*-o.bmp
 test/Part1/BMP/*-cs229.bmp
 
+# Comment out if some of the tests should be included
+test/Part1/SIMP/*
+test/Part1/BMP/*
 
