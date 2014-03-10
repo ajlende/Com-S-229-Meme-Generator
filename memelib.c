@@ -5,12 +5,12 @@
 #include "simp.h"
 #include "memelib.h"
 
-void initMeme(meme *meme_data, char *name) {
+void initMeme(meme* meme_data, char* name) {
 	meme_data->name = name;
 	meme_data->num_attr = 0;
 }
 
-void addAttribute(meme *meme_data, char *name, char *msg, int x, int y) {
+void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 
 	attribute* tmp = 0;
 	
@@ -33,7 +33,7 @@ void addAttribute(meme *meme_data, char *name, char *msg, int x, int y) {
 
 }
 
-void freeMeme(meme *meme_data) {
+void freeMeme(meme* meme_data) {
 	
 	free(meme_data->name);
 	meme_data->name = 0;

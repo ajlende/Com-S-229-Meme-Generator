@@ -17,6 +17,7 @@ int main (int argc, char** argv) {
 	FILE* outfile;
 
 	char* line;
+	char* value;
 	size_t line_size = 0;
 
 	meme meme_data;
