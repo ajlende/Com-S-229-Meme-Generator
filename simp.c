@@ -235,12 +235,12 @@ int overlay(simp* simp_top, simp* simp_bottom, int x, int y) {
 	}
 */
 
-	i_start = (x < 0) ? -x : 0;
-	j_start = (y < 0) ? -y : 0;
+	i_start = (y < 0) ? (-1 * y) : 0;
+	j_start = (x < 0) ? (-1 * x) : 0;
 
 
-	for (i = i_start; i < simp_top->height && (i+y) < simp_bottom->height; i++) {
-		for (j = j_start; j < simp_top->width && (j+x) < simp_bottom->width; j++) {
+	for (i = i_start; (i < simp_top->height) && ((i+y) < simp_bottom->height); i++) {
+		for (j = j_start; (j < simp_top->width) && ((j+x) < simp_bottom->width); j++) {
 
 			unsigned char r1, g1, b1, a1, r2, g2, b2, a2;
 			
