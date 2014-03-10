@@ -1,6 +1,6 @@
 SIMP1=./test/Part1/SIMP
 BMP1=./test/Part1/BMP
-UTIL=./utils
+UTILS=./utils
 
 # 1. These are for comparing the simp output image to the one downloaded from the cs229 website
 testall : testcrop testcolorshift testbw testoverlay
