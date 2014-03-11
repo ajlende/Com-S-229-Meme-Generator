@@ -178,40 +178,80 @@ int main (int argc, char** argv) {
 				free(font_data);
 				font_data = 0;
 
+				return 1
 			}
 
 		} else if (strncmp(line, "FONTS", 5) == 0) {
 
-			/* Open each font file for reading */
-			font_file = fopen(value, "r");
-
 			/* Read the name of each one. If the name matches font_data->name, then keep that open as font_file and close all other fsf files. */
+			tmp_word = strtok(value, " \t\n\v\f\r");
+
+			/* Check that at least of of the values matches font_data->name. If none do, then exit the program. */
+			while(tmp_word != 0 ) {
+
+				/* Open each font file for reading */
+				font_file = fopen(value, "r");				
+
+				/* If the font_file doesn't open, then close everything and exit. */
+				if (font_file == 0) {
+			
+					printf("The fsf file failed to open!\n");
+			
+					fclose(meme_file);
+					fclose(action_file);
+					fclose(outfile);
+			
+					freeMeme(meme_data);
+					free(meme_data);
+					meme_data = 0;
+			
+					freeFont(font_data);
+					free(font_data);
+					font_data = 0;
+			
+					return 1;
+				}
+
+				/* TODO: Read the fsf file, and look for the name tag. */
+				/* TODO: Change the first parameter of strcmp to ne the name that gets read. For now, I am using IMPACT because that is the name of the font that we will be using for tests. */
+
+				if (strcmp("IMPACT", font_data->name) == 0) {
+					search_flag = 1;
+					break;
+				}
+
+				fclose(font_file);
+
+				tmp_word = strtok(0, " \t\n\v\f\r");
+			}
+
+			/* If the meme we are looking for is not included in this file, then exit. */
+			if (!search_flag) {
+				
+				printf("The Font %s is not included in the mem file!", font_data->name);
+
+				fclose(meme_file);
+				fclose(action_file);
+				fclose(outfile);
+
+				if (font_file) {
+					fclose(font_file);
+				}
+
+				freeMeme(meme_data);
+				free(meme_data);
+				meme_data = 0;
+
+				freeFont(font_data);
+				free(font_data);
+				font_data = 0;
+
+			}
 
 		} else if (strncmp(line, meme_data->name, strlen(meme_data->name)) == 0) {
 
 			/* Check to see of the next word is "FILE". If it is then open that simp file, otherwise add the values to the associated attribute. */
 		}
-	}
-
-
-	/* If the font_file doesn't open, then close everything and exit. */
-	if (font_file == 0) {
-
-		printf("The fsf file failed to open!\n");
-
-		fclose(meme_file);
-		fclose(action_file);
-		fclose(outfile);
-
-		freeMeme(meme_data);
-		free(meme_data);
-		meme_data = 0;
-
-		freeFont(font_data);
-		free(font_data);
-		font_data = 0;
-
-		return 1;
 	}
 
 
