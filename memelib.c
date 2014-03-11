@@ -41,6 +41,7 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 }
 
 void freeMeme(meme* meme_data) {
+	int i;
 
 	free(meme_data->name);
 	meme_data->name = 0;
