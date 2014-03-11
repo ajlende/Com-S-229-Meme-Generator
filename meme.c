@@ -210,7 +210,8 @@ int main (int argc, char** argv) {
 	
 
 	/* cleanup */
-	
+	free(line);
+	line = 0;
 	free(name);
 	name = 0;
 	free(value);
