@@ -178,7 +178,7 @@ int main (int argc, char** argv) {
 				free(font_data);
 				font_data = 0;
 
-				return 1
+				return 1;
 			}
 
 		} else if (strncmp(line, "FONTS", 5) == 0) {
