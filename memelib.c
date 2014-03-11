@@ -26,8 +26,8 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 	(meme_data->num_attr)++;
 	
 	/* Allocate space for the name and message. */
-	meme_data->attr[(meme_data->num_attr) - 1].name = malloc(meme_data->attr[(meme_data->num_attr) - 1].name, strlen(name) + 1);
-	meme_data->attr[(meme_data->num_attr) - 1].msg = malloc(meme_data->attr[(meme_data->num_attr) - 1].msg, strlen(msg) + 1);
+	meme_data->attr[(meme_data->num_attr) - 1].name = malloc(strlen(name) + 1);
+	meme_data->attr[(meme_data->num_attr) - 1].msg = malloc(strlen(msg) + 1);
 	
 	/* Set the values of the attribute. */
 	strcpy(meme_data->attr[(meme_data->num_attr) - 1].name, name);
