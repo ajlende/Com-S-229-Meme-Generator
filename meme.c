@@ -17,9 +17,9 @@ int main (int argc, char** argv) {
 	FILE* font_file;
 	FILE* outfile;
 
-	char* line;
-	char* name;
-	char* value;
+	char* line = 0;
+	char* name = 0;
+	char* value = 0;
 	size_t line_size = 0;
 
 	int i, j;
