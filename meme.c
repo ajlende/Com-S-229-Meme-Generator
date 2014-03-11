@@ -121,6 +121,14 @@ int main (int argc, char** argv) {
 		/* TODO: remove testing print statements */
 		printf("--> %s", line);
 
+		/* Split the line into a name and a value. */
+		name = strtok(line, ":");
+		value = strtok(0, ":");
+
+		printf("name: %s\n", name);
+		printf("value: %s\n", value);
+
+
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "MEMES", 5) == 0) {
 
@@ -164,6 +172,14 @@ int main (int argc, char** argv) {
 	while (getline(&line, &line_size, font_file) != -1) {
 		/* TODO: remove testing print statements */
 		printf("--> %s", line);
+
+		/* Split the line into a name and a value. */
+		name = strtok(line, ":");
+		value = strtok(0, ":");
+
+		printf("name: %s\n", name);
+		printf("value: %s\n", value);
+
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "NAME", 4) == 0) {
