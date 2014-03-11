@@ -63,8 +63,8 @@ int main (int argc, char** argv) {
 		printf("--> %s", line);
 
 		/* Split the line into a name and a value. */
-		name = strtok(line, ":");
-		value = strtok(0, ":");
+		name = strtok(line, ":\n");
+		value = strtok(0, ":\n");
 
 		printf("name: %s\n", name);
 		printf("value: %s\n", value);
@@ -122,8 +122,8 @@ int main (int argc, char** argv) {
 		printf("--> %s", line);
 
 		/* Split the line into a name and a value. */
-		name = strtok(line, ":");
-		value = strtok(0, ":");
+		name = strtok(line, ":\n");
+		value = strtok(0, ":\n");
 
 		printf("name: %s\n", name);
 		printf("value: %s\n", value);
@@ -174,8 +174,8 @@ int main (int argc, char** argv) {
 		printf("--> %s", line);
 
 		/* Split the line into a name and a value. */
-		name = strtok(line, ":");
-		value = strtok(0, ":");
+		name = strtok(line, ":\n");
+		value = strtok(0, ":\n");
 
 		printf("name: %s\n", name);
 		printf("value: %s\n", value);
