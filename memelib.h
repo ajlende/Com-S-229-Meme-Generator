@@ -26,4 +26,8 @@ void freeMeme(meme* meme_data);
 
 size_t readMeme();
 
+void printMeme(meme* m);
+
+void printAttr(attribute a);
+
 #endif

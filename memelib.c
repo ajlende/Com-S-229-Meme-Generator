@@ -71,6 +71,6 @@ void printMeme(meme* m) {
 	printf("<============>\n");
 }
 
-void printAttribute(attribute a) {
+void printAttr(attribute a) {
 	printf("%s : %s : (%d, %d)\n", a.name, a.msg, a.x, a.y);
 }
