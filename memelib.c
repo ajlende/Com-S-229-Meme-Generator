@@ -45,6 +45,15 @@ void freeMeme(meme* meme_data) {
 	free(meme_data->name);
 	meme_data->name = 0;
 
+	for (i = 0; i < meme_data->num_attr; i++) {
+		
+		free(meme_data->attr[i].name);
+		meme_data->attr[i] = 0;
+		
+		free(meme_data->attr[i].msg);
+		meme_data->attr[i].msg = 0;
+	}
+
 	free(meme_data->attr);
 	meme_data->attr = 0;
 }
