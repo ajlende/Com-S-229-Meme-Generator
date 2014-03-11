@@ -7,7 +7,7 @@
 #include "memelib.h"
 
 void initMeme(meme* meme_data, char* name) {
-	meme_data->name = name;
+	strcpy(meme_data->name, name);
 	meme_data->num_attr = 0;
 }
 
@@ -26,8 +26,8 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 		(meme_data->num_attr)++;
 		
 		/* Set the values of the attribute. */
-		meme_data->attr[(meme_data->num_attr) - 1].name = name;
-		meme_data->attr[(meme_data->num_attr) - 1].msg = msg;
+		strcpy(meme_data->attr[(meme_data->num_attr) - 1].name, name);
+		strcpy(meme_data->attr[(meme_data->num_attr) - 1].msg, msg);
 		meme_data->attr[(meme_data->num_attr) - 1].x = x;
 		meme_data->attr[(meme_data->num_attr) - 1].y = y;
 	} else {
