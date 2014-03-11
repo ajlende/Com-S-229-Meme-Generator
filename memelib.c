@@ -84,6 +84,6 @@ void printAttr(attribute a) {
 /*
  * Searches for the given attribute name, and sets it's x and y coordinates.
  */
-void setAttrCoord(char* name, int x, int y) {
+void setAttrCoord(meme* m, char* name, int x, int y) {
 	
 }

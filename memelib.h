@@ -30,6 +30,6 @@ void printMeme(meme* m);
 
 void printAttr(attribute a);
 
-void setAttrCoord(attribute* a, int x, int y);
+void setAttrCoord(meme* m, char* name, int x, int y);
 
 #endif
