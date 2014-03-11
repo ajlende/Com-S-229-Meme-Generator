@@ -27,9 +27,11 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 		/* Increment the number of attributes. */
 		(meme_data->num_attr)++;
 		
-		/* Set the values of the attribute. */
+		/* Allocate or reallocate space for the name and message */
 		meme_data->attr[(meme_data->num_attr) - 1].name = realloc(meme_data->attr[(meme_data->num_attr) - 1].name, strlen(name) + 1);
 		meme_data->attr[(meme_data->num_attr) - 1].msg = realloc(meme_data->attr[(meme_data->num_attr) - 1].msg, strlen(msg) + 1);
+		
+		/* Set the values of the attribute. */
 		strcpy(meme_data->attr[(meme_data->num_attr) - 1].name, name);
 		strcpy(meme_data->attr[(meme_data->num_attr) - 1].msg, msg);
 		meme_data->attr[(meme_data->num_attr) - 1].x = x;
@@ -45,16 +47,16 @@ void freeMeme(meme* meme_data) {
 
 	free(meme_data->name);
 	meme_data->name = 0;
-
+/*
 	for (i = 0; i < meme_data->num_attr; i++) {
 		
-		free(meme_data->attr[i].name);
-		meme_data->attr[i] = 0;
-		
-		free(meme_data->attr[i].msg);
+		free(&(meme_data->attr[i].name));
+		meme_data->attr[i].name = 0;
+
+		free(&(meme_data->attr[i].msg));
 		meme_data->attr[i].msg = 0;
 	}
-
+*/
 	free(meme_data->attr);
 	meme_data->attr = 0;
 }

@@ -12,7 +12,6 @@
 
 typedef struct font_s {
 	char* name;
-	char* file;
 	simp* characters;
 } font;
 

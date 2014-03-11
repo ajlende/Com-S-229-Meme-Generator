@@ -8,7 +8,7 @@
 #
 
 CC=gcc -ansi -pedantic
-CFLAGS= 
+CFLAGS=-g 
 DEPS=simp.h memelib.h font.h
 
 

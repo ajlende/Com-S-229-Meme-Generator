@@ -60,6 +60,9 @@ int main (int argc, char** argv) {
 	name = (char*) malloc(128);
 	value = (char*) malloc(128);
 
+	printf("name* %p\n", name);
+	printf("value* %p\n", value);
+
 
 	/* Read through the act file */
 	while (getline(&line, &line_size, action_file) != -1) {
@@ -70,8 +73,8 @@ int main (int argc, char** argv) {
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
 
-		printf("name: %s\n", name);
-		printf("value: %s\n", value);
+		printf("name: %s\nname*: %p\n", name, name);
+		printf("value: %s\nvalue*: %p\n", value, value);
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "OUTFILE", 7) == 0) {
@@ -130,12 +133,11 @@ int main (int argc, char** argv) {
 		printf("--> %s", line);
 
 		/* Split the line into a name and a value. */
-		name = strtok(line, ":\n");
-		value = strtok(0, ":\n");
+		strcpy(name, strtok(line, ":\n"));
+		strcpy(value, strtok(0, ":\n"));
 
-		printf("name: %s\n", name);
-		printf("value: %s\n", value);
-
+		printf("name: %s\nname*: %p\n", name, name);
+		printf("value: %s\nvalue*: %p\n", value, value);
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "MEMES", 5) == 0) {
@@ -182,12 +184,11 @@ int main (int argc, char** argv) {
 		printf("--> %s", line);
 
 		/* Split the line into a name and a value. */
-		name = strtok(line, ":\n");
-		value = strtok(0, ":\n");
+		strcpy(name, strtok(line, ":\n"));
+		strcpy(value, strtok(0, ":\n"));
 
-		printf("name: %s\n", name);
-		printf("value: %s\n", value);
-
+		printf("name: %s\nname*: %p\n", name, name);
+		printf("value: %s\nvalue*: %p\n", value, value);
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "NAME", 4) == 0) {
@@ -207,8 +208,12 @@ int main (int argc, char** argv) {
 	
 
 	/* cleanup */
+	
+	free(name);
+	name = 0;
 	free(value);
 	value = 0;
+	
 
 	freeMeme(meme_data);
 	free(meme_data);
