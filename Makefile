@@ -30,7 +30,7 @@ colorshift : colorshift.o simp.o
 bw : bw.o simp.o
 	$(CC) $(CFLAGS)  -o bw bw.o simp.o
 
-meme : meme.o memelib.o simp.o
+meme : meme.o memelib.o font.o simp.o
 	$(CC) $(CFLAGS)  -o meme meme.o memelib.o font.o simp.o
 
 
