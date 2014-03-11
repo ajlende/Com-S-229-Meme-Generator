@@ -26,14 +26,6 @@ void initFont(font* f, char* name) {
 void freeFont(font* f) {
 	int i;
 	
-	for (i = 0; i < 128; i++) {
-		/* if there was a character at that position, then we can free the simp file that is there. */
-		if (f->characters[i]) {
-			freeSimp(f->characters[i]);
-			f->characters[i] = 0;
-		}
-	}
-
 	free(f->characters);
 	f->characters = 0;
 }
