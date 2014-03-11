@@ -26,10 +26,12 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 		(meme_data->num_attr)++;
 		
 		/* Set the values of the attribute. */
-		meme_data->attr[meme_data->num_attr].name = name;
-		meme_data->attr[meme_data->num_attr].msg = msg;
-		meme_data->attr[meme_data->num_attr].x = x;
-		meme_data->attr[meme_data->num_attr].y = y;
+		meme_data->attr[(meme_data->num_attr) - 1].name = name;
+		meme_data->attr[(meme_data->num_attr) - 1].msg = msg;
+		meme_data->attr[(meme_data->num_attr) - 1].x = x;
+		meme_data->attr[(meme_data->num_attr) - 1].y = y;
+	} else {
+		printf("!!! REALLOC FAILED !!!\n");
 	}
 
 }
