@@ -170,6 +170,13 @@ int main (int argc, char** argv) {
 				
 				printf("The Meme %s is not included in the mem file on line %d!", meme_data->name, line_counter);
 
+				free(line);
+				line = 0;
+				free(name);
+				name = 0;
+				free(value);
+				value = 0;
+
 				fclose(meme_file);
 				fclose(action_file);
 				fclose(outfile);
@@ -206,7 +213,14 @@ int main (int argc, char** argv) {
 				if (font_file == 0) {
 			
 					printf("The file %s on line %d failed to open!\n", value, line_counter);
-			
+
+					free(line);
+					line = 0;
+					free(name);
+					name = 0;
+					free(value);
+					value = 0;
+
 					fclose(meme_file);
 					fclose(action_file);
 					fclose(outfile);
@@ -244,6 +258,13 @@ int main (int argc, char** argv) {
 				
 				printf("The Font %s on line %d is not included in the mem file!\n", font_data->name, line_counter);
 
+				free(line);
+				line = 0;
+				free(name);
+				name = 0;
+				free(value);
+				value = 0;
+
 				fclose(meme_file);
 				fclose(action_file);
 				fclose(outfile);
@@ -279,6 +300,14 @@ int main (int argc, char** argv) {
 				if (simp_file == 0) {
 			
 					printf("The simp file, %s, on line %d failed to open!\n", value, line_counter);
+
+					free(line);
+					line = 0;
+					free(name);
+					name = 0;
+					free(value);
+					value = 0;
+
 			
 					fclose(meme_file);
 					fclose(action_file);
@@ -304,6 +333,13 @@ int main (int argc, char** argv) {
 				if(sscanf(value, "%d %d", &x, &y) != 2) {
 					
 					printf("Invalid argument(s) on line %d: %s!", line_counter, line);
+
+					free(line);
+					line = 0;
+					free(name);
+					name = 0;
+					free(value);
+					value = 0;
 
 					fclose(meme_file);
 					fclose(action_file);
