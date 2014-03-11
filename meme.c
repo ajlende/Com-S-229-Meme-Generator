@@ -93,6 +93,8 @@ int main (int argc, char** argv) {
 		}
 	}
 
+	printMeme(meme_data);
+
 
 	/* If the outfile doesn't open then close everything and exit */
 	if (outfile == 0) {

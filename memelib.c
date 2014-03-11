@@ -56,3 +56,19 @@ void freeMeme(meme* meme_data) {
 size_t readMeme() {
 	return 0;
 }
+
+void printMeme(meme* m) {
+	printf("<=== MEME ===>\n");
+	printf("NAME: %s\n", m->name);
+	printf("NUM_ATTR: %d\n", m->num_attr);
+	printf("ATTRIBUTES:\n");
+	int i;
+	for(i = 0; i < num_attr; i++) {
+		printAttr(m->attr[i]);
+	}
+	printf("<============>\n");
+}
+
+void printAttribute(attribute a) {
+	printf("%s : %s : (%d, %d)\n", a.name, a.msg, a.x, a.y);
+}
