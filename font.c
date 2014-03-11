@@ -15,7 +15,7 @@
 void initFont(font* f, char* name) {
 	
 	/* The name of the font */
-	f->name = (char*) realloc(f->name, strlen(name) + 1);
+	f->name = (char*) malloc(strlen(name) + 1);
 	strcpy(f->name, name);
 
 	/* Allocate space for all 128 possible ascii characters */
