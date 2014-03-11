@@ -3,6 +3,7 @@
  */
 
 #include <stdlib.h>
+#include<string.h>
 #include "simp.h"
 #include "memelib.h"
 
