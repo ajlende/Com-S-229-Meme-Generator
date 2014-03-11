@@ -17,28 +17,23 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 
 	attribute* tmp = 0;
 	
-	tmp = (attribute*) realloc(meme_data->attr, (meme_data->num_attr + 1) * sizeof(attribute));
+	meme_data->attr = (attribute*) realloc(meme_data->attr, (meme_data->num_attr + 1) * sizeof(attribute));
 
-	/* If realloc was successful... */
-	if (tmp) {
-		/* Copy the pointer over now that it's safe. */
-		meme_data->attr = tmp;
-		
-		/* Increment the number of attributes. */
-		(meme_data->num_attr)++;
-		
-		/* Allocate or reallocate space for the name and message */
-		meme_data->attr[(meme_data->num_attr) - 1].name = realloc(meme_data->attr[(meme_data->num_attr) - 1].name, strlen(name) + 1);
-		meme_data->attr[(meme_data->num_attr) - 1].msg = realloc(meme_data->attr[(meme_data->num_attr) - 1].msg, strlen(msg) + 1);
-		
-		/* Set the values of the attribute. */
-		strcpy(meme_data->attr[(meme_data->num_attr) - 1].name, name);
-		strcpy(meme_data->attr[(meme_data->num_attr) - 1].msg, msg);
-		meme_data->attr[(meme_data->num_attr) - 1].x = x;
-		meme_data->attr[(meme_data->num_attr) - 1].y = y;
-	} else {
-		printf("!!! REALLOC FAILED !!!\n");
-	}
+	/* Copy the pointer over now that it's safe. */
+	meme_data->attr = tmp;
+	
+	/* Increment the number of attributes. */
+	(meme_data->num_attr)++;
+	
+	/* Allocate space for the name and message. */
+	meme_data->attr[(meme_data->num_attr) - 1].name = malloc(meme_data->attr[(meme_data->num_attr) - 1].name, strlen(name) + 1);
+	meme_data->attr[(meme_data->num_attr) - 1].msg = malloc(meme_data->attr[(meme_data->num_attr) - 1].msg, strlen(msg) + 1);
+	
+	/* Set the values of the attribute. */
+	strcpy(meme_data->attr[(meme_data->num_attr) - 1].name, name);
+	strcpy(meme_data->attr[(meme_data->num_attr) - 1].msg, msg);
+	meme_data->attr[(meme_data->num_attr) - 1].x = x;
+	meme_data->attr[(meme_data->num_attr) - 1].y = y;
 
 }
 
