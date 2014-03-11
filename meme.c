@@ -57,6 +57,7 @@ int main (int argc, char** argv) {
 	font_data = (font*) malloc(sizeof(font));
 
 	/* Create space for the strings */
+	line = (char*) malloc(256);
 	name = (char*) malloc(128);
 	value = (char*) malloc(128);
 
