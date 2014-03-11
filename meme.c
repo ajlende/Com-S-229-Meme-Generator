@@ -97,6 +97,7 @@ int main (int argc, char** argv) {
 		}
 	}
 
+	/* TODO: remove this. it is a test print message */
 	printMeme(meme_data);
 
 
@@ -144,7 +145,7 @@ int main (int argc, char** argv) {
 		} else if (strncmp(line, "FONTS", 5) == 0) {
 
 			/* Open each font file for reading */
-			fopen(value, "r");
+			font_file = fopen(value, "r");
 
 			/* Read the name of each one. If the name matches font_data->name, then keep that open as font_file and close all other fsf files. */
 
