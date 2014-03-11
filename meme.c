@@ -67,14 +67,14 @@ int main (int argc, char** argv) {
 	/* Read through the act file */
 	while (getline(&line, &line_size, action_file) != -1) {
 		/* TODO: remove testing print statements */
-		printf("<=%p=> line: %s", line, line);
+		/* printf("<=%p=> line: %s", line, line); */
 
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
 		
-		printf("<=%p=> name: %s\n", name, name);
-		printf("<=%p=> value: %s\n", value, value);
+		/* printf("<=%p=> name: %s\n", name, name); */
+		/* printf("<=%p=> value: %s\n", value, value); */
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "OUTFILE", 7) == 0) {
@@ -130,14 +130,14 @@ int main (int argc, char** argv) {
 	/* Read through the mem file */
 	while (getline(&line, &line_size, meme_file) != -1) {
 		/* TODO: remove testing print statements */
-		printf("<=%p=> line: %s", line, line);
+		/* printf("<=%p=> line: %s", line, line); */
 
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
 		
-		printf("<=%p=> name: %s\n", name, name);
-		printf("<=%p=> value: %s\n", value, value);
+		/* printf("<=%p=> name: %s\n", name, name); */
+		/* printf("<=%p=> value: %s\n", value, value); */
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "MEMES", 5) == 0) {
@@ -181,11 +181,11 @@ int main (int argc, char** argv) {
 	/* Read through the fsf file */
 	while (getline(&line, &line_size, font_file) != -1) {
 		/* TODO: remove testing print statements */
-		printf("<=%p=> line: %s", line, line);
+		/* printf("<=%p=> line: %s", line, line); */
 
 		/* Split the line into a name and a value. */
-		strcpy(name, strtok(line, ":\n"));
-		strcpy(value, strtok(0, ":\n"));
+		/* strcpy(name, strtok(line, ":\n")); */
+		/* strcpy(value, strtok(0, ":\n")); */
 		
 		printf("<=%p=> name: %s\n", name, name);
 		printf("<=%p=> value: %s\n", value, value);
