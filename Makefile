@@ -9,7 +9,7 @@
 
 CC=gcc -ansi -pedantic
 CFLAGS= 
-DEPS=simp.h memelib.h
+DEPS=simp.h memelib.h font.h
 
 
 # 1. Default make command to compile all of the programs normally
@@ -31,7 +31,7 @@ bw : bw.o simp.o
 	$(CC) $(CFLAGS)  -o bw bw.o simp.o
 
 meme : meme.o memelib.o simp.o
-	$(CC) $(CFLAGS)  -o meme meme.o memelib.o simp.o
+	$(CC) $(CFLAGS)  -o meme meme.o memelib.o font.o simp.o
 
 
 
