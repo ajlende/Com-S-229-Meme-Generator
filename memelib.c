@@ -47,16 +47,16 @@ void freeMeme(meme* meme_data) {
 
 	free(meme_data->name);
 	meme_data->name = 0;
-/*
+
 	for (i = 0; i < meme_data->num_attr; i++) {
 		
-		free(&(meme_data->attr[i].name));
+		free(meme_data->attr[i].name);
 		meme_data->attr[i].name = 0;
 
-		free(&(meme_data->attr[i].msg));
+		free(meme_data->attr[i].msg);
 		meme_data->attr[i].msg = 0;
 	}
-*/
+
 	free(meme_data->attr);
 	meme_data->attr = 0;
 }
@@ -79,4 +79,11 @@ void printMeme(meme* m) {
 
 void printAttr(attribute a) {
 	printf("%s : %s : (%d, %d)\n", a.name, a.msg, a.x, a.y);
+}
+
+/*
+ * Searches for the given attribute name, and sets it's x and y coordinates.
+ */
+void setAttrCoord(char* name, int x, int y) {
+	
 }
