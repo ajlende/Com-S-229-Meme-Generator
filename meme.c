@@ -194,7 +194,7 @@ int main (int argc, char** argv) {
 			/* Read the name of each one. If the name matches font_data->name, then keep that open as font_file and close all other fsf files. */
 			tmp_word = strtok(value, " \t\n\v\f\r");
 			
-			search_flag = 0
+			search_flag = 0;
 
 			/* Check that at least of of the values matches font_data->name. If none do, then exit the program. */
 			while(tmp_word != 0 ) {
