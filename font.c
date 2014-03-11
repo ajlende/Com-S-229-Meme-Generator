@@ -19,7 +19,7 @@ void initFont(font* f, char* name) {
 	/* Allocate space for all 128 possible ascii characters */
 	/* This will make it much easier for looking up a specific character */
 	/* Used calloc because not all characters may be present when reading the file, and the spaces for them will be left empty. */
-	f->characters = (simp*) calloc(128 * sizeof(simp));
+	f->characters = (simp*) calloc(128, sizeof(simp));
 }
 
 /* Frees the memory allocated for a font data structure. */
