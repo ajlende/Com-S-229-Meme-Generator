@@ -10,20 +10,24 @@
 #include "font.h"
 #include "simp.h"
 
+char* rmWhitespace(char* str);
+
 int main (int argc, char** argv) {
 
 	FILE* meme_file;
 	FILE* action_file;
 	FILE* font_file;
+	FILE* simp_file;
 	FILE* outfile;
 
 	char* line = 0;
 	char* name = 0;
 	char* value = 0;
 	char* tmp_word = 0;
+	char* tmp_value = 0;
 	size_t line_size = 0;
 
-	int i, j, search_flag = 0;
+	int i, j, x, y, line_counter, search_flag;
 
 	meme* meme_data;
 	font* font_data;
@@ -62,11 +66,12 @@ int main (int argc, char** argv) {
 	name = (char*) malloc(128);
 	value = (char*) malloc(128);
 
-	printf("name* %p\n", name);
-	printf("value* %p\n", value);
+	line_counter = 0;
 
 	/* Read through the act file */
 	while (getline(&line, &line_size, action_file) != -1) {
+		line_counter++;
+
 		/* TODO: remove testing print statements */
 		printf("<%p> line:  %s", line, line);
 
@@ -129,9 +134,12 @@ int main (int argc, char** argv) {
 		return 1;
 	}
 
+	line_counter = 0;
 
 	/* Read through the mem file */
 	while (getline(&line, &line_size, meme_file) != -1) {
+		line_counter++;
+
 		/* TODO: remove testing print statements */
 		printf("<%p> line:  %s", line, line);
 
@@ -146,7 +154,7 @@ int main (int argc, char** argv) {
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "MEMES", 5) == 0) {
-			
+			search_flag = 0;
 			tmp_word = strtok(value, " \t\n\v\f\r");
 			/* Check that at least of of the values matches meme_data->name. If none do, then exit the program. */
 			while(tmp_word != 0 ) {
@@ -160,7 +168,7 @@ int main (int argc, char** argv) {
 			/* If the meme we are looking for is not included in this file, then exit. */
 			if (!search_flag) {
 				
-				printf("The Meme %s is not included in the mem file!", meme_data->name);
+				printf("The Meme %s is not included in the mem file on line %d!", meme_data->name, line_counter);
 
 				fclose(meme_file);
 				fclose(action_file);
@@ -182,9 +190,11 @@ int main (int argc, char** argv) {
 			}
 
 		} else if (strncmp(line, "FONTS", 5) == 0) {
-
+			
 			/* Read the name of each one. If the name matches font_data->name, then keep that open as font_file and close all other fsf files. */
 			tmp_word = strtok(value, " \t\n\v\f\r");
+			
+			search_flag = 0
 
 			/* Check that at least of of the values matches font_data->name. If none do, then exit the program. */
 			while(tmp_word != 0 ) {
@@ -195,11 +205,15 @@ int main (int argc, char** argv) {
 				/* If the font_file doesn't open, then close everything and exit. */
 				if (font_file == 0) {
 			
-					printf("The fsf file failed to open!\n");
+					printf("The file %s on line %d failed to open!\n", value, line_counter);
 			
 					fclose(meme_file);
 					fclose(action_file);
 					fclose(outfile);
+
+					if (simp_file) {
+						fclose(simp_file);
+					}
 			
 					freeMeme(meme_data);
 					free(meme_data);
@@ -228,7 +242,7 @@ int main (int argc, char** argv) {
 			/* If the meme we are looking for is not included in this file, then exit. */
 			if (!search_flag) {
 				
-				printf("The Font %s is not included in the mem file!", font_data->name);
+				printf("The Font %s on line %d is not included in the mem file!\n", font_data->name, line_counter);
 
 				fclose(meme_file);
 				fclose(action_file);
@@ -236,6 +250,10 @@ int main (int argc, char** argv) {
 
 				if (font_file) {
 					fclose(font_file);
+				}
+
+				if (simp_file) {
+					fclose(simp_file);
 				}
 
 				freeMeme(meme_data);
@@ -251,6 +269,64 @@ int main (int argc, char** argv) {
 		} else if (strncmp(line, meme_data->name, strlen(meme_data->name)) == 0) {
 
 			/* Check to see of the next word is "FILE". If it is then open that simp file, otherwise add the values to the associated attribute. */
+			sscanf(name, "%*s %s", tmp_word);
+
+			if (strcmp(tmp_word, "FILE") == 0) {
+				/* Open each font file for reading */
+				simp_file = fopen(value, "rb");				
+
+				/* If the simp_file doesn't open, then close everything and exit. */
+				if (simp_file == 0) {
+			
+					printf("The simp file, %s, on line %d failed to open!\n", value, line_counter);
+			
+					fclose(meme_file);
+					fclose(action_file);
+					fclose(outfile);
+
+					if (font_file) {
+						fclose(font_file);
+					}
+			
+					freeMeme(meme_data);
+					free(meme_data);
+					meme_data = 0;
+			
+					freeFont(font_data);
+					free(font_data);
+					font_data = 0;
+			
+					return 1;
+				}
+
+			} else {
+
+				if(sscanf(value, "%d %d", &x, &y) != 2) {
+					
+					printf("Invalid argument(s) on line %d: %s!", line_counter, line);
+
+					fclose(meme_file);
+					fclose(action_file);
+					fclose(outfile);
+
+					if (font_file) {
+						fclose(font_file);
+					}
+			
+					freeMeme(meme_data);
+					free(meme_data);
+					meme_data = 0;
+			
+					freeFont(font_data);
+					free(font_data);
+					font_data = 0;
+			
+					return 1;
+				}
+
+				setAttrCoord(meme_data, tmp_word, x, y);
+			}
+
 		}
 	}
 
@@ -306,9 +382,15 @@ int main (int argc, char** argv) {
 	fclose(meme_file);
 	fclose(action_file);
 	fclose(font_file);
+	fclose(simp_file);
 	fclose(outfile);
 
 	return 0;
 }
 
+char* rmWhitespace(char* str) {
+	int i;
+	char* out = "TODO";
 
+	return out;
+}
