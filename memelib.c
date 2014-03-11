@@ -37,21 +37,9 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 }
 
 void freeMeme(meme* meme_data) {
-	int i;
 
 	free(meme_data->name);
 	meme_data->name = 0;
-	
-	/*
-	for (i = 0; i < meme_data->num_attr; i++) {
-
-		free(meme_data->attr[i].name);
-		meme_data->attr[i].name = 0;
-
-		free(meme_data->attr[i].msg);
-		meme_data->attr[i].msg = 0;
-	}
-	*/
 
 	free(meme_data->attr);
 	meme_data->attr = 0;
@@ -67,11 +55,9 @@ void printMeme(meme* m) {
 	printf("NAME: %s\n", m->name);
 	printf("NUM_ATTR: %d\n", m->num_attr);
 	printf("ATTRIBUTES:\n");
-
 	for(i = 0; i < m->num_attr; i++) {
 		printAttr(m->attr[i]);
 	}
-
 	printf("<============>\n");
 }
 

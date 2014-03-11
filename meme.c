@@ -67,8 +67,8 @@ int main (int argc, char** argv) {
 		printf("--> %s", line);
 
 		/* Split the line into a name and a value. */
-		strcpy(strtok(line, ":\n"), name);
-		strcpy(strtok(0, ":\n"), value);
+		strcpy(name, strtok(line, ":\n"));
+		strcpy(value, strtok(0, ":\n"));
 
 		printf("name: %s\n", name);
 		printf("value: %s\n", value);
