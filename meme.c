@@ -20,9 +20,10 @@ int main (int argc, char** argv) {
 	char* line = 0;
 	char* name = 0;
 	char* value = 0;
+	char* tmp_word = 0;
 	size_t line_size = 0;
 
-	int i, j;
+	int i, j, search_flag = 0;
 
 	meme* meme_data;
 	font* font_data;
@@ -67,7 +68,7 @@ int main (int argc, char** argv) {
 	/* Read through the act file */
 	while (getline(&line, &line_size, action_file) != -1) {
 		/* TODO: remove testing print statements */
-		printf("<%p> line: %s", line, line);
+		printf("<%p> line:  %s", line, line);
 
 		if (line[0] == '\n') continue;
 
@@ -75,7 +76,7 @@ int main (int argc, char** argv) {
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
 		
-		printf("<%p> name: %s\n", name, name);
+		printf("<%p> name:  %s\n", name, name);
 		printf("<%p> value: %s\n", value, value);
 
 		/* For each line, take action based on what it starts with */
@@ -132,7 +133,7 @@ int main (int argc, char** argv) {
 	/* Read through the mem file */
 	while (getline(&line, &line_size, meme_file) != -1) {
 		/* TODO: remove testing print statements */
-		printf("<%p> line: %s", line, line);
+		printf("<%p> line:  %s", line, line);
 
 		if (line[0] == '\n') continue;
 
@@ -140,13 +141,44 @@ int main (int argc, char** argv) {
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
 		
-		printf("<%p> name: %s\n", name, name);
+		printf("<%p> name:  %s\n", name, name);
 		printf("<%p> value: %s\n", value, value);
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "MEMES", 5) == 0) {
-
+			
+			tmp_word = strtok(value, " \t\n\v\f\r");
 			/* Check that at least of of the values matches meme_data->name. If none do, then exit the program. */
+			while(tmp_word != 0 ) {
+				if (strncmp(tmp_word, meme_data->name) == 0) {
+					search_flag = 1;
+					break;
+				}
+				tmp_word = strtok(0, " \t\n\v\f\r");
+			}
+
+			/* If the meme we are looking for is not included in this file, then exit. */
+			if (!search_flag) {
+				
+				printf("The Meme %s is not included in the mem file!", meme_data->name);
+
+				fclose(meme_file);
+				fclose(action_file);
+				fclose(outfile);
+
+				if (font_file) {
+					fclose(font_file);
+				}
+
+				freeMeme(meme_data);
+				free(meme_data);
+				meme_data = 0;
+
+				freeFont(font_data);
+				free(font_data);
+				font_data = 0;
+
+			}
 
 		} else if (strncmp(line, "FONTS", 5) == 0) {
 
@@ -169,6 +201,7 @@ int main (int argc, char** argv) {
 
 		fclose(meme_file);
 		fclose(action_file);
+		fclose(outfile);
 
 		freeMeme(meme_data);
 		free(meme_data);
@@ -185,7 +218,7 @@ int main (int argc, char** argv) {
 	/* Read through the fsf file */
 	while (getline(&line, &line_size, font_file) != -1) {
 		/* TODO: remove testing print statements */
-		printf("<%p> line: %s", line, line);
+		printf("<%p> line:  %s", line, line);
 
 		if (line[0] == '\n') continue;
 
@@ -193,7 +226,7 @@ int main (int argc, char** argv) {
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
 		
-		printf("<%p> name: %s\n", name, name);
+		printf("<%p> name:  %s\n", name, name);
 		printf("<%p> value: %s\n", value, value);
 
 		/* For each line, take action based on what it starts with */
