@@ -56,6 +56,10 @@ int main (int argc, char** argv) {
 	meme_data = (meme*) malloc(sizeof(meme));
 	font_data = (font*) malloc(sizeof(font));
 
+	/* Create space for the strings */
+	name = (char*) malloc(128);
+	value = (char*) malloc(128);
+
 
 	/* Read through the act file */
 	while (getline(&line, &line_size, action_file) != -1) {
@@ -63,8 +67,8 @@ int main (int argc, char** argv) {
 		printf("--> %s", line);
 
 		/* Split the line into a name and a value. */
-		name = strtok(line, ":\n");
-		value = strtok(0, ":\n");
+		strcpy(strtok(line, ":\n"), name);
+		strcpy(strtok(0, ":\n"), value);
 
 		printf("name: %s\n", name);
 		printf("value: %s\n", value);
@@ -103,14 +107,17 @@ int main (int argc, char** argv) {
 
 		fclose(meme_file);
 		fclose(action_file);
+		printf("closed mem file and act file.\n");
 
 		freeMeme(meme_data);
 		free(meme_data);
 		meme_data = 0;
+		printf("freed meme_data\n");
 
 		freeFont(font_data);
 		free(font_data);
 		font_data = 0;
+		printf("freed font_data.\n");
 
 		return 1;
 	}
