@@ -58,14 +58,16 @@ size_t readMeme() {
 }
 
 void printMeme(meme* m) {
+	int i;
 	printf("<=== MEME ===>\n");
 	printf("NAME: %s\n", m->name);
 	printf("NUM_ATTR: %d\n", m->num_attr);
 	printf("ATTRIBUTES:\n");
-	int i;
-	for(i = 0; i < num_attr; i++) {
+
+	for(i = 0; i < m->num_attr; i++) {
 		printAttr(m->attr[i]);
 	}
+
 	printf("<============>\n");
 }
 
