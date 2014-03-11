@@ -132,6 +132,8 @@ int main (int argc, char** argv) {
 		/* TODO: remove testing print statements */
 		printf("--> %s", line);
 
+		if (line[0] == '\n') continue;
+
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
