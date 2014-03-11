@@ -5,6 +5,7 @@
 #define _GNU_SOURCE
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "memelib.h"
 #include "font.h"
 #include "simp.h"
@@ -66,7 +67,7 @@ int main (int argc, char** argv) {
 		value = strtok(0, ':');
 
 		printf("name: %s\n", name);
-		printf("valueL %s\n", value);
+		printf("value: %s\n", value);
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "OUTFILE", 7) == 0) {
@@ -88,7 +89,7 @@ int main (int argc, char** argv) {
 		} else {
 
 			/* If the meme structure already exists, add attributes. */
-			addAttribute(name, value, 0, 0);
+			addAttribute(meme_data, name, value, 0, 0);
 		}
 	}
 
@@ -96,7 +97,7 @@ int main (int argc, char** argv) {
 	/* If the outfile doesn't open then close everything and exit */
 	if (outfile == 0) {
 
-		printf("File '%s' failed to open!\n", out_name);
+		printf("The outfile file failed to open!\n");
 
 		fclose(meme_file);
 		fclose(action_file);
@@ -140,7 +141,7 @@ int main (int argc, char** argv) {
 	/* If the font_file doesn't open, then close everything and exit. */
 	if (font_file == 0) {
 
-		printf("File '%s' failed to open!\n", );
+		printf("The fsf file failed to open!\n");
 
 		fclose(meme_file);
 		fclose(action_file);
