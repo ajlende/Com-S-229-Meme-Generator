@@ -8,6 +8,7 @@
 #include "memelib.h"
 
 void initMeme(meme* meme_data, char* name) {
+	meme_data->name = (char*) realloc(meme_data->name, strlen(name) + 1);
 	strcpy(meme_data->name, name);
 	meme_data->num_attr = 0;
 }
@@ -27,6 +28,8 @@ void addAttribute(meme* meme_data, char* name, char* msg, int x, int y) {
 		(meme_data->num_attr)++;
 		
 		/* Set the values of the attribute. */
+		meme_data->attr[(meme_data->num_attr) - 1].name = realloc(meme_data->attr[(meme_data->num_attr) - 1].name, strlen(name) + 1);
+		meme_data->attr[(meme_data->num_attr) - 1].mag = realloc(meme_data->attr[(meme_data->num_attr) - 1].msg, strlen(msg) + 1);
 		strcpy(meme_data->attr[(meme_data->num_attr) - 1].name, name);
 		strcpy(meme_data->attr[(meme_data->num_attr) - 1].msg, msg);
 		meme_data->attr[(meme_data->num_attr) - 1].x = x;
