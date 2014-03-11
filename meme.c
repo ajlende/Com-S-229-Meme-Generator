@@ -150,7 +150,7 @@ int main (int argc, char** argv) {
 			tmp_word = strtok(value, " \t\n\v\f\r");
 			/* Check that at least of of the values matches meme_data->name. If none do, then exit the program. */
 			while(tmp_word != 0 ) {
-				if (strncmp(tmp_word, meme_data->name) == 0) {
+				if (strcmp(tmp_word, meme_data->name) == 0) {
 					search_flag = 1;
 					break;
 				}
