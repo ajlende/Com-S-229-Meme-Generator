@@ -10,6 +10,7 @@
 void initMeme(meme* meme_data, char* name) {
 	meme_data->name = (char*) realloc(meme_data->name, strlen(name) + 1);
 	strcpy(meme_data->name, name);
+	meme_data->attr = 0;
 	meme_data->num_attr = 0;
 }
 
