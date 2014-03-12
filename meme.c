@@ -345,7 +345,7 @@ int main (int argc, char** argv) {
 			
 					printf("The simp file, %s, on line %d of %s failed to open!\n", value, line_counter, meme_filename);
 					
-					freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+					freeAll("cccmnffff", line, name, value, meme_data, font_data, meme_file, action_file, font_file, outfile);
 
 					/*
 					free(line);
@@ -572,9 +572,9 @@ void freeAll(char* fmt, ...) {
 				printf("free simp*\n");
 				break;
 		}
-
+		
+		printf("zeroing %p\n", a);
 		a = 0;
-		printf("zeroed %p\n", a);
 	}
 
 	va_end(argp);
