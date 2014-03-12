@@ -381,7 +381,7 @@ int main (int argc, char** argv) {
 		line_size = strlen(meme_data->attr[i].msg);
 
 		/* For each letter in that attribute's message. */
-		for (j = 0; j < line_size; j++) {
+		for (j = 1; j < line_size; j++) {
 			cur_char = meme_data->attr[i].msg[j];
 			w = font_data->characters[cur_char]->width;
 			w += string_simp->width;
@@ -405,7 +405,7 @@ int main (int argc, char** argv) {
 		}
 
 		/* Calculate the upper left corner based on the centers given. */
-		y = meme_data->attr[i].y - (string_simp->height / 2);
+		y = meme_data->attr[i].y - string_simp->height;
 		x = meme_data->attr[i].x - (string_simp->width / 2);
 
 		/* Overlay the completed string_simp onto the meme_simp. */
