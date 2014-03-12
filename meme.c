@@ -370,12 +370,12 @@ int main (int argc, char** argv) {
 	for (i = 0; i < meme_data->num_attr; i++) {
 	
 		/* TODO: take care of the scenario where there are zero letters in the message. */
-		w = font_data->characters[meme_data->attr[0].msg[0]]->width;
-		h = font_data->characters[meme_data->attr[0].msg[0]]->height;
+		w = font_data->characters[meme_data->attr[i].msg[0]]->width;
+		h = font_data->characters[meme_data->attr[i].msg[0]]->height;
 	
 		/* initialize the string_simp with the width of the first two letters. */
 		initSimp(string_simp, w, h);
-		crop(font_data->characters[meme_data->attr[0].msg[0]], string_simp, 0, 0, w, h);
+		crop(font_data->characters[meme_data->attr[i].msg[0]], string_simp, 0, 0, w, h);
 
 
 		line_size = strlen(meme_data->attr[i].msg);
