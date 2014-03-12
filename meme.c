@@ -48,6 +48,8 @@ int main (int argc, char** argv) {
 
 	simp* meme_simp = 0;
 	simp* font_simp = 0;
+	simp* string_simp = 0;
+	simp* temp_simp = 0;
 
 
 	/* Check to make sure there are the proper number of argumnets. */
@@ -356,11 +358,49 @@ int main (int argc, char** argv) {
 		}
 	}
 	
-	/* create a big string simp to overlay */
+	/* create a string_simp to overlay, and a temp_simp to hold the temporary crop. */
+	string_simp = (simp*) malloc(sizeof(simp));
+	temp_simp = (simp*) malloc(sizeof(simp));
+
+	/* TODO: take care of the scenario where there are zero letters in the message. */
+	w = font_data->characters[meme_data->attr[0].msg[0]]->width;
+	h = font_data->characters[meme_data->attr[0].msg[0]]->height;
+	
+	/* initialize the string_simp with the width of the first two letters. */
+	initSimp(string_simp, w, h);
+	crop(font_data->characters[meme_data->attr[0].msg[0]], string_simp, w, h);
+
+	/* For each attribute in the meme */
+	for (i = 0; i < meme_data->num_attr; i++) {
+		line_size = strlen(meme_data->attr[i].msg);
+
+		/* For each letter in that attribute's message. */
+		for (j = 0; j < line_size; j++) {
+			w = font_data->characters[meme_data->attr[i].msg[j]]->width;
+			h = font_data->characters[meme_data->attr[i].msg[j]]->height;
+			
+			initSimp(temp_simp, w, h);
+			
+			/* Crop simp_string into temp_simp with simp_string->width + current character's width and the standard height. */
+
+			/* Swap string_simp and temp_simp pointers */
+
+			freeSimp(temp_simp);
+		}
+
+		/* Overlay the completed string_simp onto the meme_simp. */
+
+
+		/* Free the string_simp to use on the next attribute. */
+		freeSimp(string_simp);
+	}
+
+	/* Write the meme_simp to the outfile */
+	writeSimp(meme_simp, outfile);
 	
 
 	/* cleanup */
-	freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+	freeAll("cccmnssssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, string_simp, temp_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 
 	return 0;
 }
