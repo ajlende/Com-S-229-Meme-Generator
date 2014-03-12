@@ -38,7 +38,7 @@ void freeFont(font* f) {
 	f->name = 0;
 
 	for (i = 0; i < 128; i++) {
-		if (f->characters[i]->width != 0) {
+		if (f->characters[i] != 0) {
 			freeSimp(f->characters[i]);
 			free(f->characters[i]);
 			f->characters[i] = 0;
