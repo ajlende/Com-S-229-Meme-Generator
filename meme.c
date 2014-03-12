@@ -368,7 +368,7 @@ int main (int argc, char** argv) {
 	
 	/* initialize the string_simp with the width of the first two letters. */
 	initSimp(string_simp, w, h);
-	crop(font_data->characters[meme_data->attr[0].msg[0]], string_simp, w, h);
+	crop(font_data->characters[meme_data->attr[0].msg[0]], string_simp, 0, 0, w, h);
 
 	/* For each attribute in the meme */
 	for (i = 0; i < meme_data->num_attr; i++) {
