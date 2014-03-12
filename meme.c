@@ -43,6 +43,8 @@ int main (int argc, char** argv) {
 	int line_counter = 0;
 	int search_flag = 0;
 
+	char cur_char = 0;
+
 	meme* meme_data = 0;
 	font* font_data = 0;
 
@@ -380,9 +382,10 @@ int main (int argc, char** argv) {
 
 		/* For each letter in that attribute's message. */
 		for (j = 0; j < line_size; j++) {
-			w = font_data->characters[meme_data->attr[i].msg[j]]->width;
+			cur_char = meme_data->attr[i].msg[j];
+			w = font_data->character[cur_char]->width;
 			w += string_simp->width;
-			h = font_data->characters[meme_data->attr[i].msg[j]]->height;
+			h = font_data->characters[cur_char]->height;
 			
 			initSimp(temp_simp, w, h);
 			
@@ -393,6 +396,10 @@ int main (int argc, char** argv) {
 			temp_swap_ptr = string_simp;
 			string_simp = temp_simp;
 			temp_simp = temp_swap_ptr;
+
+			/* overlay the new letter */
+			x = w - font_data->characters[cur_char]->width;
+			overlay(font_data->characters[cur_char], string_simp, x, 0);
 
 			freeSimp(temp_simp);
 		}
