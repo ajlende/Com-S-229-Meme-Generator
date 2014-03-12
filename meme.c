@@ -31,6 +31,7 @@ int main (int argc, char** argv) {
 	char* tmp_value = 0;
 	char* meme_filename = 0;
 	char* action_filename = 0;
+
 	size_t line_size = 0;
 
 	int i, j, x, y, w, h, line_counter, search_flag;
@@ -425,7 +426,7 @@ int main (int argc, char** argv) {
 		} else if (strncmp(line, "IMAGE", 5) == 0) {
 
 			/* Open the simp image for editing */
-			font_simp_file = fopen(value);
+			font_simp_file = fopen(value, "rb");
 
 			/* If the simp_file doesn't open, then close everything and exit. */
 			if (font_simp_file == 0) {
@@ -528,9 +529,9 @@ int main (int argc, char** argv) {
 			/* Check the character after CHARACTER. Crop the image at the given values and store it at the proper index. */
 
 			if (sscanf(value, "%d %d %d %d", &x, &y, &w, &h) != 4) {
-				font_data->characters[name[9]] = (simp*) malloc(sizeof(simp));
-				initSimp(font_data->characters[name[9]], w, h);
-				crop(font_simp, font_data->characters[name[9]]);
+				&(font_data->characters[name[9]]) = (simp*) malloc(sizeof(simp));
+				initSimp(&(font_data->characters[name[9]]), w, h);
+				crop(font_simp, &(font_data->characters[name[9]]), x, y, w, h);
 			}
 			
 		}
