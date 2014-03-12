@@ -9,6 +9,7 @@
 ===========================================
 
 
+
 The SIMP Data Structure
 ===========================================
 
@@ -19,25 +20,36 @@ with four unsigned 8-bit chars to represent the values of the red, green, blue, 
 alpha channels of the pixel. The structure type definitions can be found in simp.h.
 
 
+
+The FONT Data Structure
+===========================================
+
+TODO:
+
+
+
+The MEME Data Structure
+===========================================
+
+TODO:
+
+
+
 Extra Details
 ===========================================
 
-All files inputted into all programs are assumed to follow the SIMP image format as
-described in section 6.1 of the Project 1 Specification.
+All simp files inputted into all programs are assumed to follow the SIMP image
+format as described in section 6.1 of the Project 1 Specification.
 
 All file names entered as command line arguments for input are expected to exist.
 Non-existent output files will be created, and existing ones will be overwritten.
 
-All numerical values entered as command line arguments are expected to be positive
-integers.
+All numerical values entered as command line arguments are expected to be integers.
 
-In the crop program, the values w + x and h + y are expected to be within the width
-and height of the input image.
-
-In the overlay program, the width of the image to overlay plus x and the hight of the
-image to overlay plus y are expected to be within the boundries of the base image.
+TODO:
 
 If any of the above are entered not as expected, then the program will exit.
+
 
 
 Files
@@ -117,6 +129,12 @@ the first picture using a translation such that the top-left corner of pic2
 is at the position (x, y) inside pic1.
 
 
+meme.c:
+-------
+The meme.c file contains the main method for the meme program.
+TODO:
+
+
 simp.c:
 -------
 The simp.c file contains all of the function bodies for the function
@@ -132,3 +150,21 @@ pixel data structure as well as the function prototypes that are defined
 in simp.c
 
 
+memelib.c:
+----------
+TODO:
+
+
+memelib.h
+---------
+TODO:
+
+
+font.c
+------
+TODO:
+
+
+font.h
+------
+TODO:
