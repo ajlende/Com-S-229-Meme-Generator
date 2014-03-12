@@ -207,6 +207,12 @@ int main (int argc, char** argv) {
 					fclose(simp_file);
 				}
 
+				if (meme_simp) {
+					freeSimp(meme_simp);
+					free(meme_simp);
+					meme_simp = 0;
+				}
+
 				return 1;
 			}
 
@@ -232,6 +238,12 @@ int main (int argc, char** argv) {
 				
 					if (flag_simp_open) {
 						fclose(simp_file);
+					}
+
+					if (meme_simp) {
+						freeSimp(meme_simp);
+						free(meme_simp);
+						meme_simp = 0;
 					}
 				
 					return 1;
@@ -266,6 +278,13 @@ int main (int argc, char** argv) {
 				if (flag_simp_open) {
 					fclose(simp_file);
 				}
+
+				if (meme_simp) {
+					freeSimp(meme_simp);
+					free(meme_simp);
+					meme_simp = 0;
+				}
+
 
 				return 1;
 
@@ -304,7 +323,7 @@ int main (int argc, char** argv) {
 					
 					printf("The meme simp file was unable to be read!\n");
 
-					freeAll("cccmnffff", line, name, value, meme_data, font_data, simp_file, meme_file, action_file, outfile);
+					freeAll("cccmnsffff", line, name, value, meme_data, font_data, meme_simp, simp_file, meme_file, action_file, outfile);
 				
 					if (flag_font_open) {
 						fclose(font_file);
@@ -327,6 +346,12 @@ int main (int argc, char** argv) {
 
 					if (flag_simp_open) {
 						fclose(simp_file);
+					}
+
+					if (meme_simp) {
+						freeSimp(meme_simp);
+						free(meme_simp);
+						meme_simp = 0;
 					}
 
 					return 1;
