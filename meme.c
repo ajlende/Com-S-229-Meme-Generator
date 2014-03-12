@@ -533,8 +533,8 @@ char* rmWhitespace(char* str) {
 }
 
 void freeAll(char* fmt, ...) {
-	const char* p;
-	void* a;
+	const char* p = 0;
+	void* a = 0;
 
 	va_list argp;
 
