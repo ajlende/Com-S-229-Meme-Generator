@@ -4,6 +4,7 @@
 
 #define _GNU_SOURCE
 #include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
 #include "memelib.h"
@@ -12,11 +13,14 @@
 
 char* rmWhitespace(char* str);
 
+void freeAll(char* fmt, ...);
+
 int main (int argc, char** argv) {
 
 	FILE* meme_file;
 	FILE* action_file;
 	FILE* font_file;
+	FILE* font_simp_file;
 	FILE* simp_file;
 	FILE* outfile;
 
@@ -29,10 +33,13 @@ int main (int argc, char** argv) {
 	char* action_filename = 0;
 	size_t line_size = 0;
 
-	int i, j, x, y, line_counter, search_flag;
+	int i, j, x, y, w, h, line_counter, search_flag;
 
 	meme* meme_data;
 	font* font_data;
+
+	simp* meme_simp;
+	simp* font_simp;
 
 
 	/* Check to make sure there are the proper number of argumnets. */
@@ -342,6 +349,12 @@ int main (int argc, char** argv) {
 					return 1;
 				}
 
+				meme_simp = (simp*) malloc(sizeof(simp));
+
+				if (!readSimp(meme_simp, simp_file)) {
+					
+				}
+
 			} else {
 
 				if (sscanf(value, "%d %d", &x, &y) != 2) {
@@ -361,6 +374,10 @@ int main (int argc, char** argv) {
 
 					if (font_file) {
 						fclose(font_file);
+					}
+
+					if (simp_file) {
+						fclose(simp_file);
 					}
 			
 					freeMeme(meme_data);
@@ -382,9 +399,12 @@ int main (int argc, char** argv) {
 
 	printMeme(meme_data);
 
+	line_counter = 0;
 
 	/* Read through the fsf file */
 	while (getline(&line, &line_size, font_file) != -1) {
+		line_counter++;
+
 		/* TODO: remove testing print statements */
 		printf("<%p> line:  %s", line, line);
 
@@ -405,10 +425,113 @@ int main (int argc, char** argv) {
 		} else if (strncmp(line, "IMAGE", 5) == 0) {
 
 			/* Open the simp image for editing */
+			font_simp_file = fopen(value);
+
+			/* If the simp_file doesn't open, then close everything and exit. */
+			if (font_simp_file == 0) {
+		
+				printf("The simp file, %s, on line %d of the specified fsf file failed to open!\n", value, line_counter);
+
+				free(line);
+				line = 0;
+				free(name);
+				name = 0;
+				free(value);
+				value = 0;
+
+				fclose(meme_file);
+				fclose(action_file);
+				fclose(outfile);
+				fclose(font_file);
+				fclose(simp_file);
+		
+				freeMeme(meme_data);
+				free(meme_data);
+				meme_data = 0;
+		
+				freeFont(font_data);
+				free(font_data);
+				font_data = 0;
+		
+				return 1;
+			}
+
+			font_simp = (simp*) malloc(sizeof(simp));
+			
+			if (!readSimp(font_simp, font_simp_file)) {
+
+				printf("The file %s from line %d of the fsf file was unable to be read!\nThe filetype may be incorrect or the file may be corrupted.\n", value, line_counter);
+
+				free(line);
+				line = 0;
+				free(name);
+				name = 0;
+				free(value);
+				value = 0;
+
+				fclose(meme_file);
+				fclose(action_file);
+				fclose(outfile);
+				fclose(font_file);
+				fclose(simp_file);
+		
+				freeMeme(meme_data);
+				free(meme_data);
+				meme_data = 0;
+		
+				freeFont(font_data);
+				free(font_data);
+				font_data = 0;
+
+				freeSimp(font_simp);
+				free(font_simp);
+				font_simp = 0;
+		
+				return 1;
+
+			}
 			
 		} else if (strncmp(line, "CHARACTER", 9) == 0) {
+
+			if (!font_simp_file) {
+				printf("The fsf NAME line must come before any CHARACTERn line!\n");
+
+				free(line);
+				line = 0;
+				free(name);
+				name = 0;
+				free(value);
+				value = 0;
+
+				fclose(meme_file);
+				fclose(action_file);
+				fclose(outfile);
+				fclose(font_file);
+				fclose(simp_file);
+		
+				freeMeme(meme_data);
+				free(meme_data);
+				meme_data = 0;
+		
+				freeFont(font_data);
+				free(font_data);
+				font_data = 0;
+
+				freeSimp(font_simp);
+				free(font_simp);
+				font_simp = 0;
+		
+				return 1;
+
+			}
 			
 			/* Check the character after CHARACTER. Crop the image at the given values and store it at the proper index. */
+
+			if (sscanf(value, "%d %d %d %d", &x, &y, &w, &h) != 4) {
+				font_data->characters[name[9]] = (simp*) malloc(sizeof(simp));
+				initSimp(font_data->characters[name[9]], w, h);
+				crop(font_simp, font_data->characters[name[9]]);
+			}
 			
 		}
 	}
@@ -421,7 +544,6 @@ int main (int argc, char** argv) {
 	name = 0;
 	free(value);
 	value = 0;
-	
 
 	freeMeme(meme_data);
 	free(meme_data);
@@ -431,9 +553,18 @@ int main (int argc, char** argv) {
 	free(font_data);
 	font_data = 0;
 
+	freeSimp(font_simp);
+	free(font_simp);
+	font_simp = 0;
+
+	freeSimp(meme_simp);
+	free(meme_simp);
+	meme_simp = 0;
+
 	fclose(meme_file);
 	fclose(action_file);
 	fclose(font_file);
+	fclose(font_simp_file);
 	fclose(simp_file);
 	fclose(outfile);
 
@@ -445,4 +576,43 @@ char* rmWhitespace(char* str) {
 	char* out = "TODO";
 
 	return out;
+}
+
+void freeAll(char* fmt, ...) {
+	const char* p;
+	void* a;
+
+	va_list argp;
+
+	va_start(argp, fmt);
+
+	for (p = fmt; *p != '\0'; p++) {
+
+		a = va_arg(argp, void*);
+		
+		switch(*p) {
+			case 'c':
+				/* handle char* */
+				free(a);
+				break;
+			case 'f':
+				/* handle FILE* */
+				fclose(a);
+				break;
+			case 'n':
+				/* handle font* */
+				freeFont((font*) a);
+				free(a);
+				break;
+			case 's':
+				/* handle simp* */
+				freeSimp((simp*) a);
+				free(a);
+				break;
+		}
+
+		a = 0;
+	}
+
+	va_end(argp);
 }

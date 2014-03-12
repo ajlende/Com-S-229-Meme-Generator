@@ -26,8 +26,18 @@ void initFont(font* f, char* name) {
 
 /* Frees the memory allocated for a font data structure. */
 void freeFont(font* f) {
+	int i;
+
 	free(f->name);
 	f->name = 0;
+
+	for (i = 0; i < 128; i++) {
+		if (f->characters[i]) {
+			freeSimp(f->characters[i]);
+			free(f->characters[i]);
+			f->characters[i] = 0;
+		}
+	}
 
 	free(f->characters);
 	f->characters = 0;
