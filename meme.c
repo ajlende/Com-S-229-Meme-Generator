@@ -205,9 +205,6 @@ int main (int argc, char** argv) {
 
 				if (flag_simp_open) {
 					fclose(simp_file);
-				}
-
-				if (meme_simp) {
 					freeSimp(meme_simp);
 					free(meme_simp);
 					meme_simp = 0;
@@ -237,13 +234,10 @@ int main (int argc, char** argv) {
 					freeAll("cccmnfff", line, name, value, meme_data, font_data, meme_file, action_file, outfile);
 				
 					if (flag_simp_open) {
-						fclose(simp_file);
-					}
-
-					if (meme_simp) {
 						freeSimp(meme_simp);
 						free(meme_simp);
 						meme_simp = 0;
+						fclose(simp_file);
 					}
 				
 					return 1;
@@ -276,15 +270,11 @@ int main (int argc, char** argv) {
 				}
 
 				if (flag_simp_open) {
-					fclose(simp_file);
-				}
-
-				if (meme_simp) {
 					freeSimp(meme_simp);
 					free(meme_simp);
 					meme_simp = 0;
+					fclose(simp_file);
 				}
-
 
 				return 1;
 
@@ -345,13 +335,10 @@ int main (int argc, char** argv) {
 					}
 
 					if (flag_simp_open) {
-						fclose(simp_file);
-					}
-
-					if (meme_simp) {
 						freeSimp(meme_simp);
 						free(meme_simp);
 						meme_simp = 0;
+						fclose(simp_file);
 					}
 
 					return 1;
