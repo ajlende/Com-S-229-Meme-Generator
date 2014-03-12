@@ -57,9 +57,6 @@ int main (int argc, char** argv) {
 
 	if (meme_file == 0) {
 		printf("File %s failed to open!\n", meme_filename);
-
-		freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
-
 		return 1;
 	}
 	
