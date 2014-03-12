@@ -307,8 +307,6 @@ int main (int argc, char** argv) {
 
 			if (strcmp(name, "FILE") == 0) {
 
-				printf("-- FILE --> VALUE: %s\n", value);
-				
 				/* Open each font file for reading */
 				simp_file = fopen(value, "rb");				
 
@@ -346,9 +344,7 @@ int main (int argc, char** argv) {
 
 			} else {
 
-				printf("-- ELSE --> VALUE: %s\n", value);
-
-				if(sscanf(value, "%d %d", &x, &y) != 2) {
+				if (sscanf(value, "%d %d", &x, &y) != 2) {
 					
 					printf("Invalid argument(s) on line %d of %s: %s:value!\n", line_counter, meme_filename, line, value);
 
@@ -383,6 +379,8 @@ int main (int argc, char** argv) {
 
 		}
 	}
+
+	printMeme(meme_data);
 
 
 	/* Read through the fsf file */

@@ -86,5 +86,12 @@ void printAttr(attribute a) {
  * Searches for the given attribute name, and sets it's x and y coordinates.
  */
 void setAttrCoord(meme* m, char* name, int x, int y) {
-	
+	int i;
+	for (i = 0; i < m->num_attr; i++) {
+		if (strcmp(name, m->attr[i].name) == 0) {
+			m->attr[i].x = x;
+			m->attr[i].y = y;
+			break;
+		}
+	}
 }
