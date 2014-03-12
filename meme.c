@@ -469,9 +469,9 @@ int main (int argc, char** argv) {
 				printf("The simp file, %s, on line %d of the specified fsf file failed to open!\n", value, line_counter);
 				
 				/* free specific ones */
-				/* freeAll("cccfffffmn", line, name, value, meme_file, action_file, outfile, font_file, simp_file, meme_data, font_data); */
+				freeAll("cccfffffmn", line, name, value, meme_file, action_file, outfile, font_file, simp_file, meme_data, font_data);
 
-				freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+				/* freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile); */
 		
 				return 1;
 			}
