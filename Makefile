@@ -37,7 +37,7 @@ meme : meme.o memelib.o font.o simp.o
 
 # 2. This will clean out any non-source files from the directory
 clean : 
-	rm *.o bw colorshift crop overlay meme
+	-rm *.o bw colorshift crop overlay meme
 
 
 
