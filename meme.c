@@ -613,6 +613,7 @@ void freeAll(char* fmt, ...) {
 				freeMeme((meme*) a);
 				free((meme*) a);
 				printf("free meme*\n");
+				break;
 			case 's':
 				/* handle simp* */
 				freeSimp((simp*) a);
