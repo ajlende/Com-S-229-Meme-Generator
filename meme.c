@@ -27,8 +27,6 @@ int main (int argc, char** argv) {
 	char* tmp_value = 0;
 	char* meme_filename = 0;
 	char* action_filename = 0;
-	char* font_filename = 0;
-	char* simp_filename = 0;
 	size_t line_size = 0;
 
 	int i, j, x, y, line_counter, search_flag;
@@ -303,22 +301,14 @@ int main (int argc, char** argv) {
 
 		} else if (strncmp(line, meme_data->name, strlen(meme_data->name)) == 0) {
 
-			printf("-----------> VALUE: %s\n", value);
-			printf("-----------> NAME:  %s\n", name);
-			printf("-----------> TMP_W: %s\n", tmp_word);
-
 			/* Check to see of the next word is "FILE". If it is then open that simp file, otherwise add the values to the associated attribute. */
-			sscanf(name, "%*s %s", simp_filename);
+			tmp_word = name;
+			sscanf(name, "%*s %s", tmp_word);
 
-			printf("-----------> VALUE: %s\n", value);
-			printf("-----------> NAME:  %s\n", name);
-			printf("-----------> TMP_W: %s\n", tmp_word);
+			if (strcmp(name, "FILE") == 0) {
 
-			if (strcmp(tmp_word, "FILE") == 0) {
-				printf("-----------> VALUE: %s\n", value);
-				printf("-----------> NAME:  %s\n", name);
-				printf("-----------> TMP_W: %s\n", tmp_word);
-
+				printf("-- FILE --> VALUE: %s\n", value);
+				
 				/* Open each font file for reading */
 				simp_file = fopen(value, "rb");				
 
@@ -356,9 +346,11 @@ int main (int argc, char** argv) {
 
 			} else {
 
+				printf("-- ELSE --> VALUE: %s\n", value);
+
 				if(sscanf(value, "%d %d", &x, &y) != 2) {
 					
-					printf("Invalid argument(s) on line %d of %s: %s!", line_counter, meme_filename, line);
+					printf("Invalid argument(s) on line %d of %s: %s:value!\n", line_counter, meme_filename, line, value);
 
 					free(line);
 					line = 0;
