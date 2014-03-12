@@ -248,32 +248,11 @@ int main (int argc, char** argv) {
 					
 					/* freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile); */
 
-					freeAll("cccmnffff", line, name, value, meme_data, font_data, simp_file, meme_file, action_file, outfile);
-
-					/*
-					free(line);
-					line = 0;
-					free(name);
-					name = 0;
-					free(value);
-					value = 0;
-
-					fclose(meme_file);
-					fclose(action_file);
-					fclose(outfile);
+					freeAll("cccmnfff", line, name, value, meme_data, font_data, meme_file, action_file, outfile);
 
 					if (simp_file) {
 						fclose(simp_file);
 					}
-			
-					freeMeme(meme_data);
-					free(meme_data);
-					meme_data = 0;
-			
-					freeFont(font_data);
-					free(font_data);
-					font_data = 0;
-					*/
 			
 					return 1;
 				}
