@@ -379,14 +379,18 @@ int main (int argc, char** argv) {
 		/* For each letter in that attribute's message. */
 		for (j = 0; j < line_size; j++) {
 			w = font_data->characters[meme_data->attr[i].msg[j]]->width;
+			w += string_simp->width;
 			h = font_data->characters[meme_data->attr[i].msg[j]]->height;
 			
 			initSimp(temp_simp, w, h);
 			
 			/* Crop simp_string into temp_simp with simp_string->width + current character's width and the standard height. */
-			
+			crop(string_simp, temp_simp, 0, 0, w, h);
 
-			/* Swap string_simp and temp_simp pointers */
+			/* Swap string_simp and temp_simp pointers in place with xor swap. */
+			string_simp ^= temp_simp;
+			temp_simp ^= string_simp;
+			string_simp ^= temp_simp;
 
 			freeSimp(temp_simp);
 		}
