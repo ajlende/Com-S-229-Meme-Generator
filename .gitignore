@@ -45,6 +45,10 @@ Session.vim
 *.x86_64
 *.hex
 
+# Bash files
+*.sh
+*.bash
+
 # Special Executables
 bw
 colorshift
