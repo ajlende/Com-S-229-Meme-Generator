@@ -308,7 +308,7 @@ int main (int argc, char** argv) {
 			printf("-----------> TMP_W: %s\n", tmp_word);
 
 			/* Check to see of the next word is "FILE". If it is then open that simp file, otherwise add the values to the associated attribute. */
-			sscanf(name, "%*s %s", tmp_word);
+			sscanf(name, "%*s %s", simp_filename);
 
 			printf("-----------> VALUE: %s\n", value);
 			printf("-----------> NAME:  %s\n", name);
