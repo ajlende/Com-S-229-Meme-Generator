@@ -199,7 +199,11 @@ void crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h) {
 	int i = 0;
 	int j = 0;
 
-	pixel empty_pixel = 0;
+	pixel empty_pixel;
+	empty_pixel.r = 0;
+	empty_pixel.g = 0;
+	empty_pixel.b = 0;
+	empty_pixel.a = 0;
 	
 	/* Copy the cropped area of the image into the new structure. */
 	for (i = 0; i < h; i++) {
