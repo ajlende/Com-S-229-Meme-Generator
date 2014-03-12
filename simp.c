@@ -42,10 +42,9 @@ void initSimp(simp *simp_data, int width, int height) {
  * Frees the data malloc'd for the simp data.
  */
 void freeSimp(simp *simp_data) {
+	int i;
 
 	if (!simp_data->data) return;
-
-	int i;
 
 	for (i = 0; i < simp_data->height; i++) {
 		free(simp_data->data[i]);
