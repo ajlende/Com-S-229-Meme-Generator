@@ -43,11 +43,11 @@ int main (int argc, char** argv) {
 
 	int i, j, x, y, w, h, line_counter, search_flag;
 
-	meme* meme_data;
-	font* font_data;
+	meme* meme_data = 0;
+	font* font_data = 0;
 
-	simp* meme_simp;
-	simp* font_simp;
+	simp* meme_simp = 0;
+	simp* font_simp = 0;
 
 
 	/* Check to make sure there are the proper number of argumnets. */
@@ -424,6 +424,7 @@ int main (int argc, char** argv) {
 		}
 	}
 	
+	/* create a big string simp to overlay */
 
 	/* cleanup */
 	freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
