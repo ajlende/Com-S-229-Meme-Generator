@@ -25,6 +25,10 @@ int main (int argc, char** argv) {
 	char* value = 0;
 	char* tmp_word = 0;
 	char* tmp_value = 0;
+	char* meme_filename = 0;
+	char* action_filename = 0;
+	char* font_filename = 0;
+	char* simp_filename = 0;
 	size_t line_size = 0;
 
 	int i, j, x, y, line_counter, search_flag;
@@ -39,19 +43,21 @@ int main (int argc, char** argv) {
 		return 1;
 	}
 
+	meme_filename = argv[1];
+	action_filename = argv[2];
 	
 	/* Open the files for reading. If one fails to open, then exit and return 1. */
-	meme_file = fopen( argv[1], "r" );
+	meme_file = fopen(meme_filename, "r");
 
 	if (meme_file == 0) {
-		printf("File %s failed to open!\n", argv[1]);
+		printf("File %s failed to open!\n", meme_filename);
 		return 1;
 	}
 	
-	action_file = fopen( argv[2], "r" );
+	action_file = fopen(action_filename, "r");
 
 	if (action_file == 0) {
-		printf("File %s failed to open!\n", argv[2]);
+		printf("File %s failed to open!\n", action_filename);
 		fclose(meme_file);
 		return 1;
 	}
@@ -91,6 +97,37 @@ int main (int argc, char** argv) {
 			/* TODO: find the value. */
 			outfile = fopen(value, "wb");
 
+			/* If the outfile doesn't open then close everything and exit */
+			if (outfile == 0) {
+		
+				printf("The outfile from line %d of %s failed to open!\n", line_counter, action_filename);
+		
+				free(line);
+				line = 0;
+				free(name);
+				name = 0;
+				free(value);
+				value = 0;
+		
+				fclose(meme_file);
+				fclose(action_file);
+				
+				if (meme_data) {
+					freeMeme(meme_data);
+					free(meme_data);
+					meme_data = 0;
+				}
+				
+				if (font_data) {
+					freeFont(font_data);
+					free(font_data);
+					font_data = 0;
+				}
+
+				return 1;
+			}
+
+
 		} else if (strncmp(line, "MEME", 4) == 0) {
 
 			/* Initialize the meme structure with the given name. */
@@ -110,29 +147,6 @@ int main (int argc, char** argv) {
 
 	/* TODO: remove this. it is a test print message */
 	printMeme(meme_data);
-
-
-	/* If the outfile doesn't open then close everything and exit */
-	if (outfile == 0) {
-
-		printf("The outfile file failed to open!\n");
-
-		fclose(meme_file);
-		fclose(action_file);
-		printf("closed mem file and act file.\n");
-
-		freeMeme(meme_data);
-		free(meme_data);
-		meme_data = 0;
-		printf("freed meme_data\n");
-
-		freeFont(font_data);
-		free(font_data);
-		font_data = 0;
-		printf("freed font_data.\n");
-
-		return 1;
-	}
 
 	line_counter = 0;
 
@@ -168,7 +182,7 @@ int main (int argc, char** argv) {
 			/* If the meme we are looking for is not included in this file, then exit. */
 			if (!search_flag) {
 				
-				printf("The Meme %s is not included in the mem file on line %d!", meme_data->name, line_counter);
+				printf("The Meme %s is not included in the file %s on line %d!", meme_data->name, meme_filename, line_counter);
 
 				free(line);
 				line = 0;
@@ -212,7 +226,7 @@ int main (int argc, char** argv) {
 				/* If the font_file doesn't open, then close everything and exit. */
 				if (font_file == 0) {
 			
-					printf("The file %s on line %d failed to open!\n", value, line_counter);
+					printf("The file %s on line %d of %s failed to open!\n", value, line_counter, meme_filename);
 
 					free(line);
 					line = 0;
@@ -299,7 +313,7 @@ int main (int argc, char** argv) {
 				/* If the simp_file doesn't open, then close everything and exit. */
 				if (simp_file == 0) {
 			
-					printf("The simp file, %s, on line %d failed to open!\n", value, line_counter);
+					printf("The simp file, %s, on line %d of %s failed to open!\n", value, line_counter, meme_filename);
 
 					free(line);
 					line = 0;
@@ -332,7 +346,7 @@ int main (int argc, char** argv) {
 
 				if(sscanf(value, "%d %d", &x, &y) != 2) {
 					
-					printf("Invalid argument(s) on line %d: %s!", line_counter, line);
+					printf("Invalid argument(s) on line %d of %s: %s!", line_counter, meme_filename, line);
 
 					free(line);
 					line = 0;
