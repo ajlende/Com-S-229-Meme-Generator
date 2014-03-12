@@ -1,15 +1,15 @@
 MEMES:INSANITY KEANU CONFESSION
 
-INSANITY FILE:asdfadf.simp
+INSANITY FILE:test/Memes/insanity.simp
 INSANITY TOP:250 50
 INSANITY BOTTOM:250 490
 
-KEANU FILE:adfdsf.simp
+KEANU FILE:test/Memes/keanu.simp
 KEANU TOP:154 45
 KEANU BOTTOM:154 405
 
-CONFESSION FILE:asdfdfadav.simp
+CONFESSION FILE:test/Memes/confession.simp
 CONFESSION TOP:460 45
 CONFESSION BOTTOM:460 955
 
-FONTS:test/Fonts/impact.fsf
+FONTS:wubwubwub.simp
