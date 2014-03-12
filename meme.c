@@ -384,6 +384,7 @@ int main (int argc, char** argv) {
 			initSimp(temp_simp, w, h);
 			
 			/* Crop simp_string into temp_simp with simp_string->width + current character's width and the standard height. */
+			
 
 			/* Swap string_simp and temp_simp pointers */
 
@@ -391,7 +392,7 @@ int main (int argc, char** argv) {
 		}
 
 		/* Overlay the completed string_simp onto the meme_simp. */
-
+		overlay(string_simp, meme_simp, 0, 0);
 
 		/* Free the string_simp to use on the next attribute. */
 		freeSimp(string_simp);
