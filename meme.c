@@ -404,8 +404,12 @@ int main (int argc, char** argv) {
 			freeSimp(temp_simp);
 		}
 
+		/* Calculate the upper left corner based on the centers given. */
+		y = meme_data->attr[i].y - (string_simp->height / 2);
+		x = meme_data->attr[i].x - (string_simp->width / 2);
+
 		/* Overlay the completed string_simp onto the meme_simp. */
-		overlay(string_simp, meme_simp, 0, 0);
+		overlay(string_simp, meme_simp, x, y);
 
 		/* Free the string_simp to use on the next attribute. */
 		freeSimp(string_simp);
