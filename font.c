@@ -24,10 +24,22 @@ void initFont(font* f, char* name) {
 	f->characters = (simp**) calloc(128, sizeof(simp*));
 }
 
-void addCharacter (simp* s, font* f, char idx, int x, int y, int w, int h) {
+void addCharacter(simp* s, font* f, char idx, int x, int y, int w, int h) {
 	f->characters[idx] = (simp*) malloc(sizeof(simp));
 	initSimp(f->characters[idx], w, h);
 	crop(s, f->characters[idx], x, y, w, h);
+	printCharacter(f, idx, x, y);
+}
+
+void printCharacter(font* f, char idx, int x, int y) {
+	printf("<== CHARACTER ==>\n");
+	printf("char: %c\n", idx);
+	printf("x: %d\n", x);
+	printf("y: %d\n", y);
+	printf("w: %d\n", f->characters[idx]->width);
+	printf("h: %d\n", f->characters[idx]->height);
+	printf("<===============>\n");
+
 }
 
 /* Frees the memory allocated for a font data structure. */
