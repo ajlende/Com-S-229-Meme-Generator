@@ -306,7 +306,9 @@ int main (int argc, char** argv) {
 		} else if (strncmp(line, "IMAGE", 5) == 0) {
 
 			/* Open the simp image for editing */
-			font_simp_file = fopen(value, "rb");
+			font_simp_file = fopen(
+				value,
+				"rb");
 
 			/* If the simp_file doesn't open, then close everything and exit. */
 			if (font_simp_file == 0) {
@@ -357,7 +359,7 @@ int main (int argc, char** argv) {
 	}
 	
 	/* create a big string simp to overlay */
-
+	
 
 	/* cleanup */
 	freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
