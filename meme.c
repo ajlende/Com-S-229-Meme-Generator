@@ -303,15 +303,21 @@ int main (int argc, char** argv) {
 
 		} else if (strncmp(line, meme_data->name, strlen(meme_data->name)) == 0) {
 
-			printf("-----------> VALUE: %s", value);
+			printf("-----------> VALUE: %s\n", value);
+			printf("-----------> NAME:  %s\n", name);
+			printf("-----------> TMP_W: %s\n", tmp_word);
 
 			/* Check to see of the next word is "FILE". If it is then open that simp file, otherwise add the values to the associated attribute. */
 			sscanf(name, "%*s %s", tmp_word);
 
-			printf("-----------> VALUE: %s", value);
+			printf("-----------> VALUE: %s\n", value);
+			printf("-----------> NAME:  %s\n", name);
+			printf("-----------> TMP_W: %s\n", tmp_word);
 
 			if (strcmp(tmp_word, "FILE") == 0) {
-				printf("-----------> VALUE: %s", value);
+				printf("-----------> VALUE: %s\n", value);
+				printf("-----------> NAME:  %s\n", name);
+				printf("-----------> TMP_W: %s\n", tmp_word);
 
 				/* Open each font file for reading */
 				simp_file = fopen(value, "rb");				
