@@ -49,8 +49,4 @@ void freeFont(font* f) {
 	f->characters = 0;
 }
 
-/* Loads simp images of each file into the font's simp character array */
-size_t readFont(font* f, FILE* font_simp, FILE* fsf_file) {
-		return 0;
-}
 

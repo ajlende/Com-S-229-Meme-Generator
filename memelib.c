@@ -62,10 +62,6 @@ void freeMeme(meme* meme_data) {
 	meme_data->attr = 0;
 }
 
-size_t readMeme() {
-	return 0;
-}
-
 void printMeme(meme* m) {
 	int i;
 	printf("<=== MEME ===>\n");
