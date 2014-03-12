@@ -196,7 +196,8 @@ void colorshift(simp* simp_data, char* pattern) {
  * Returns zero if error and one if otherwise.
  */
 void crop(simp* simp_in, simp* simp_out, int x, int y, int w, int h) {
-	int i = j = 0;
+	int i = 0;
+	int j = 0;
 
 	pixel empty_pixel = 0;
 	

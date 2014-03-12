@@ -34,7 +34,14 @@ int main (int argc, char** argv) {
 
 	size_t line_size = 0;
 
-	int i = j = x = y = w = h = line_counter = search_flag = 0;
+	int i = 0;
+	int j = 0;
+	int x = 0;
+	int y = 0;
+	int w = 0;
+	int h = 0;
+	int line_counter = 0;
+	int search_flag = 0;
 
 	meme* meme_data = 0;
 	font* font_data = 0;
