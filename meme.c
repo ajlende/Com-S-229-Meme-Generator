@@ -538,7 +538,8 @@ int main (int argc, char** argv) {
 	
 
 	/* cleanup */
-	free(line);
+	freeAll("cccmssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+/*	free(line);
 	line = 0;
 	free(name);
 	name = 0;
@@ -566,7 +567,7 @@ int main (int argc, char** argv) {
 	fclose(font_file);
 	fclose(font_simp_file);
 	fclose(simp_file);
-	fclose(outfile);
+	fclose(outfile);*/
 
 	return 0;
 }
@@ -604,6 +605,10 @@ void freeAll(char* fmt, ...) {
 				freeFont((font*) a);
 				free(a);
 				break;
+			case 'm':
+				/* handle meme* */
+				freeMeme((meme*) a);
+				free(a);
 			case 's':
 				/* handle simp* */
 				freeSimp((simp*) a);
