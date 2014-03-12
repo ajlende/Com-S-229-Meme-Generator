@@ -21,7 +21,13 @@ void initFont(font* f, char* name) {
 	/* Allocate space for all 128 possible ascii characters */
 	/* This will make it much easier for looking up a specific character */
 	/* Used calloc because not all characters may be present when reading the file, and the spaces for them will be left empty. */
-	f->characters = (simp*) calloc(128, sizeof(simp));
+	f->characters = (simp**) calloc(128, sizeof(simp*));
+}
+
+void addCharacter (simp* s, font* f, char idx, int x, int y, int w, int h) {
+	f->characters[idx] = (simp*) malloc(sizeof(simp));
+	initSimp(f->characters[idx], w, h);
+	crop(s, f->characters[idx], x, y, w, h);
 }
 
 /* Frees the memory allocated for a font data structure. */
@@ -32,8 +38,10 @@ void freeFont(font* f) {
 	f->name = 0;
 
 	for (i = 0; i < 128; i++) {
-		if (&(f->characters[i])) {
-			freeSimp(&(f->characters[i]));
+		if (*(f->characters[i]) != 0) {
+			freeSimp(f->characters[i]);
+			free(f->characters[i]);
+			f->characters[i] = 0;
 		}
 	}
 
