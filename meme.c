@@ -114,7 +114,6 @@ int main (int argc, char** argv) {
 		if (strncmp(line, "OUTFILE", 7) == 0) {
 			
 			/* Open the outfile for writing binary. */
-			/* TODO: find the value. */
 			outfile = fopen(value, "wb");
 
 			/* If the outfile doesn't open then close everything and exit */
@@ -199,7 +198,7 @@ int main (int argc, char** argv) {
 			while(tmp_word != 0 ) {
 
 				/* Open each font file for reading */
-				font_file = fopen(value, "r");				
+				font_file = fopen(tmp_value, "r");				
 
 				/* If the font_file doesn't open, then close everything and exit. */
 				if (font_file == 0) {
@@ -210,15 +209,25 @@ int main (int argc, char** argv) {
 				
 					return 1;
 				}
+				
+				/* Read the fsf file, and look for the name tag. */
+				while (getline(&line, &line_size, font_file) != -1) {
+					if (strncmp(line, "NAME", 4) == 0) {
+						tmp_value = strtok(line, ":\n");
+						tmp_value = strtok(0, ":\n");
 
-				/* TODO: Read the fsf file, and look for the name tag. */
-				/* TODO: Change the first parameter of strcmp to ne the name that gets read. For now, I am using IMPACT because that is the name of the font that we will be using for tests. */
+						if (strcmp(tmp_value, font_data->name) == 0) {
+							search_flag = 1;
+							break;
+						}
 
-				if (strcmp("IMPACT", font_data->name) == 0) {
-					search_flag = 1;
-					break;
+					}
 				}
 
+				if (search_flag) {
+					break;
+				}
+				
 				fclose(font_file);
 
 				tmp_word = strtok(0, " \t\n\v\f\r");
