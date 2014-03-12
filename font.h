@@ -25,9 +25,6 @@ void initFont();
  */
 void freeFont();
 
-/*
- * Reads the font int the font structure
- */
-size_t readFont();
+void printCharacter(font* f, char idx, int x, int y);
 
 #endif
