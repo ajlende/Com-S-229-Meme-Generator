@@ -546,29 +546,35 @@ void freeAll(char* fmt, ...) {
 			case 'c':
 				/* handle char* */
 				free((char*) a);
+				printf("free char*\n");
 				break;
 			case 'f':
 				/* handle FILE* */
 				fclose((FILE*) a);
+				printf("free FILE*\n");
 				break;
 			case 'n':
 				/* handle font* */
 				freeFont((font*) a);
 				free((font*) a);
+				printf("free font*\n");
 				break;
 			case 'm':
 				/* handle meme* */
 				freeMeme((meme*) a);
 				free((meme*) a);
+				printf("free meme*\n");
 				break;
 			case 's':
 				/* handle simp* */
 				freeSimp((simp*) a);
 				free((simp*) a);
+				printf("free simp*\n");
 				break;
 		}
 
 		a = 0;
+		printf("zeroed %p\n", a);
 	}
 
 	va_end(argp);
