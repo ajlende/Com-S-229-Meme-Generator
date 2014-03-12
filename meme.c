@@ -573,7 +573,6 @@ void freeAll(char* fmt, ...) {
 		}
 
 		a = 0;
-		printf("zero\n");
 	}
 
 	va_end(argp);
