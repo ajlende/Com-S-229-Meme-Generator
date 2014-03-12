@@ -341,19 +341,20 @@ int main (int argc, char** argv) {
 			
 				return 1;
 
+			} else {
+				
+				/* Check the character after CHARACTER. Crop the image at the given values and store it at the proper index. */
+	
+				if (sscanf(value, "%d %d %d %d", &x, &y, &w, &h) != 4) {
+					printf("Invalid argument(s) on line %d of the fsf file!\n", line_counter);
+	
+					freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+	
+					return 1;				
+				}
+
+				addCharacter(font_simp_file, font_data, name[9], x, y, w, h);
 			}
-			
-			/* Check the character after CHARACTER. Crop the image at the given values and store it at the proper index. */
-
-			if (sscanf(value, "%d %d %d %d", &x, &y, &w, &h) != 4) {
-				printf("Invalid argument(s) on line %d of the fsf file!\n", line_counter);
-
-				freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
-
-				return 1;				
-			}
-
-			addCharacter(font_simp_file, font_data, name[9], x, y, w, h);
 			
 		}
 	}
