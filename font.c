@@ -46,8 +46,12 @@ void printCharacter(font* f, char idx, int x, int y) {
 void freeFont(font* f) {
 	int i;
 
+	if (!f->name) return;
+
 	free(f->name);
 	f->name = 0;
+
+	if (!f->characters) return;
 
 	for (i = 0; i < 128; i++) {
 		if (f->characters[i] != 0) {
