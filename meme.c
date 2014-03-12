@@ -538,7 +538,7 @@ int main (int argc, char** argv) {
 	
 
 	/* cleanup */
-	freeAll("cccmssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+	freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 /*	free(line);
 	line = 0;
 	free(name);
