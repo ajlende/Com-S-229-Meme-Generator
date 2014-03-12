@@ -529,7 +529,6 @@ int main (int argc, char** argv) {
 			/* Check the character after CHARACTER. Crop the image at the given values and store it at the proper index. */
 
 			if (sscanf(value, "%d %d %d %d", &x, &y, &w, &h) != 4) {
-				&(font_data->characters[name[9]]) = (simp*) malloc(sizeof(simp));
 				initSimp(&(font_data->characters[name[9]]), w, h);
 				crop(font_simp, &(font_data->characters[name[9]]), x, y, w, h);
 			}
