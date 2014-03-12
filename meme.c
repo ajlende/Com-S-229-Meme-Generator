@@ -17,12 +17,12 @@ void freeAll(char* fmt, ...);
 
 int main (int argc, char** argv) {
 
-	FILE* meme_file;
-	FILE* action_file;
-	FILE* font_file;
-	FILE* font_simp_file;
-	FILE* simp_file;
-	FILE* outfile;
+	FILE* meme_file = 0;
+	FILE* action_file = 0;
+	FILE* font_file = 0;
+	FILE* font_simp_file = 0;
+	FILE* simp_file = 0;
+	FILE* outfile = 0;
 
 	char* line = 0;
 	char* name = 0;
