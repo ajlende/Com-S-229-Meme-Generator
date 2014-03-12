@@ -51,6 +51,8 @@ int main (int argc, char** argv) {
 	simp* string_simp = 0;
 	simp* temp_simp = 0;
 
+	simp* temp_swap_ptr = 0;
+
 
 	/* Check to make sure there are the proper number of argumnets. */
 	if (argc != 3 ) {
@@ -387,10 +389,10 @@ int main (int argc, char** argv) {
 			/* Crop simp_string into temp_simp with simp_string->width + current character's width and the standard height. */
 			crop(string_simp, temp_simp, 0, 0, w, h);
 
-			/* Swap string_simp and temp_simp pointers in place with xor swap. */
-			string_simp ^= temp_simp;
-			temp_simp ^= string_simp;
-			string_simp ^= temp_simp;
+			/* Swap string_simp and temp_simp pointers. */
+			temp_swap_ptr = string_simp;
+			string_simp = temp_simp;
+			temp_simp = temp_swap_ptr;
 
 			freeSimp(temp_simp);
 		}
