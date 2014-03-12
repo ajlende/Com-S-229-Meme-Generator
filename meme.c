@@ -34,6 +34,13 @@ int main (int argc, char** argv) {
 
 	size_t line_size = 0;
 
+	char flag_meme_open = 0;
+	char flag_action_open = 0;
+	char flag_font_open = 0;
+	char flag_font_simp_open = 0;
+	char flag_simp_open = 0;
+	char flag_outfile_open = 0;
+
 	int i, j, x, y, w, h, line_counter, search_flag;
 
 	meme* meme_data;
@@ -58,6 +65,8 @@ int main (int argc, char** argv) {
 	if (meme_file == 0) {
 		printf("File %s failed to open!\n", meme_filename);
 		return 1;
+	} else {
+		flag_meme_open = 1;
 	}
 	
 	action_file = fopen(action_filename, "r");
@@ -67,9 +76,9 @@ int main (int argc, char** argv) {
 
 		freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 
-		/* fclose(meme_file); */
-
 		return 1;
+	} else {
+		flag_action_open;
 	}
 
 
@@ -112,19 +121,8 @@ int main (int argc, char** argv) {
 		
 				printf("The outfile from line %d of %s failed to open!\n", line_counter, action_filename);
 
-				freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
-				
-				/*
-				free(line);
-				line = 0;
-				free(name);
-				name = 0;
-				free(value);
-				value = 0;
-		
-				fclose(meme_file);
-				fclose(action_file);
-				
+				freeAll("cccff", line, name, value, meme_file, action_file);
+								
 				if (meme_data) {
 					freeMeme(meme_data);
 					free(meme_data);
@@ -136,9 +134,10 @@ int main (int argc, char** argv) {
 					free(font_data);
 					font_data = 0;
 				}
-				*/
 
 				return 1;
+			} else {
+				flag_outfile_open = 1;
 			}
 
 
@@ -198,32 +197,15 @@ int main (int argc, char** argv) {
 				
 				printf("The Meme %s is not included in the file %s on line %d!", meme_data->name, meme_filename, line_counter);
 
-				freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+				freeAll("cccmnfff", line, name, value, meme_data, font_data, meme_file, action_file, outfile);
 				
-				/*
-				free(line);
-				line = 0;
-				free(name);
-				name = 0;
-				free(value);
-				value = 0;
-
-				fclose(meme_file);
-				fclose(action_file);
-				fclose(outfile);
-
-				if (font_file) {
+				if (flag_font_open) {
 					fclose(font_file);
 				}
 
-				freeMeme(meme_data);
-				free(meme_data);
-				meme_data = 0;
-
-				freeFont(font_data);
-				free(font_data);
-				font_data = 0;
-				*/
+				if (flag_simp_open) {
+					fclose(simp_file);
+				}
 
 				return 1;
 			}
@@ -246,15 +228,15 @@ int main (int argc, char** argv) {
 			
 					printf("The file %s on line %d of %s failed to open!\n", value, line_counter, meme_filename);
 					
-					/* freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile); */
-
 					freeAll("cccmnfff", line, name, value, meme_data, font_data, meme_file, action_file, outfile);
-
-					if (simp_file) {
+				
+					if (flag_simp_open) {
 						fclose(simp_file);
 					}
-			
+				
 					return 1;
+				} else {
+					flag_font_open = 1;
 				}
 
 				/* TODO: Read the fsf file, and look for the name tag. */
@@ -275,38 +257,15 @@ int main (int argc, char** argv) {
 				
 				printf("The Font %s on line %d is not included in the mem file!\n", font_data->name, line_counter);
 				
-				/* freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile); */
-
-				freeAll("cccmnffff", line, name, value, meme_data, font_data, meme_file, action_file, font_file, outfile);
-
-				/*
-				free(line);
-				line = 0;
-				free(name);
-				name = 0;
-				free(value);
-				value = 0;
-
-				fclose(meme_file);
-				fclose(action_file);
-				fclose(outfile);
-
-				if (font_file) {
+				freeAll("cccmnfff", line, name, value, meme_data, font_data, meme_file, action_file, outfile);
+				
+				if (flag_font_open) {
 					fclose(font_file);
 				}
 
-				if (simp_file) {
+				if (flag_simp_open) {
 					fclose(simp_file);
 				}
-
-				freeMeme(meme_data);
-				free(meme_data);
-				meme_data = 0;
-
-				freeFont(font_data);
-				free(font_data);
-				font_data = 0;
-				*/
 
 				return 1;
 
@@ -328,9 +287,15 @@ int main (int argc, char** argv) {
 			
 					printf("The simp file, %s, on line %d of %s failed to open!\n", value, line_counter, meme_filename);
 					
-					freeAll("cccmnffff", line, name, value, meme_data, font_data, meme_file, action_file, font_file, outfile);
+					freeAll("cccmnfff", line, name, value, meme_data, font_data, meme_file, action_file, outfile);
+				
+					if (flag_font_open) {
+						fclose(font_file);
+					}
 			
 					return 1;
+				} else {
+					flag_simp_open = 1;
 				}
 
 				meme_simp = (simp*) malloc(sizeof(simp));
@@ -339,7 +304,11 @@ int main (int argc, char** argv) {
 					
 					printf("The meme simp file was unable to be read!\n");
 
-					freeAll("cccmnffff", line, name, value, meme_data, font_data, meme_file, action_file, font_file, outfile);
+					freeAll("cccmnffff", line, name, value, meme_data, font_data, simp_file, meme_file, action_file, outfile);
+				
+					if (flag_font_open) {
+						fclose(font_file);
+					}
 
 					return 1;
 				}
@@ -350,36 +319,15 @@ int main (int argc, char** argv) {
 					
 					printf("Invalid argument(s) on line %d of %s: %s:value!\n", line_counter, meme_filename, line, value);
 
-					freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
-
-					/*
-					free(line);
-					line = 0;
-					free(name);
-					name = 0;
-					free(value);
-					value = 0;
-
-					fclose(meme_file);
-					fclose(action_file);
-					fclose(outfile);
-
-					if (font_file) {
+					freeAll("cccmnfff", line, name, value, meme_data, font_data, meme_file, action_file, outfile);
+				
+					if (flag_font_open) {
 						fclose(font_file);
 					}
 
-					if (simp_file) {
+					if (flag_simp_open) {
 						fclose(simp_file);
 					}
-			
-					freeMeme(meme_data);
-					free(meme_data);
-					meme_data = 0;
-			
-					freeFont(font_data);
-					free(font_data);
-					font_data = 0;
-					*/
 
 					return 1;
 				}
@@ -425,12 +373,11 @@ int main (int argc, char** argv) {
 		
 				printf("The simp file, %s, on line %d of the specified fsf file failed to open!\n", value, line_counter);
 				
-				/* free specific ones */
-				freeAll("cccfffffmn", line, name, value, meme_file, action_file, outfile, font_file, simp_file, meme_data, font_data);
+				freeAll("cccmnfffff", line, name, value, meme_data, font_data, font_file, simp_file, meme_file, action_file, outfile);
 
-				/* freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile); */
-		
 				return 1;
+			} else {
+				flag_font_simp_open = 1;
 			}
 
 			font_simp = (simp*) malloc(sizeof(simp));
@@ -439,25 +386,19 @@ int main (int argc, char** argv) {
 
 				printf("The file %s from line %d of the fsf file was unable to be read!\nThe filetype may be incorrect or the file may be corrupted.\n", value, line_counter);
 				
-				/* free specific ones */
-				/* freeAll("cccfffffmns", line, name, value, meme_file, action_file, outfile, font_file, simp_file, meme_data, font_data, font_simp); */
+				freeAll("cccmnffffff", line, name, value, meme_data, font_data, font_file, font_simp_file, simp_file, meme_file, action_file, outfile);
 
-				freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
-		
 				return 1;
 
 			}
 			
 		} else if (strncmp(line, "CHARACTER", 9) == 0) {
 
-			if (!font_simp_file) {
+			if (!flag_font_simp_open) {
 				printf("The fsf NAME line must come before any CHARACTERn line!\n");
-
-				/* free specific ones */
-				/* freeAll("cccfffffmns", line, name, value, meme_file, action_file, outfile, font_file, simp_file, meme_data, font_data, font_simp); */
-
-				freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
-	
+				
+				freeAll("cccmnfffff", line, name, value, meme_data, font_data, font_file, simp_file, meme_file, action_file, outfile);
+					
 				return 1;
 
 			}
