@@ -333,7 +333,7 @@ int main (int argc, char** argv) {
 		} else if (strncmp(line, "CHARACTER", 9) == 0) {
 
 			if (!font_simp_file) {
-				printf("The fsf NAME line must come before any CHARACTERn line!\n");
+				printf("The fsf IMAGE line must come before any CHARACTERn line!\n");
 
 				freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 			
@@ -351,7 +351,7 @@ int main (int argc, char** argv) {
 				return 1;				
 			}
 
-			addCharacter(font_simp_file, font_data, name[9], x, y, w, h);
+			addCharacter(font_simp, font_data, name[9], x, y, w, h);
 			
 		}
 	}
