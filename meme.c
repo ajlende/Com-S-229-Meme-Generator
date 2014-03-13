@@ -253,7 +253,7 @@ int main (int argc, char** argv) {
 				
 				fclose(font_file);
 
-				strcpy(name, strtok(0, " \t\n\v\f\r"));
+				strcpy(file, strtok(0, " \t\n\v\f\r"));
 			}
 
 			/* If the meme we are looking for is not included in this file, then exit. */
