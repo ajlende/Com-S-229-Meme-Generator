@@ -1,6 +1,6 @@
 ===========================================
 |                                         |
-|      Project 1A                         |
+|      Project 1B                         |
 |      SIMP Image Manipulation            |
 |                                         |
 |      Alex Lende                         |
@@ -13,26 +13,31 @@
 The SIMP Data Structure
 ===========================================
 
-The simp data structure consists of a 32-bit unsigned int for the width followed by
-another 32-bit unsigned int for the height. Following the width and height is a
-pixel** to hold all of the pixels of the image. Each pixel is stored in a structure
-with four unsigned 8-bit chars to represent the values of the red, green, blue, and
-alpha channels of the pixel. The structure type definitions can be found in simp.h.
+The simp data structure consists of a 32-bit int for the width followed by another
+32-bit int for the height. Following the width and height is a pixel** to hold all 
+of the pixels of the image. Each pixel is stored in a structure with four unsigned 
+8-bit chars to represent the values of the red, green, blue, and alpha channels of 
+the pixel. The structure type definitions can be found in simp.h.
 
 
 
 The FONT Data Structure
 ===========================================
 
-TODO:
+The font data structure consists of only a name, and an array of characters. The 
+array of characters is an array of pointers to simp files containing the data for 
+that letter.
 
 
 
 The MEME Data Structure
 ===========================================
 
-TODO:
-
+The meme data structure consists of a name, the number of MEMEIDs, hereafter called 
+attributes, and an array of attributes. Each attribute is stored in an attribute 
+structure. the attribute structure consists of the name of the attribute, the message 
+that that the attribute says, and the x and y coordinates for the center and bottom of 
+the attribute.
 
 
 Extra Details
@@ -46,7 +51,9 @@ Non-existent output files will be created, and existing ones will be overwritten
 
 All numerical values entered as command line arguments are expected to be integers.
 
-TODO:
+It is assumed that the .mem, .fsf, and .act files are written according to the 
+specification, and there is no extreneous whitespace such as on either side of the 
+separating colon.
 
 If any of the above are entered not as expected, then the program will exit.
 
@@ -132,15 +139,23 @@ is at the position (x, y) inside pic1.
 meme.c:
 -------
 The meme.c file contains the main method for the meme program.
-TODO:
+
+The meme program is used to generate internet memes.
+
+Usage: meme memefile.mem action.act
+
+The meme program should load the MEM file specified by argument 1, and the ACT 
+file specified by argument 2. The MEM file contains references to FSF files, so 
+these should be loaded as well. The program should then perform the action 
+specified by the ACT file, to load the given meme image, the specified font, and 
+to overlay the specified text over the meme as specified. The final meme should 
+be saved to the SIMP file specified by OUTFILE in the ACT file.
 
 
 simp.c:
 -------
 The simp.c file contains all of the function bodies for the function
 prototypes in simp.h.
-
-The functions below relate to reading and writing of the simp file type.
 
 
 simp.h:
@@ -152,19 +167,25 @@ in simp.c
 
 memelib.c:
 ----------
-TODO:
+The memelib.c file contains the functions associated with the meme data structure.
 
 
 memelib.h
 ---------
-TODO:
+The memelib.h file contains the type definition of the meme and attribute data 
+structures as well as contains the function prototypes for the functions detailed 
+in memelib.c.
 
 
 font.c
 ------
-TODO:
+The font.c file contains the functions associated with the file data structure.
 
 
 font.h
 ------
-TODO:
+The font.h file contains the type definition of the font data structure as well 
+as contains the function prototypes for the functinos detailed in font.c.
+
+
+

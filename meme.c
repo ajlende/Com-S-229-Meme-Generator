@@ -460,7 +460,6 @@ int main (int argc, char** argv) {
 
 	/* Write the meme_simp to the outfile */
 	writeSimp(meme_simp, outfile);
-	
 
 	/* cleanup */
 	freeAll("ccccmnssssffffff", line, name, value, file, meme_data, font_data, font_simp, meme_simp, string_simp, temp_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);

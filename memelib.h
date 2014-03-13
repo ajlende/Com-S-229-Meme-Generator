@@ -1,5 +1,10 @@
 /*
  * memelib.h
+ * By Alex Lende
+ * 
+ * The memelib.h file contains the type definition of the meme and attribute data 
+ * structures as well as contains the function prototypes for the functions detailed 
+ * in memelib.c.
  */
 
 #ifndef _MEMELIB_H_

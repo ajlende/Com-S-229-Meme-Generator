@@ -2,7 +2,8 @@
  * font.h
  * By Alex Lende
  * 
- * The font.h file contains the type definitions for the font and letter data structures as well as the function prototypes that are defined in font.c
+ * The font.h file contains the type definitions for the font and letter data 
+ * structures as well as the function prototypes that are defined in font.c
  */
 
 #ifndef _FONT_H_
@@ -16,7 +17,7 @@ typedef struct font_s {
 } font;
 
 /*
- * Creates space for a new font structure TODO: finish description
+ * Creates space for a new font structure
  */
 void initFont();
 
@@ -25,6 +26,9 @@ void initFont();
  */
 void freeFont();
 
+/*
+ * Prints the information for a single character to the console.
+ */
 void printCharacter(font* f, char idx, int x, int y);
 
 #endif
