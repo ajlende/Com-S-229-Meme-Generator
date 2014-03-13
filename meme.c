@@ -195,10 +195,10 @@ int main (int argc, char** argv) {
 			search_flag = 0;
 
 			/* Check that at least of of the values matches font_data->name. If none do, then exit the program. */
-			while(tmp_word != 0 ) {
+			while(name != 0) {
 
 				/* Open each font file for reading */
-				font_file = fopen(tmp_word, "r");
+				font_file = fopen(name, "r");
 
 				/* If the font_file doesn't open, then close everything and exit. */
 				if (font_file == 0) {
