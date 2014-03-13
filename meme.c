@@ -206,7 +206,7 @@ int main (int argc, char** argv) {
 				printf("----------> tmp_value: %s\n", tmp_value);
 				printf("o---------> name:      %s\n", name);
 				printf("----------> value:     %s\n", value);
-				printf("----------> file:      %s\n", file);
+				/* printf("----------> file:      %s\n", file); */
 				printf("----------> font_data: %s\n", font_data->name);
 
 				/* Open each font file for reading */
@@ -215,7 +215,7 @@ int main (int argc, char** argv) {
 				/* If the font_file doesn't open, then close everything and exit. */
 				if (font_file == 0) {
 			
-					printf("The file %s on line %d of %s failed to open!\n", file, line_counter, meme_filename);
+					printf("The file %s on line %d of %s failed to open!\n", tmp_word, line_counter, meme_filename);
 
 					freeAll("ccccmnssffffff", line, name, value, file, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 				
