@@ -190,14 +190,16 @@ int main (int argc, char** argv) {
 			}
 
 		} else if (strncmp(line, "FONTS", 5) == 0) {
+
+			printf("file values: %s\n", value);
 			
 			/* Read the name of each one. If the name matches font_data->name, then keep that open as font_file and close all other fsf files. */
-			strcpy(file, strtok(value, " \t\n\v\f\r"));
-			
+			tmp_word = strtok(value, " \t\n\v\f\r");
+
 			search_flag = 0;
 
 			/* Check that at least of of the values matches font_data->name. If none do, then exit the program. */
-			while(file != 0) {
+			while(tmp_word != 0) {
 
 				/* TODO Remove printf for testing */
 				printf("----------> tmp_word:  %s\n", tmp_word);
@@ -230,19 +232,16 @@ int main (int argc, char** argv) {
 
 					if (strncmp(line, "NAME", 4) == 0) {
 
-						tmp_word = strtok(line, ":\n");
-						tmp_word = strtok(0, ":\n");
+						tmp_value = strtok(line, ":\n");
+						tmp_value = strtok(0, ":\n");
 
-						if (strcmp(tmp_word, font_data->name) == 0) {
+						if (strcmp(tmp_value, font_data->name) == 0) {
 							printf("FOUND A MATCH\n");
 							search_flag = 1;
 							break;
 						}
 
 					}
-
-					tmp_word = 0;
-
 				}
 
 				if (search_flag) {
@@ -251,8 +250,7 @@ int main (int argc, char** argv) {
 				
 				fclose(font_file);
 
-				strcpy(file, strtok(0, " \t\n\v\f\r"));
-			}
+				tmp_word = strtok(0, " \t\n\v\f\r");			}
 
 			/* If the meme we are looking for is not included in this file, then exit. */
 			if (!search_flag) {
