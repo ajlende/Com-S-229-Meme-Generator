@@ -215,6 +215,8 @@ int main (int argc, char** argv) {
 				/* Read the fsf file, and look for the name tag. */
 				while (getline(&line, &line_size, font_file) != -1) {
 
+					printf("line: %s", line);
+
 					if (line[0] == '\n') continue;
 
 					if (strncmp(line, "NAME", 4) == 0) {
@@ -229,6 +231,7 @@ int main (int argc, char** argv) {
 						printf("o---------> name:      %s\n", name);
 						printf("----------> value:     %s\n", value);
 						printf("----------> file:      %s\n", file);
+						printf("----------> font_data: %s\n", font_data->name);
 
 
 
@@ -239,6 +242,9 @@ int main (int argc, char** argv) {
 						}
 
 					}
+
+					tmp_word = 0;
+
 				}
 
 				if (search_flag) {
