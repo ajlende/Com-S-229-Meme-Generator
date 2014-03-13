@@ -203,7 +203,7 @@ int main (int argc, char** argv) {
 				/* If the font_file doesn't open, then close everything and exit. */
 				if (font_file == 0) {
 			
-					printf("The file %s on line %d of %s failed to open!\n", value, line_counter, meme_filename);
+					printf("The file %s on line %d of %s failed to open!\n", tmp_word, line_counter, meme_filename);
 
 					freeAll("cccmnssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 				
