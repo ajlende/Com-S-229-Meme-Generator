@@ -447,8 +447,6 @@ int main (int argc, char** argv) {
 
 		/* Free the string_simp to use on the next attribute. */
 		freeSimp(string_simp);
-		free(string_simp);
-		string_simp = 0;
 	}
 
 	/* Write the meme_simp to the outfile */
