@@ -312,7 +312,7 @@ int main (int argc, char** argv) {
 			tmp_word = fustrtok(tmp_word, file, 128, ":\n");
 
 			/* Open the simp image for editing */
-			font_simp_file = fopen(tmp_word, "rb");
+			font_simp_file = fopen(file, "rb");
 
 			/* If the simp_file doesn't open, then close everything and exit. */
 			if (font_simp_file == 0) {
