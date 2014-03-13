@@ -199,6 +199,14 @@ int main (int argc, char** argv) {
 			/* Check that at least of of the values matches font_data->name. If none do, then exit the program. */
 			while(file != 0) {
 
+				/* TODO Remove printf for testing */
+				printf("----------> tmp_word:  %s\n", tmp_word);
+				printf("----------> tmp_value: %s\n", tmp_value);
+				printf("o---------> name:      %s\n", name);
+				printf("----------> value:     %s\n", value);
+				printf("----------> file:      %s\n", file);
+				printf("----------> font_data: %s\n", font_data->name);
+
 				/* Open each font file for reading */
 				font_file = fopen(file, "r");
 
@@ -211,14 +219,6 @@ int main (int argc, char** argv) {
 				
 					return 1;
 				}
-
-				/* TODO Remove printf for testing */
-				printf("----------> tmp_word:  %s\n", tmp_word);
-				printf("----------> tmp_value: %s\n", tmp_value);
-				printf("o---------> name:      %s\n", name);
-				printf("----------> value:     %s\n", value);
-				printf("----------> file:      %s\n", file);
-				printf("----------> font_data: %s\n", font_data->name);
 
 				
 				/* Read the fsf file, and look for the name tag. */
