@@ -235,8 +235,8 @@ int main (int argc, char** argv) {
 					if (strncmp(line, "NAME", 4) == 0) {
 						
 						tmp_value = line;
-						tmp_value = fustrtok(tmp_value, file, 128, " :\n\t\v\f\r");
-						tmp_value = fustrtok(tmp_value, file, 128, " :\n\t\v\f\r");						
+						tmp_value = fustrtok(tmp_value, file, 128, ":\n");
+						tmp_value = fustrtok(tmp_value, file, 128, ":\n");						
 						
 						if (strcmp(tmp_value, font_data->name) == 0) {
 							printf("FOUND A MATCH\n");
