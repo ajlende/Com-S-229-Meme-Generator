@@ -231,10 +231,11 @@ int main (int argc, char** argv) {
 					if (line[0] == '\n') continue;
 
 					if (strncmp(line, "NAME", 4) == 0) {
-
-						tmp_value = strtok(line, ":\n");
-						tmp_value = strtok(0, ":\n");
-
+						
+						tmp_value = line;
+						tmp_value = fustrtok(tmp_value, file, 128, " :\n\t\v\f\r");
+						tmp_value = fustrtok(tmp_value, file, 128, " :\n\t\v\f\r");						
+						
 						if (strcmp(tmp_value, font_data->name) == 0) {
 							printf("FOUND A MATCH\n");
 							search_flag = 1;
@@ -250,7 +251,9 @@ int main (int argc, char** argv) {
 				
 				fclose(font_file);
 
-				tmp_word = strtok(0, " \t\n\v\f\r");			}
+				tmp_word = strtok(0, " \t\n\v\f\r");
+				
+			}
 
 			/* If the meme we are looking for is not included in this file, then exit. */
 			if (!search_flag) {
@@ -451,6 +454,18 @@ int main (int argc, char** argv) {
 	freeAll("cccmnssssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, string_simp, temp_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 
 	return 0;
+}
+
+char* fustrtok(char* s, char* buf, size_t len, char* delim)
+{
+    s += strspn(s, delim);
+    int n = strcspn(s, delim);  /* count the span (spn) of bytes in */
+    if (len-1 < n)              /* the complement (c) of *delim */
+        n = len-1;
+    memcpy(buf, s, n);
+    buf[n] = 0;
+    s += n;
+    return (*s == 0) ? NULL : s;
 }
 
 char* rmWhitespace(char* str) {
