@@ -177,7 +177,6 @@ int main (int argc, char** argv) {
 
 		} else if (strncmp(line, "FONTS", 5) == 0) {
 
-			printf("file values: %s\n", value);
 			
 			/* Read the name of each one. If the name matches font_data->name, then keep that open as font_file and close all other fsf files. */
 			tmp_word = strtok(value, " \t\n\v\f\r");
