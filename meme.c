@@ -202,10 +202,10 @@ int main (int argc, char** argv) {
 			while(tmp_word != 0) {
 
 				/* TODO Remove printf for testing */
-				printf("----------> tmp_word:  %s\n", tmp_word);
-				printf("----------> tmp_value: %s\n", tmp_value);
-				printf("o---------> name:      %s\n", name);
-				printf("----------> value:     %s\n", value);
+				printf("<%p>----------> tmp_word:  %s\n", tmp_word, tmp_word);
+				printf("<%p>----------> tmp_value: %s\n", tmp_value, tmp_value);
+				printf("<%p>----------> name:      %s\n", name, name);
+				printf("<%p>----------> value:     %s\n", value, value);
 				/* printf("----------> file:      %s\n", file); */
 				printf("----------> font_data: %s\n", font_data->name);
 
