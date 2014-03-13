@@ -231,7 +231,7 @@ int main (int argc, char** argv) {
 
 
 						if (strcmp(tmp_word, font_data->name) == 0) {
-							printf("FOUND A MATCH\n")
+							printf("FOUND A MATCH\n");
 							search_flag = 1;
 							break;
 						}
