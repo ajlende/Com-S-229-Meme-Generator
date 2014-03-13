@@ -299,16 +299,16 @@ int main (int argc, char** argv) {
 
 		if (isspace(line[0])) continue;
 
-		/* Split the line into a name and a value. */
-		strcpy(name, strtok(line, ":\n"));
-		strcpy(value, strtok(0, ":\n"));
-
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "NAME", 4) == 0) {
 			
 			/* This statement may be able to be removed because the NAME was already checked in the mem file read. */
 
 		} else if (strncmp(line, "IMAGE", 5) == 0) {
+
+			/* Split the line into a name and a value. */
+			strcpy(name, strtok(line, ":\n"));
+			strcpy(value, strtok(0, ":\n"));
 
 			/* Open the simp image for editing */
 			font_simp_file = fopen(value, "rb");
