@@ -408,6 +408,8 @@ int main (int argc, char** argv) {
 		/* TODO: take care of the scenario where there are zero letters in the message. */
 		w = font_data->characters[meme_data->attr[i].msg[0]]->width;
 		h = font_data->characters[meme_data->attr[i].msg[0]]->height;
+
+		printf("w: %d\nh: %d\n", w, h);
 	
 		/* initialize the string_simp with the width of the first two letters. */
 		initSimp(string_simp, w, h);
