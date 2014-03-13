@@ -456,16 +456,21 @@ int main (int argc, char** argv) {
 	return 0;
 }
 
-char* fustrtok(char* s, char* buf, size_t len, char* delim)
-{
-    s += strspn(s, delim);
-    int n = strcspn(s, delim);  /* count the span (spn) of bytes in */
-    if (len-1 < n)              /* the complement (c) of *delim */
-        n = len-1;
-    memcpy(buf, s, n);
-    buf[n] = 0;
-    s += n;
-    return (*s == 0) ? NULL : s;
+char* fustrtok(char* s, char* buf, size_t len, char* delim) {
+	int n;
+
+	s += strspn(s, delim);
+	n = strcspn(s, delim);
+
+	if (len-1 < n) {
+		n = len-1;
+	}
+	
+	memcpy(buf, s, n);
+	buf[n] = 0;
+	s += n;
+	
+	return (*s == 0) ? NULL : s;
 }
 
 char* rmWhitespace(char* str) {
