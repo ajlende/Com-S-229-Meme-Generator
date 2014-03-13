@@ -11,6 +11,8 @@
 #include "font.h"
 #include "simp.h"
 
+char* fustrtok(char* s, char* buf, size_t len, char* delim);
+
 char* rmWhitespace(char* str);
 
 void freeAll(char* fmt, ...);
