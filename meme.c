@@ -410,6 +410,7 @@ int main (int argc, char** argv) {
 	
 		/* initialize the string_simp with the width of the first two letters. */
 		initSimp(string_simp, w, h);
+		initSimp(temp_simp, 0, 0);
 		crop(font_data->characters[meme_data->attr[i].msg[0]], string_simp, 0, 0, w, h);
 
 
