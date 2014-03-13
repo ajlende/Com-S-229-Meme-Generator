@@ -307,11 +307,12 @@ int main (int argc, char** argv) {
 		} else if (strncmp(line, "IMAGE", 5) == 0) {
 
 			/* Split the line into a name and a value. */
-			strcpy(name, strtok(line, ":\n"));
-			strcpy(value, strtok(0, ":\n"));
+			tmp_word = line;
+			tmp_word = fustrtok(tmp_word, file, 128, ":\n");
+			tmp_word = fustrtok(tmp_word, file, 128, ":\n");
 
 			/* Open the simp image for editing */
-			font_simp_file = fopen(value, "rb");
+			font_simp_file = fopen(tmp_word, "rb");
 
 			/* If the simp_file doesn't open, then close everything and exit. */
 			if (font_simp_file == 0) {
