@@ -14,8 +14,6 @@
 
 char* fustrtok(char* s, char* buf, size_t len, char* delim);
 
-char* rmWhitespace(char* str);
-
 void freeAll(char* fmt, ...);
 
 int main (int argc, char** argv) {
@@ -103,17 +101,11 @@ int main (int argc, char** argv) {
 	while (getline(&line, &line_size, action_file) != -1) {
 		line_counter++;
 
-		/* TODO: remove testing print statements */
-		printf("<%p> line:  %s", line, line);
-
 		if (isspace(line[0])) continue;
 
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
-		
-		printf("<%p> name:  %s\n", name, name);
-		printf("<%p> value: %s\n", value, value);
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "OUTFILE", 7) == 0) {
@@ -148,9 +140,6 @@ int main (int argc, char** argv) {
 		}
 	}
 
-	/* TODO: remove this. it is a test print message */
-	printMeme(meme_data);
-
 	line_counter = 0;
 
 	/* Read through the mem file */
@@ -158,9 +147,6 @@ int main (int argc, char** argv) {
 		line_counter++;
 
 		if (line[0] == '\n') continue;
-
-		/* TODO: remove testing print statements */
-		printf("<%p> line:  %s", line, line);
 
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
@@ -204,14 +190,6 @@ int main (int argc, char** argv) {
 			/* Check that at least of of the values matches font_data->name. If none do, then exit the program. */
 			while(tmp_word != 0) {
 
-				/* TODO Remove printf for testing */
-				printf("<%p>----------> tmp_word:  %s\n", tmp_word, tmp_word);
-				printf("<%p>----------> tmp_value: %s\n", tmp_value, tmp_value);
-				printf("<%p>----------> name:      %s\n", name, name);
-				printf("<%p>----------> value:     %s\n", value, value);
-				/* printf("----------> file:      %s\n", file); */
-				printf("----------> font_data: %s\n", font_data->name);
-
 				/* Open each font file for reading */
 				font_file = fopen(tmp_word, "r");
 
@@ -229,8 +207,6 @@ int main (int argc, char** argv) {
 				/* Read the fsf file, and look for the name tag. */
 				while (getline(&line, &line_size, font_file) != -1) {
 
-					printf("line: %s", line);
-
 					if (isspace(line[0])) continue;
 
 					if (strncmp(line, "NAME", 4) == 0) {
@@ -240,7 +216,6 @@ int main (int argc, char** argv) {
 						tmp_value = fustrtok(tmp_value, file, 128, ":\n");
 						
 						if (strcmp(file, font_data->name) == 0) {
-							printf("FOUND A MATCH\n");
 							search_flag = 1;
 							break;
 						}
@@ -330,15 +305,9 @@ int main (int argc, char** argv) {
 
 		if (isspace(line[0])) continue;
 
-		/* TODO: remove testing print statements */
-		printf("<%p> line:  %s", line, line);
-
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
-		
-		printf("<%p> name:  %s\n", name, name);
-		printf("<%p> value: %s\n", value, value);
 
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "NAME", 4) == 0) {
@@ -413,8 +382,6 @@ int main (int argc, char** argv) {
 	
 		/* initialize the string_simp with the width of the first two letters. */
 		initSimp(string_simp, w, h);
-
-		/* TODO if this gets removed, then change j=1 to 0. */
 		crop(font_data->characters[meme_data->attr[i].msg[0]], string_simp, 0, 0, w, h);
 
 		line_size = strlen(meme_data->attr[i].msg);
@@ -484,13 +451,6 @@ char* fustrtok(char* s, char* buf, size_t len, char* delim) {
 	return (*s == 0) ? NULL : s;
 }
 
-char* rmWhitespace(char* str) {
-	int i;
-	char* out = "TODO";
-
-	return out;
-}
-
 void freeAll(char* fmt, ...) {
 	const char* p = 0;
 	void* a = 0;
@@ -509,30 +469,25 @@ void freeAll(char* fmt, ...) {
 			case 'c':
 				/* handle char* */
 				free((char*) a);
-				printf("free char*\n");
 				break;
 			case 'f':
 				/* handle FILE* */
 				fclose((FILE*) a);
-				printf("free FILE*\n");
 				break;
 			case 'n':
 				/* handle font* */
 				freeFont((font*) a);
 				free((font*) a);
-				printf("free font*\n");
 				break;
 			case 'm':
 				/* handle meme* */
 				freeMeme((meme*) a);
 				free((meme*) a);
-				printf("free meme*\n");
 				break;
 			case 's':
 				/* handle simp* */
 				freeSimp((simp*) a);
 				free((simp*) a);
-				printf("free simp*\n");
 				break;
 		}
 		

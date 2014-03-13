@@ -72,3 +72,4 @@ test/Part1/BMP/*
 test/Part2/SIMP/*_o.simp
 test/Part2/BMP/*_o.bmp
 
+*.tar.gz

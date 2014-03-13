@@ -72,14 +72,12 @@ Makefile:
 The Makefile contained in the project contains four sections as described below. 
 
 1. all command     - This is the default make command to compile all of the
-                     programs normally.
+                     programs normally. CFLAGS includes -g for debuffing.
+					 This may be removed.
 2. clean command   - This will clean out any non-source files from the
                      directory.
 3. tarball command - This will make a tarball from the source files for
                      submission.
-4. debug commands  - This runs all the compiling with the gcc -g flag for gdb
-                     debugging.
-
 
 bw.c:
 -----
