@@ -156,10 +156,10 @@ int main (int argc, char** argv) {
 	while (getline(&line, &line_size, meme_file) != -1) {
 		line_counter++;
 
+		if (line[0] == '\n') continue;
+
 		/* TODO: remove testing print statements */
 		printf("<%p> line:  %s", line, line);
-
-		if (line[0] == '\n') continue;
 
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
