@@ -214,12 +214,16 @@ int main (int argc, char** argv) {
 				while (getline(&line, &line_size, font_file) != -1) {
 					if (strncmp(line, "NAME", 4) == 0) {
 						/* TODO Remove printf for testing */
-						printf("----------> FSF LINE: %s\n", line);
+						printf("----------> FSF LINE:  %s", line);
+						printf("----------> tmp_word:  %s\n", tmp_word);
+						printf("----------> tmp_value: %s\n", tmp_value);
+						printf("----------> name:      %s\n", name);
+						printf("o---------> value:     %s\n", value);
 
 						tmp_value = strtok(line, ":\n");
 						tmp_value = strtok(0, ":\n");
 						
-						printf("----------> FSF NAME: %s\n", tmp_value);
+						printf("----------> FSF NAME:  %s\n", tmp_value);
 
 						if (strcmp(tmp_value, font_data->name) == 0) {
 							search_flag = 1;
