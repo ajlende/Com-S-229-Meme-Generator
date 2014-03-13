@@ -152,9 +152,6 @@ int main (int argc, char** argv) {
 		strcpy(name, strtok(line, ":\n"));
 		strcpy(value, strtok(0, ":\n"));
 		
-		printf("<%p> name:  %s\n", name, name);
-		printf("<%p> value: %s\n", value, value);
-
 		/* For each line, take action based on what it starts with */
 		if (strncmp(line, "MEMES", 5) == 0) {
 			search_flag = 0;
@@ -295,8 +292,6 @@ int main (int argc, char** argv) {
 		}
 	}
 
-	printMeme(meme_data);
-
 	line_counter = 0;
 
 	/* Read through the fsf file */
@@ -378,8 +373,6 @@ int main (int argc, char** argv) {
 		w = font_data->characters[meme_data->attr[i].msg[0]]->width;
 		h = font_data->characters[meme_data->attr[i].msg[0]]->height;
 
-		printf("w: %d\nh: %d\n", w, h);
-	
 		/* initialize the string_simp with the width of the first two letters. */
 		initSimp(string_simp, w, h);
 		crop(font_data->characters[meme_data->attr[i].msg[0]], string_simp, 0, 0, w, h);
@@ -388,7 +381,6 @@ int main (int argc, char** argv) {
 
 		/* For each letter in that attribute's message. */
 		for (j = 1; j < line_size; j++) {
-			printf("Writing attribute %d letter %d\n", i, j);
 
 			cur_char = meme_data->attr[i].msg[j];
 			w = font_data->characters[cur_char]->width;
@@ -422,8 +414,6 @@ int main (int argc, char** argv) {
 		/* Free the string_simp to use on the next attribute. */
 		freeSimp(string_simp);
 	}
-
-	printf("mwidth: %d\n", meme_simp->width);
 
 	/* Write the meme_simp to the outfile */
 	writeSimp(meme_simp, outfile);
@@ -490,8 +480,7 @@ void freeAll(char* fmt, ...) {
 				free((simp*) a);
 				break;
 		}
-		
-		printf("zeroing %p\n", a);
+
 		a = 0;
 	}
 

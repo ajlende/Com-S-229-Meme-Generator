@@ -28,7 +28,6 @@ void addCharacter(simp* s, font* f, char idx, int x, int y, int w, int h) {
 	f->characters[idx] = (simp*) malloc(sizeof(simp));
 	initSimp(f->characters[idx], w, h);
 	crop(s, f->characters[idx], x, y, w, h);
-	printCharacter(f, idx, x, y);
 }
 
 void printCharacter(font* f, char idx, int x, int y) {
