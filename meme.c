@@ -451,6 +451,8 @@ int main (int argc, char** argv) {
 		freeSimp(string_simp);
 	}
 
+	printf("mwidth: %d", meme_simp->width);
+
 	/* Write the meme_simp to the outfile */
 	writeSimp(meme_simp, outfile);
 	
