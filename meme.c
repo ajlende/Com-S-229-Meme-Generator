@@ -212,7 +212,13 @@ int main (int argc, char** argv) {
 				
 				/* Read the fsf file, and look for the name tag. */
 				while (getline(&line, &line_size, font_file) != -1) {
+
 					if (strncmp(line, "NAME", 4) == 0) {
+
+						strtok(line, ":\n");
+						strcpy(name, strtok(0, ":\n"));
+
+
 						/* TODO Remove printf for testing */
 						printf("----------> FSF LINE:  %s", line);
 						printf("----------> tmp_word:  %s\n", tmp_word);
@@ -220,12 +226,9 @@ int main (int argc, char** argv) {
 						printf("----------> name:      %s\n", name);
 						printf("o---------> value:     %s\n", value);
 
-						tmp_value = strtok(line, ":\n");
-						tmp_value = strtok(0, ":\n");
-						
-						printf("----------> FSF NAME:  %s\n", tmp_value);
 
-						if (strcmp(tmp_value, font_data->name) == 0) {
+
+						if (strcmp(name, font_data->name) == 0) {
 							search_flag = 1;
 							break;
 						}
