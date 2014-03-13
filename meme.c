@@ -7,6 +7,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include "memelib.h"
 #include "font.h"
 #include "simp.h"
@@ -105,7 +106,7 @@ int main (int argc, char** argv) {
 		/* TODO: remove testing print statements */
 		printf("<%p> line:  %s", line, line);
 
-		if (line[0] == '\n') continue;
+		if (isspace(line[0])) continue;
 
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
@@ -230,7 +231,7 @@ int main (int argc, char** argv) {
 
 					printf("line: %s", line);
 
-					if (line[0] == '\n') continue;
+					if (isspace(line[0])) continue;
 
 					if (strncmp(line, "NAME", 4) == 0) {
 						
@@ -327,10 +328,10 @@ int main (int argc, char** argv) {
 	while (getline(&line, &line_size, font_file) != -1) {
 		line_counter++;
 
+		if (isspace(line[0])) continue;
+
 		/* TODO: remove testing print statements */
 		printf("<%p> line:  %s", line, line);
-
-		if (line[0] == '\n') continue;
 
 		/* Split the line into a name and a value. */
 		strcpy(name, strtok(line, ":\n"));
