@@ -198,8 +198,7 @@ int main (int argc, char** argv) {
 			while(tmp_word != 0 ) {
 
 				/* Open each font file for reading */
-				/* font_file = fopen(tmp_word, "r"); */
-				printf("open %s", name);
+				font_file = fopen(tmp_word, "r");
 
 				/* If the font_file doesn't open, then close everything and exit. */
 				if (font_file == 0) {
