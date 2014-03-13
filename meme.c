@@ -211,6 +211,15 @@ int main (int argc, char** argv) {
 				
 					return 1;
 				}
+
+				/* TODO Remove printf for testing */
+				printf("----------> tmp_word:  %s\n", tmp_word);
+				printf("----------> tmp_value: %s\n", tmp_value);
+				printf("o---------> name:      %s\n", name);
+				printf("----------> value:     %s\n", value);
+				printf("----------> file:      %s\n", file);
+				printf("----------> font_data: %s\n", font_data->name);
+
 				
 				/* Read the fsf file, and look for the name tag. */
 				while (getline(&line, &line_size, font_file) != -1) {
@@ -223,17 +232,6 @@ int main (int argc, char** argv) {
 
 						tmp_word = strtok(line, ":\n");
 						tmp_word = strtok(0, ":\n");
-
-
-						/* TODO Remove printf for testing */
-						printf("----------> tmp_word:  %s\n", tmp_word);
-						printf("----------> tmp_value: %s\n", tmp_value);
-						printf("o---------> name:      %s\n", name);
-						printf("----------> value:     %s\n", value);
-						printf("----------> file:      %s\n", file);
-						printf("----------> font_data: %s\n", font_data->name);
-
-
 
 						if (strcmp(tmp_word, font_data->name) == 0) {
 							printf("FOUND A MATCH\n");
