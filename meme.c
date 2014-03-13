@@ -215,6 +215,8 @@ int main (int argc, char** argv) {
 					if (strncmp(line, "NAME", 4) == 0) {
 						tmp_value = strtok(line, ":\n");
 						tmp_value = strtok(0, ":\n");
+						
+						printf("FSF NAME: %s", tmp_value);
 
 						if (strcmp(tmp_value, font_data->name) == 0) {
 							search_flag = 1;
