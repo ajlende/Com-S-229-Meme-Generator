@@ -215,6 +215,8 @@ int main (int argc, char** argv) {
 				/* Read the fsf file, and look for the name tag. */
 				while (getline(&line, &line_size, font_file) != -1) {
 
+					if (line[0] == '\n') continue;
+
 					if (strncmp(line, "NAME", 4) == 0) {
 
 						tmp_word = strtok(line, ":\n");
