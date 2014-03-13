@@ -414,10 +414,13 @@ int main (int argc, char** argv) {
 		/* initialize the string_simp with the width of the first two letters. */
 		initSimp(string_simp, w, h);
 
+		/* TODO if this gets removed, then change j=1 to 0. */
+		crop(font_data->characters[meme_data->attr[i].msg[0]], string_simp, 0, 0, w, h);
+
 		line_size = strlen(meme_data->attr[i].msg);
 
 		/* For each letter in that attribute's message. */
-		for (j = 0; j < line_size; j++) {
+		for (j = 1; j < line_size; j++) {
 			printf("Writing attribute %d letter %d\n", i, j);
 
 			cur_char = meme_data->attr[i].msg[j];
