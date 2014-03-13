@@ -43,6 +43,8 @@ void initSimp(simp *simp_data, int width, int height) {
  */
 void freeSimp(simp *simp_data) {
 	int i;
+	
+	if (!simp_data) return;
 
 	if (!simp_data->data) return;
 
