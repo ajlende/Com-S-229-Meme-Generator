@@ -455,7 +455,7 @@ int main (int argc, char** argv) {
 	
 
 	/* cleanup */
-	freeAll("cccmnssssffffff", line, name, value, meme_data, font_data, font_simp, meme_simp, string_simp, temp_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
+	freeAll("ccccmnssssffffff", line, name, value, file, meme_data, font_data, font_simp, meme_simp, string_simp, temp_simp, meme_file, action_file, font_file, font_simp_file, simp_file, outfile);
 
 	return 0;
 }
