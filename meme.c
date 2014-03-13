@@ -416,6 +416,8 @@ int main (int argc, char** argv) {
 
 		/* For each letter in that attribute's message. */
 		for (j = 0; j < line_size; j++) {
+			printf("Writing attribute %d letter %d\n", i, j);
+
 			cur_char = meme_data->attr[i].msg[j];
 			w = font_data->characters[cur_char]->width;
 			w += string_simp->width;
